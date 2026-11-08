@@ -1,0 +1,77 @@
+{% extends 'admin/layout.html' %}
+{% set page_title = ('Modifier les emplois du temps' if emploi.pk else 'Ajouter une filière') %}
+{% block header_action %}
+    <a class="pub-btn secondary" href="{{ route('admin.emplois.index') }}">Retour à la liste</a>
+{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="{{ asset('css/emplois.css') }}?v=4">
+    <script src="{{ asset('js/emplois-admin.js') }}?v=4" defer></script>
+    <section class="pub-panel edt-admin-form">
+        <form method="POST" enctype="multipart/form-data" action="{{ (route('admin.emplois.update', emploi) if emploi.pk else route('admin.emplois.store')) }}" class="edt-editor">
+            {{ csrf_input }}
+            {% if emploi.pk %}  {% endif %}
+
+            <label for="edt-filiere">Filière *</label>
+            <input id="edt-filiere" name="filiere" required maxlength="180" value="{{ old('filiere', emploi.filiere) }}" placeholder="Ex. : Génie civil">
+
+            <div class="edt-form-grid">
+                <div>
+                    <label for="edt-cycle">Cycle *</label>
+                    <select id="edt-cycle" name="cycle" required>
+                        <option value="">Choisir le cycle</option>
+                        {% for value , label in cycles.items() %}
+                            <option value="{{ value }}" {% if old('cycle', emploi.cycle) == value %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="edt-annee">Année universitaire *</label>
+                    <input id="edt-annee" name="annee" required maxlength="9" value="{{ old('annee', emploi.annee) }}" placeholder="2026-2027">
+                </div>
+            </div>
+
+            {% if emploi.pk  and  emploi.lien  and  (not emploi.cycle  or  emploi.lien) %}
+                <div class="edt-legacy-note">
+                    <strong>Entrée existante à classer</strong>
+                    <p>Pour un DUT ou un DBT, reportez l'ancien lien dans le semestre concerné (S1 à S4 pour le DUT ; S5 ou S6 pour le DBT). Aucun semestre n'est déduit automatiquement. Le lien précédent reste enregistré.</p>
+                    <label for="edt-ancien-lien">Ancien lien {{ ('(' ~ emploi.niveau ~ ')' if emploi.niveau else '') }}</label>
+                    <input id="edt-ancien-lien" readonly value="{{ emploi.lien }}">
+                </div>
+            {% endif %}
+
+            <fieldset data-edt-fields="dut" class="edt-link-fields">
+                <legend>DUT · 1re année — S1 et S2 / 2e année — S3 et S4</legend>
+                {% for semestre in [1, 2, 3, 4] %}
+                    {% set champ = 'lien_s' ~ semestre %}
+                    {% with fichier='fichier_s' ~ semestre, inputId='edt-lien-s' ~ semestre, label='Semestre ' ~ semestre ~ ' — ' ~ ('1re année' if semestre<=2 else '2e année') %}{% include 'admin/emplois/document-field.html' %}{% endwith %}
+                {% endfor %}
+                <p class="edt-help">Chaque semestre possède son propre lien. Un champ vide affichera « À venir » sur le site.</p>
+            </fieldset>
+
+            <fieldset data-edt-fields="bachelor" class="edt-link-fields">
+                <legend>DBT (Bachelor) · Semestres 5 et 6</legend>
+                {% for semestre in [5, 6] %}
+                    {% set champ = 'lien_s' ~ semestre %}
+                    {% with fichier='fichier_s' ~ semestre, inputId='edt-lien-s' ~ semestre, label='Semestre ' ~ semestre %}{% include 'admin/emplois/document-field.html' %}{% endwith %}
+                {% endfor %}
+                <p class="edt-help">Chaque semestre possède son propre lien. Un champ vide affichera « À venir » sur le site.</p>
+            </fieldset>
+
+            <fieldset data-edt-fields="unique" class="edt-link-fields">
+                <legend>Licence · Année universitaire</legend>
+                {% with champ='lien', fichier='fichier_lien', inputId='edt-lien', label='Emploi du temps' %}{% include 'admin/emplois/document-field.html' %}{% endwith %}
+                <p class="edt-help">Un seul lien pour cette année de formation. Laissez vide si le document n'est pas encore disponible.</p>
+            </fieldset>
+
+            <label for="edt-ordre">Ordre d’affichage</label>
+            <input id="edt-ordre" name="ordre" type="number" required min="0" max="99999" value="{{ old('ordre', (emploi.ordre if emploi.ordre is not none else 0)) }}">
+            <p class="edt-help">Les nombres les plus petits apparaissent en premier dans chaque cycle et année universitaire.</p>
+            <input type="hidden" name="publie" value="0">
+            <label class="edt-checkbox"><input type="checkbox" name="publie" value="1" {% if old('publie', emploi.publie) %}checked{% endif %}> Publier cette filière sur le site</label>
+            <div class="edt-admin-actions">
+                <button class="pub-btn primary" type="submit">Enregistrer</button>
+                <a class="pub-btn secondary" href="{{ route('admin.emplois.index') }}">Annuler</a>
+            </div>
+        </form>
+    </section>
+{% endblock %}

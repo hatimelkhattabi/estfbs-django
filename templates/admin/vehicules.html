@@ -1,0 +1,17 @@
+{% if can_model('demandevehicule') %}
+<section id="tab-vehicules" class="hidden space-y-4">
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+    <div class="p-4 border-b border-slate-200"><h2 class="font-bold text-sm">Demandes de véhicule</h2><p class="text-xs text-slate-500 mt-1">Choisissez « Validée » ou « Approuvée », puis cliquez sur Enregistrer pour autoriser le téléchargement de l’ordre de mission.</p></div>
+    <div class="overflow-x-auto"><table class="w-full text-left border-collapse text-xs"><thead><tr class="bg-blue-50 text-blue-950 uppercase text-[10px] font-bold"><th class="p-3">Code / professeur</th><th class="p-3">Visite</th><th class="p-3">Effectif / véhicule</th><th class="p-3">Statut</th><th class="p-3 no-print">Actions</th></tr></thead><tbody>
+    {% for row in demandes_vehicule %}
+      <tr class="border-t border-slate-100"><td class="p-3"><strong class="block">{{ row.nom_professeur }}</strong><small>{{ row.code_suivi }}</small><p>{{ row.email_professeur }} · {{ row.telephone_professeur }}</p><p>{{ row.departement }}</p><p>{{ row.grade_professeur or "PES" }}</p></td>
+      <td class="p-3"><strong>{{ row.destination }}</strong><p>{{ fmt_date(row.date_visite) }} · {{ row.heure_depart }}–{{ row.heure_retour }}</p><p>Retour : {{ fmt_date(row.date_retour_prevue) }}</p><p>{{ row.organisme_accueil or row.destination }}</p><p>{{ row.duree_visite }}</p><p>{{ row.motif_visite }}</p><p>{{ row.accompagnateurs }}</p></td><td class="p-3">{{ row.effectif_etudiants }} étudiants<p>{{ row.type_vehicule }}</p><p>{{ row.filiere }}</p></td><td class="p-3">{{ row.statut }}<p>{{ row.remarque_administration }}</p></td>
+      <td class="p-3 no-print"><a class="text-blue-900 underline" href="/demande-vehicule/{{ row.code_suivi }}/pdf" target="_blank" rel="noopener">Fiche PDF ↗</a>{% if row.ordre_mission_disponible %}<p><a href="/demande-vehicule/{{ row.code_suivi }}/ordre-mission-pdf" target="_blank" rel="noopener">Ordre de mission PDF ↗</a></p>{% else %}<p class="text-slate-500 mt-1">Ordre de mission disponible après validation</p>{% endif %}
+        {% if can_model('demandevehicule','change') %}<form method="post" action="{{ route('admin.dashboard') }}" class="space-y-2 mt-2">{{ csrf_input }}<input type="hidden" name="action" value="update_vehicle_status"><input type="hidden" name="id" value="{{ row.pk }}"><select name="status" class="border border-slate-300 rounded-lg p-2">{% for value,label in row._meta.get_field('statut').choices %}<option value="{{ value }}" {% if row.statut==value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select><label class="block">Remarque<textarea name="remarque_administration" rows="2" maxlength="10000" class="border border-slate-300 rounded-lg p-2 block">{{ row.remarque_administration }}</textarea></label><button class="px-3 py-2 bg-blue-900 text-white rounded-lg">Enregistrer</button></form>{% endif %}
+      </td></tr>
+    {% else %}<tr><td colspan="5" class="p-8 text-center text-slate-400">Aucune demande de véhicule trouvée.</td></tr>{% endfor %}
+    </tbody></table></div>
+  </div>
+  {{ dashboard_pagination('vehicules', demandes_vehicule) }}
+</section>
+{% endif %}

@@ -1,0 +1,21 @@
+/* Hauteur du sous-menu des 11 DUT sur les écrans de portable. */
+.est-formations-flyout {
+    max-height: max(180px, calc(100vh - 230px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+}
+/* Garder l'ouverture au clavier, sans retenir le focus laissé par un clic souris. */
+.est-formations-menu:has(:focus-visible) > .nav-dropdown {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0);
+}
+.est-formations-group:has(:focus-visible) > .est-formations-flyout {
+    display: block !important;
+}
+.est-formations-group a:focus-visible,
+.est-formations-group > button:focus-visible {
+    outline: 2px solid #c4a15c;
+    outline-offset: -2px;
+}

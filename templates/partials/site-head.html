@@ -1,0 +1,68 @@
+
+
+<!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="{{ asset('assets/img/logo-est.jpg') }}" />
+
+  <!-- Tailwind CSS CDN avec configuration personnalisée -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+              950: '#172554',
+              dark: '#1e3a8a',
+            },
+            accent: {
+              300: '#fdba74',
+              400: '#fb923c',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+            },
+            emeraldAccent: {
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+            heading: ['Outfit', 'system-ui', 'sans-serif'],
+            serif: ['Playfair Display', 'Cinzel', 'Georgia', 'serif'],
+            arabic: ['Amiri', 'Traditional Arabic', 'Noto Naskh Arabic', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Styles personnalisés & animations -->
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+<meta name="csrf-token" content="{{ csrf_token }}">
+<link rel="stylesheet" href="{{ asset('css/publications.css') }}">
+<script src="{{ asset('js/csrf.js') }}"></script><link rel="stylesheet" href="{{ asset('css/directory-media.css') }}">
+<script src="{{ asset('js/directory-media.js') }}" defer></script>
+<link rel="stylesheet" href="{{ asset('css/chatbot-click-fix.css') }}">
+<link rel="stylesheet" href="{{ asset('css/formations-navigation.css') }}?v=shared-1">
+<link rel="stylesheet" href="{{ asset('css/mobile-layout.css') }}?v=1">
+
+
+<link rel="stylesheet" href="{{ asset('css/django-site.css') }}">
+<link rel="stylesheet" href="{{ asset('css/public-refresh.css') }}?v=20261108-interface">

@@ -1,0 +1,88 @@
+/* Isolated from the public site and the article editor. */
+.pub-editor-with-cover > * { min-width: 0; }
+.pub-editor-with-cover .pub-editor-actions { flex-wrap: wrap; }
+
+@font-face {
+    font-family: "Cover Outfit";
+    src: url("../fonts/cover-designer/outfit-variable.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+}
+
+.cover-designer { grid-column: 1 / -1; min-width: 0; border: 1px solid #dce2e8; border-radius: 12px; background: #fff; }
+.cover-designer > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px; cursor: pointer; list-style: none; }
+.cover-designer > summary::-webkit-details-marker { display: none; }
+.cover-designer > summary::after { content: "+"; font-size: 24px; color: #8a6b35; }
+.cover-designer[open] > summary::after { content: "−"; }
+.cover-designer > summary strong { display: block; color: #18283c; font-size: 17px; }
+.cover-designer > summary small { margin-top: 5px; }
+.cover-designer .cover-badge { margin-left: auto; background: #f5efe3; color: #765b2b; padding: 6px 10px; border-radius: 6px; font-size: 11px; }
+.cover-body { padding: 0 22px 22px; }
+.cover-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
+.cover-stage { position: sticky; top: 20px; min-width: 0; }
+.cover-stage-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; padding: 12px 0; }
+.cover-stage-head span { color: #6b7785; font-size: 11px; }
+.cover-stage canvas[data-cover-canvas] { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; border-radius: 8px; background: #f5eee3; box-shadow: 0 0 0 1px #dce2e8; touch-action: none; cursor: grab; }
+.cover-stage canvas:focus-visible { outline: 3px solid #b68a41; outline-offset: 4px; }
+.cover-stage canvas:active { cursor: grabbing; }
+.cover-tip { font-size: 11px; line-height: 1.6; color: #687789; margin: 12px 0 22px; }
+.cover-thumbnail-row { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 18px; background: #f8f9fb; border: 1px solid #e4e8ed; border-radius: 8px; }
+.cover-thumbnail-row strong { font-size: 12px; }
+.cover-thumbnail-row p { font-size: 11px; color: #687789; margin: 4px 0 0; }
+.cover-thumbnail-row canvas { display: block; width: min(100%, 400px); height: auto; border-radius: 6px; border: 1px solid #e0e4e9; }
+.cover-controls { min-width: 0; }
+.cover-controls fieldset { min-width: 0; border: 1px solid #e2e6eb; border-radius: 9px; padding: 16px; margin: 0 0 16px; background: #fafbfc; }
+.cover-controls legend { padding: 0 6px; font-size: 12px; font-weight: 700; color: #25394c; }
+.pub-editor .cover-designer label { font-size: 11px; margin: 0 0 13px; font-weight: 600; }
+.cover-designer input, .cover-designer textarea, .cover-designer select { min-width: 0; max-width: 100%; font: inherit; }
+.cover-designer textarea { resize: vertical; }
+.cover-designer input[type="color"] { width: 100%; height: 36px; padding: 3px; cursor: pointer; }
+.cover-designer input[type="range"] { width: 100%; padding: 0; accent-color: #aa803b; cursor: pointer; }
+.cover-designer input[type="file"] { width: 100%; font-size: 10px; background: #fff; }
+.cover-designer input[type="number"] { width: 100%; }
+.cover-designer output { float: right; color: #6d7885; font-size: 10px; font-weight: normal; }
+.cover-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.pub-editor .cover-designer .cover-check { display: flex; align-items: center; gap: 8px; font-weight: normal; }
+.pub-editor .cover-check input[type="checkbox"] { width: 16px; height: 16px; margin: 0; accent-color: #aa803b; }
+.cover-subdetails > summary { cursor: pointer; font-size: 11px; color: #647386; margin-bottom: 12px; }
+.cover-element-row { display: flex; align-items: end; gap: 8px; }
+.cover-element-row label { flex: 1; min-width: 0; }
+.cover-element-row .pub-btn { margin-bottom: 13px; padding: 10px; font-size: 11px; }
+.cover-element-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.cover-element-actions .pub-btn { padding: 8px 10px; font-size: 10px; }
+.cover-remove { border: 0; padding: 5px 0; background: none; color: #795b40; font-size: 10px !important; text-decoration: underline; }
+.cover-actions { margin-top: 8px; padding-top: 20px; border-top: 1px solid #e3e7ed; }
+.cover-action-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+.cover-designer [data-cover-status] { font-size: 12px; color: #54677a; line-height: 1.6; margin: 14px 0 5px; }
+.cover-designer [data-cover-status][data-error="true"] { color: #8a5329; }
+.cover-designer .cover-save-note { color: #74808d; font-size: 11px; margin: 0; line-height: 1.6; }
+.cover-designer button:disabled { opacity: .5; cursor: not-allowed; }
+.cover-designer [hidden] { display: none !important; }
+
+@media (max-width: 1400px) and (min-width: 1101px), (max-width: 900px) {
+    .cover-workspace { grid-template-columns: minmax(0, 1fr); }
+    .cover-stage { position: static; }
+    .cover-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .cover-controls fieldset:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 600px) {
+    .cover-designer > summary { padding: 16px; }
+    .cover-designer > summary strong { font-size: 15px; }
+    .cover-designer .cover-badge { display: none; }
+    .cover-body { padding: 0 12px 16px; }
+    .cover-controls { display: block; }
+    .cover-actions .pub-btn { white-space: normal; }
+    .cover-thumbnail-row { padding: 12px; }
+}
+
+@media (max-width: 1100px) {
+    .pub-editor-with-cover { grid-template-columns: minmax(0, 1fr); }
+    .pub-editor-with-cover .pub-settings { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Page indépendante : l’atelier occupe toute la largeur disponible. */
+.cover-standalone-form { display: block; margin-top: 24px; }
+.cover-standalone-form .cover-designer { width: 100%; }
+.cover-standalone-form .cover-designer label { display: block; }

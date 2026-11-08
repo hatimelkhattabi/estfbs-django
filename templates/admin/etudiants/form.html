@@ -1,0 +1,16 @@
+{% extends 'admin/layout.html' %}
+{% set page_title = 'Modifier un étudiant' if etudiant.pk else 'Ajouter un étudiant' %}
+{% block header_action %}<a class="pub-btn secondary" href="{{ route('admin.etudiants.index') }}">← Étudiants</a>{% endblock %}
+{% block content %}
+<section class="pub-panel"><form method="POST" class="pub-editor" action="{{ route('admin.etudiants.update',etudiant) if etudiant.pk else route('admin.etudiants.store') }}">{{ csrf_input }}
+  <div class="pub-fields">
+    <label>Numéro Apogée *<input type="text" name="apogee" required inputmode="numeric" maxlength="32" pattern="[0-9]{1,32}" value="{{ old('apogee',etudiant.apogee) }}"></label>
+    <div class="pub-two"><label>Nom *<input name="nom" required maxlength="150" value="{{ old('nom',etudiant.nom) }}"></label><label>Prénom *<input name="prenom" required maxlength="150" value="{{ old('prenom',etudiant.prenom) }}"></label></div>
+    <label>Filière(s)<textarea name="filiere" rows="3">{{ old('filiere',etudiant.filiere) }}</textarea></label>
+    <label>Niveau(x)<input name="niveau" maxlength="100" value="{{ old('niveau',etudiant.niveau) }}"></label>
+    <label>Année universitaire<input name="annee_universitaire" maxlength="20" value="{{ old('annee_universitaire',etudiant.annee_universitaire) }}"></label>
+  </div>
+  <div class="pub-settings"><div class="pub-setting-box"><h3>Envoi des messages</h3><label class="pub-check"><input type="checkbox" name="actif" value="1" {% if old('actif',etudiant.actif) %}checked{% endif %}> Autoriser cet étudiant à envoyer un message</label><p>Le numéro Apogée est conservé comme texte, avec ses éventuels zéros initiaux.</p></div></div>
+  <div class="pub-editor-actions"><a class="pub-btn secondary" href="{{ route('admin.etudiants.index') }}">Annuler</a><button class="pub-btn primary">Enregistrer</button></div>
+</form></section>
+{% endblock %}

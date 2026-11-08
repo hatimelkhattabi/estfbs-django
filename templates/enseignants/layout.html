@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token }}"><title>{{ page_title|default('Mon espace') }} | EST-FBS</title>
+<link rel="icon" href="{{ asset('assets/img/logo-est.jpg') }}">
+{% if active=='vehicle' %}<script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">{% endif %}
+<link rel="stylesheet" href="{{ asset('css/teacher-portal.css') }}?v=20261108-document-options">
+{% block extra_head %}{% endblock %}
+</head><body class="tp-body {{ 'tp-vehicle' if active=='vehicle' else '' }}">
+<a class="tp-skip" href="#main-content">Aller au contenu</a>
+<aside class="tp-sidebar" aria-label="Espace enseignants">
+<a class="tp-brand" href="{{ route('teacher-home') }}"><img src="{{ asset('assets/img/logo-est.jpg') }}" alt="Logo EST-FBS"><span>EST Fkih Ben Salah<small>Espace enseignants</small></span></a>
+<button class="tp-menu-toggle" type="button" aria-expanded="false" aria-controls="tp-services-nav">Menu des services <span aria-hidden="true">☰</span></button>
+<nav id="tp-services-nav" aria-label="Services enseignants"><p class="tp-nav-label">MON ESPACE</p>
+<a class="tp-nav {{ 'active' if active=='home' else '' }}" {% if active=='home' %}aria-current="page"{% endif %} href="{{ route('teacher-home') }}">Tableau de bord</a>
+<p class="tp-nav-label">MES SERVICES</p>
+{% for key,name,label in [('printing','teacher-print','Demande d’impression'),('administrative','teacher-administrative','Documents administratifs'),('attendance','teacher-attendance','Listes de présence'),('vehicle','teacher-vehicle','Demande de véhicule'),('anonymous','teacher-anonymous','Message anonyme')] %}
+<a class="tp-nav {{ 'active' if active==key else '' }}" {% if active==key %}aria-current="page"{% endif %} href="{{ route(name) }}">{{ label }}</a>
+{% endfor %}
+<p class="tp-nav-label">SUIVI &amp; MON COMPTE</p>
+<a class="tp-nav {{ 'active' if active=='requests' else '' }}" href="{{ route('teacher-requests') }}">Mes demandes</a>
+<a class="tp-nav {{ 'active' if active=='password' else '' }}" href="{{ route('teacher-password') }}">Changer mon mot de passe</a>
+<a class="tp-nav" href="/">Voir le site ↗</a>
+</nav>
+<div class="tp-account"><strong>{{ enseignant.nom_complet if enseignant else '' }}</strong><small>PPR {{ enseignant.ppr if enseignant else '' }}</small><form method="post" action="{{ route('teacher-logout') }}">{{ csrf_input }}<button>Se déconnecter</button></form></div>
+</aside>
+<main class="tp-main" id="main-content">
+<header class="tp-heading"><p class="tp-eyebrow">EST-FBS · SERVICES AUX ENSEIGNANTS</p><h1>{{ page_title|default('Mon espace enseignants') }}</h1><p>{{ description|default('Vos services et vos démarches, au même endroit.') }}</p></header>
+{% for message in django_messages %}<div class="tp-notice" role="status">{{ message }}</div>{% endfor %}
+{% block content %}{% endblock %}
+<footer class="tp-footer">EST-FBS · Université Sultan Moulay Slimane</footer>
+</main>
+<script src="{{ asset('js/teacher-portal.js') }}?v=20261108-document-options" defer></script>
+</body></html>

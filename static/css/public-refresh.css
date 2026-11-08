@@ -1,0 +1,192 @@
+/* Titres des rubriques : même style que la référence ELOGHA. */
+.est-ribbon,
+.pub-detail .est-page-title {
+    display: inline;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #0ea5e9;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: clamp(24px, 2.4vw, 32px);
+    font-weight: 800;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    text-align: left;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 7px;
+    text-decoration-skip-ink: auto;
+    overflow-wrap: anywhere;
+}
+.est-title-heading { margin: 4px 0 12px; text-align: left; }
+.pub-detail .est-page-title { display: block; margin: 12px 0 20px; }
+
+/* Un seul compteur public, dans la colonne Espace étudiants du pied de page. */
+.footer-visitor-counter { padding-top: 16px; max-width: 100%; }
+.footer-counter-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 0 7px;
+    color: #b45309;
+    font: 600 10px/1.6 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: .015em;
+    text-transform: uppercase;
+}
+.footer-counter-label i { color: #f97316; }
+.footer-counter-digits {
+    display: flex;
+    gap: 5px;
+    width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border: 1px solid #263348;
+    border-radius: 16px;
+    background: #0f172a;
+    box-shadow: 0 3px 6px #0f172a26;
+}
+.footer-counter-digits .odometer-digit {
+    display: flex;
+    flex: 0 1 31px;
+    align-items: center;
+    justify-content: center;
+    width: 31px;
+    min-width: 0;
+    height: 39px;
+    border: 1px solid #334155;
+    border-radius: 11px;
+    background: linear-gradient(#1e293b, #0f172a 55%, #000);
+    color: #fbbf24;
+    font: 800 21px/1 ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+@media (max-width: 640px) {
+    .est-ribbon, .pub-detail .est-page-title { font-size: 25px; }
+}
+
+/* Cartes Actualités / Événements : présentation éditoriale de la référence. */
+.pub-site-card.pub-editorial-card {
+    min-width: 0;
+    height: 100%;
+    border-color: #dbe3ef;
+    border-radius: 13px;
+    background: #fff;
+}
+.pub-editorial-card .pub-site-image-link {
+    display: block;
+    flex: 0 0 auto;
+    height: 195px;
+    overflow: hidden;
+    background: #f5f6f8;
+}
+.pub-editorial-card .pub-site-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.pub-editorial-card .pub-site-cover.pub-cover-contain {
+    object-fit: contain;
+    background: #fcf8ef;
+}
+.pub-editorial-card .pub-site-card-body {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    padding: 24px;
+}
+.pub-editorial-card .pub-site-kind {
+    margin: 0;
+    color: #a97616;
+    font: 700 10px/1.5 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+}
+.pub-site-card.pub-editorial-card .pub-site-title {
+    margin: 10px 0 12px;
+    color: #172e4c;
+    font: 700 18px/1.4 Georgia, 'Times New Roman', serif;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+}
+.pub-editorial-card .pub-site-title a { color: inherit; }
+.pub-editorial-card .pub-site-title a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.pub-editorial-card .pub-site-summary {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    margin: 0;
+    color: #63718a;
+    font: 400 12px/1.8 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.pub-editorial-card .pub-site-location {
+    margin: 18px 0 0;
+    color: #63718a;
+    font: 400 11px/1.6 'Plus Jakarta Sans', system-ui, sans-serif;
+    overflow-wrap: anywhere;
+}
+.pub-editorial-card .pub-site-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    padding: 16px 24px;
+    border-top: 1px solid #e8edf4;
+    color: #63718a;
+    font: 400 11px/1.5 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.pub-editorial-card .pub-site-card-footer a { color: #254e75; font-weight: 600; white-space: nowrap; }
+.pub-editorial-card .pub-site-card-footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.pub-editorial-card a:focus-visible { outline: 2px solid #a97616; outline-offset: -3px; border-radius: 3px; }
+@media (max-width: 760px) {
+    .pub-editorial-card .pub-site-image-link { height: 220px; }
+    .pub-editorial-card .pub-site-card-body { padding: 22px; }
+    .pub-editorial-card .pub-site-card-footer { padding: 16px 22px; }
+}
+
+/* Des pages et des documents un peu plus grands, avec le même habillage. */
+.pub-inner-page .pub-detail {
+    box-sizing: border-box;
+    width: calc(100% - 48px);
+    max-width: 1120px;
+    padding: clamp(24px, 3.2vw, 46px);
+    font-size: 15px;
+}
+.pub-inner-page .pub-detail.pub-detail-timetable { max-width: 1240px; }
+.pub-inner-page .pub-detail h1:not(.est-page-title) { font-size: clamp(29px, 3.2vw, 41px); }
+.pub-inner-page .pub-detail-content { font-size: 16px; }
+.pub-inner-page .pub-detail-image { max-height: 560px; }
+#evenements > div { max-width: 1320px; }
+.pub-editorial-card .pub-site-image-link { height: 220px; }
+.pub-site-card.pub-editorial-card .pub-site-title { font-size: 20px; }
+.pub-editorial-card .pub-site-summary { font-size: 13px; }
+.pub-editorial-card .pub-site-location,
+.pub-editorial-card .pub-site-card-footer { font-size: 12px; }
+.dm-image-button, .dm-video { height: 250px; }
+.dm-caption h3 { font-size: 17px; }
+.dm-caption p { font-size: 14px; }
+.dm-lightbox { max-width: 96vw; max-height: 94vh; }
+.dm-lightbox img { max-width: 89vw; max-height: 78vh; }
+.dm-lightbox figcaption { font-size: 14px; }
+#contact .contact-instructions { color: #52647e; font-size: 14px; line-height: 1.7; margin: 0 0 22px; }
+#form-contact label { font-size: 14px; }
+#form-contact input, #form-contact textarea { font-size: 14px; }
+#form-contact button { min-height: 46px; font-size: 13px; }
+#contact-status-msg { font-size: 14px; line-height: 1.6; }
+@media (min-width: 1024px) {
+    #mot-directeur .director-layout { grid-template-columns: minmax(0, 5fr) minmax(0, 8fr); }
+    #mot-directeur .director-portrait, #mot-directeur .director-message { grid-column: auto; min-width: 0; }
+}
+@media (max-width: 760px) {
+    .pub-inner-page .pub-detail { width: calc(100% - 24px); margin: 24px auto; padding: 24px; }
+    .pub-editorial-card .pub-site-image-link { height: 220px; }
+    .dm-image-button, .dm-video { height: 240px; }
+    .dm-lightbox { padding: 46px 12px 16px; }
+    .dm-lightbox img { max-width: 87vw; max-height: 76vh; }
+}

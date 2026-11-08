@@ -1,0 +1,58 @@
+{% extends 'admin/layout.html' %}
+{% set page_title = 'Emplois du temps' %}
+{% block header_action %}
+    {% if can('emplois','add') %}<a class="pub-btn primary" href="{{ route('admin.emplois.create') }}">+ Ajouter une filière</a>{% endif %}
+{% endblock %}
+{% block content %}
+    <link rel="stylesheet" href="{{ asset('css/emplois.css') }}?v=4">
+    <div class="edt-admin-intro">
+        <p>DUT : S1 et S2 pour la 1re année, S3 et S4 pour la 2e année. DBT (Bachelor) : deux liens, S5 et S6. Licence : un lien pour l'année universitaire.</p>
+        <a class="pub-btn secondary" href="{{ route('emplois.index') }}" target="_blank" rel="noopener noreferrer">Voir la page publique ↗</a>
+    </div>
+    <section class="pub-panel">
+        {% if not emplois %}
+            <div class="pub-empty">
+                <h2>Ajoutez votre première filière</h2>
+                <p>Choisissez son cycle et renseignez les liens de ses emplois du temps.</p>
+                {% if can('emplois','add') %}<a class="pub-btn primary" href="{{ route('admin.emplois.create') }}">Ajouter une filière</a>{% endif %}
+            </div>
+        {% else %}
+            <div class="pub-table-wrap">
+                <table class="pub-table">
+                    <thead><tr><th>Filière</th><th>Cycle</th><th>Année</th><th>Liens</th><th>Affichage</th><th>Ordre</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        {% for emploi in emplois %}
+                            <tr>
+                                <td><strong>{{ emploi.filiere }}</strong>{% if not emploi.cycle  and  emploi.niveau %}<small class="edt-admin-level">{{ emploi.niveau }}</small>{% endif %}</td>
+                                <td>{{ emploi.get_cycle_display() }}</td>
+                                <td>{{ emploi.annee }}</td>
+                                <td><div class="edt-admin-actions">
+                                    {% for label , url in emploi.liens %}
+                                        {% if valid_link(url) %}
+                                            <a class="edt-admin-link" href="{{ url }}" target="_blank" rel="noopener noreferrer">{{ label }} ↗</a>
+                                        {% else %}
+                                            <span class="edt-muted">{{ label }} : à renseigner</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if emploi.lien %}
+                                        <a class="edt-admin-link" href="{{ emploi.lien }}" target="_blank" rel="noopener noreferrer">Ancien lien à classer ↗</a>
+                                    {% endif %}
+                                </div></td>
+                                <td>{{ ('Publié' if emploi.publie else 'Masqué') }}</td>
+                                <td>{{ emploi.ordre }}</td>
+                                <td><div class="edt-admin-actions">
+                                    {% if can('emplois','change') %}<a class="pub-btn secondary" href="{{ route('admin.emplois.edit', emploi) }}">Modifier</a>{% endif %}
+                                    {% if can('emplois','delete') %}<form method="POST" action="{{ route('admin.emplois.destroy', emploi) }}" onsubmit="return confirm('Supprimer cette filière de la page des emplois du temps ?')">
+                                        {{ csrf_input }} 
+                                        <button class="pub-btn secondary" type="submit">Supprimer</button>
+                                    </form>{% endif %}
+                                </div></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {{ pagination(page) }}
+        {% endif %}
+    </section>
+{% endblock %}

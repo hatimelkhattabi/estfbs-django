@@ -1,0 +1,115 @@
+
+
+<footer data-site-footer class="bg-white/95 backdrop-blur-md text-blue-950 pt-16 pb-8 border-t-2 border-blue-100 shadow-inner">
+    <div class="max-w-7xl mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+      
+      <!-- Colonne 1: Établissement -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="bg-white p-1 rounded-xl border border-blue-200 shadow-sm">
+            <img src="{{ asset('assets/img/logo-est.jpg') }}" alt="Logo EST FBS" class="h-12 w-auto" />
+          </div>
+          <div>
+            <h5 class="text-blue-900 font-bold font-heading text-sm">EST Fquih Ben Salah</h5>
+            <p class="text-[10px] text-orange-600 font-arabic font-bold">المدرسة العليا للتكنولوجيا</p>
+          </div>
+        </div>
+        <p class="text-xs text-blue-950/70 leading-relaxed font-normal">
+          Établissement public d'enseignement supérieur technologique, composante de l'Université Sultan Moulay Slimane de Béni Mellal.
+        </p>
+        <div class="flex items-center gap-3 pt-2">
+          <a href="#" class="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 hover:bg-orange-500 hover:text-white flex items-center justify-center transition shadow-sm"><i class="fab fa-facebook-f text-xs"></i></a>
+          <a href="#" class="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 hover:bg-orange-500 hover:text-white flex items-center justify-center transition shadow-sm"><i class="fab fa-linkedin-in text-xs"></i></a>
+          <a href="#" class="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 hover:bg-orange-500 hover:text-white flex items-center justify-center transition shadow-sm"><i class="fab fa-youtube text-xs"></i></a>
+          <a href="#" class="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 hover:bg-orange-500 hover:text-white flex items-center justify-center transition shadow-sm"><i class="fab fa-twitter text-xs"></i></a>
+        </div>
+
+        <!-- Localisation Google Maps de l'école -->
+        <div class="pt-2">
+          <div class="rounded-xl overflow-hidden border border-blue-200 shadow-sm bg-white group hover:border-orange-400 transition-all duration-300">
+            <div class="relative w-full h-36 bg-slate-100">
+              <iframe 
+                title="Localisation Google Maps EST Fquih Ben Salah"
+                src="https://maps.google.com/maps?q=Ecole+Superieure+de+Technologie+Fquih+Ben+Salah&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed" 
+                class="w-full h-full border-0" 
+                loading="lazy" 
+                allowfullscreen="" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            <a href="https://maps.google.com/?q=Ecole+Superieure+de+Technologie+Fquih+Ben+Salah" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="flex items-center justify-between px-3 py-1.5 text-[11px] font-semibold text-blue-900 bg-blue-50/70 hover:bg-orange-50 hover:text-orange-600 transition border-t border-blue-100">
+              <span class="flex items-center gap-1.5">
+                <i class="fas fa-map-marker-alt text-orange-500"></i>
+                <span>Localisation EST-FBS</span>
+              </span>
+              <span class="text-[10px] text-blue-700 flex items-center gap-1 group-hover:text-orange-600">
+                <span>Ouvrir Maps</span>
+                <i class="fas fa-external-link-alt text-[9px]"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonne 2: Accès Rapides -->
+      <div class="space-y-3">
+        <h5 class="text-blue-900 font-bold font-heading text-sm uppercase tracking-wider border-l-4 border-orange-500 pl-2.5">
+          <i class="fas fa-compass text-emerald-600 mr-1"></i> Navigation
+        </h5>
+        <ul class="space-y-2 text-xs">
+          <li><a href="{{ route('home', [], False) }}#accueil" class="text-blue-800 hover:text-orange-600 font-medium transition">Accueil</a></li>
+          <li><a href="{{ url('organigramme.html') }}" class="text-blue-800 hover:text-orange-600 font-medium transition">Organigramme de EST-FBS</a></li>
+          <li><a href="{{ route('home', [], False) }}#departements" class="text-blue-800 hover:text-orange-600 font-medium transition">Départements</a></li>
+          <li><a href="{{ route('home', [], False) }}#nos-locaux" class="text-blue-800 hover:text-orange-600 font-medium transition">Nos locaux</a></li>
+          <li><a href="{{ route('home', [], False) }}#formations" class="text-blue-800 hover:text-orange-600 font-medium transition">Catalogue des Formations</a></li>
+          <li><a href="{{ route('home', [], False) }}#recherche" class="text-blue-800 hover:text-orange-600 font-medium transition">Recherche & Laboratoires</a></li>
+          <li><a href="{{ route('home', [], False) }}#evenements" class="text-blue-800 hover:text-orange-600 font-medium transition">Évènements & Colloques</a></li>
+          <li><a href="{{ route('home', [], False) }}#espace-etudiants" class="text-blue-800 hover:text-orange-600 font-medium transition">Espace Étudiants (E-Services)</a></li>
+          <li><a href="{{ route('teacher-home') }}" class="text-blue-800 hover:text-orange-600 font-medium transition">Espace Enseignants (R&D / Harakiya)</a></li>
+          <li><a href="{{ route('galerie.index') }}" class="text-blue-800 hover:text-orange-600 font-medium transition">Galerie Photos</a></li>
+        </ul>
+      </div>
+
+      <!-- Colonne 3: Espace étudiants -->
+      {% include 'partials/student-footer.html' %}
+
+      <!-- Colonne 4: Portail Partenaire & USMS -->
+      <div class="space-y-4">
+        <h5 class="text-blue-900 font-bold font-heading text-sm uppercase tracking-wider border-l-4 border-orange-500 pl-2.5">
+          <i class="fas fa-university text-emerald-600 mr-1"></i> Université Tutelle
+        </h5>
+        <div class="flex items-center gap-3 bg-blue-50/80 p-3 rounded-xl border border-blue-200 shadow-sm">
+          <img src="{{ asset('assets/img/logo-usms.png') }}" alt="Logo USMS" class="h-10 w-auto" />
+          <div>
+            <strong class="block text-xs text-blue-900">Univ. Sultan Moulay Slimane</strong>
+            <a href="https://www.usms.ac.ma" target="_blank" rel="noopener noreferrer" class="text-[11px] text-orange-600 hover:text-orange-700 font-bold hover:underline">https://www.usms.ac.ma <i class="fas fa-external-link-alt text-[9px]"></i></a>
+          </div>
+        </div>
+        <p class="text-[11px] text-blue-950/70 leading-relaxed font-normal">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-1"></span>
+          Liens Utiles & Partenaires Officiels :
+        </p>
+        <ul class="space-y-1.5 text-xs pt-1">
+          <li><a href="https://www.usms.ac.ma" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-blue-800 hover:text-orange-600 font-medium transition"><i class="fas fa-external-link-alt text-[10px] text-orange-500 w-3.5"></i><span>https://www.usms.ac.ma</span></a></li>
+          <li><a href="https://www.suptech-sante.ma/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-blue-800 hover:text-orange-600 font-medium transition"><i class="fas fa-external-link-alt text-[10px] text-orange-500 w-3.5"></i><span>https://www.suptech-sante.ma/</span></a></li>
+          <li><a href="https://www.enssup.gov.ma" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-blue-800 hover:text-orange-600 font-medium transition"><i class="fas fa-external-link-alt text-[10px] text-orange-500 w-3.5"></i><span>www.enssup.gov.ma</span></a></li>
+          <li><a href="https://www.ocpgroup.ma" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-blue-800 hover:text-orange-600 font-medium transition"><i class="fas fa-external-link-alt text-[10px] text-orange-500 w-3.5"></i><span>https://www.ocpgroup.ma</span></a></li>
+          <li><a href="https://www.cnrst.ma" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-blue-800 hover:text-orange-600 font-medium transition"><i class="fas fa-external-link-alt text-[10px] text-orange-500 w-3.5"></i><span>https://www.cnrst.ma</span></a></li>
+        </ul>
+        <p class="hidden">
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Copyright Bar -->
+    <div class="max-w-7xl mx-auto px-4 pt-6 border-t border-blue-100 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-blue-800">
+      <p>© 2026 École Supérieure de Technologie de Fquih Ben Salah. Tous droits réservés.</p>
+    </div>
+
+  </footer>
+{% include 'partials/search-modal.html' %}
+

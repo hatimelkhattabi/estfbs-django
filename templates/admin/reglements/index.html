@@ -1,0 +1,42 @@
+{% extends 'admin/layout.html' %}
+{% set page_title = 'Textes et règlements' %}
+{% block header_action %}
+    {% if can('reglements','add') %}<a class="pub-btn primary" href="{{ route('admin.reglements.create') }}">+ Ajouter un document</a>{% endif %}
+{% endblock %}
+{% block content %}
+    <section class="pub-panel">
+        <div class="pub-panel-head">
+            <div><h2>Documents de l’établissement</h2><p class="pub-muted">Téléversez vos PDF et choisissez leur ordre d’affichage.</p></div>
+            <a class="pub-btn secondary" href="{{ route('reglements.index') }}" target="_blank" rel="noopener">Voir la page ↗</a>
+        </div>
+        <div class="pub-table-wrap">
+            <table class="pub-table">
+                <thead><tr><th>Ordre</th><th>Document</th><th>Fichier</th><th>État</th><th>Actions</th></tr></thead>
+                <tbody>
+                    {% for document in documents %}
+                        <tr>
+                            <td>{{ document.ordre }}</td>
+                            <td><strong>{{ document.titre }}</strong></td>
+                            <td>
+                                {% if document.document_url %}
+                                    <a href="{{ document.document_url }}" target="_blank" rel="noopener noreferrer">{{ ('PDF téléversé' if document.file_path else 'Lien existant') }} ↗</a>
+                                {% else %}
+                                    <span class="pub-muted">Aucun PDF</span>
+                                {% endif %}
+                            </td>
+                            <td><span class="pub-badge {{ ('live' if document.publie else 'draft') }}">{{ ('Publié' if document.publie else 'Masqué') }}</span></td>
+                            <td><div class="pub-row-actions">
+                                {% if can('reglements','change') %}<a href="{{ route('admin.reglements.edit', document) }}">Modifier</a>{% endif %}
+                                {% if can('reglements','change') %}<form method="post" action="{{ route('admin.reglements.toggle', document) }}">{{ csrf_input }}<button type="submit">{{ ('Masquer' if document.publie else 'Publier') }}</button></form>{% endif %}
+                                {% if can('reglements','delete') %}<form method="post" action="{{ route('admin.reglements.destroy', document) }}" onsubmit="return confirm('Supprimer ce document et son PDF ?')">{{ csrf_input }} <button type="submit" class="pub-delete">Supprimer</button></form>{% endif %}
+                            </div></td>
+                        </tr>
+                    {% else %}
+                        <tr><td colspan="5">Aucun document. Cliquez sur « Ajouter un document ».</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {{ pagination(page) }}
+    </section>
+{% endblock %}

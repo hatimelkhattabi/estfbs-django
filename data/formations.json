@@ -1,0 +1,94 @@
+{
+  "dut": {
+    "label": "Filières DUT (Bac+2)",
+    "icon": "fa-graduation-cap",
+    "items": [
+      {
+        "nom": "Génie Civil",
+        "icon": "fa-hard-hat",
+        "brochure": "DUT/DUT-G%C3%A9nieCivil.pdf"
+      },
+      {
+        "nom": "Génie Minier",
+        "icon": "fa-mountain",
+        "brochure": "DUT/DUT-G%C3%A9nie-Minier.pdf"
+      },
+      {
+        "nom": "Génie Informatique",
+        "icon": "fa-laptop-code",
+        "brochure": "DUT/DUT-G%C3%A9nieInformatique.pdf"
+      },
+      {
+        "nom": "Génie Biologique",
+        "icon": "fa-dna",
+        "brochure": "DUT/DUT-G%C3%A9nieBiologique.pdf"
+      },
+      {
+        "nom": "Industrie Agroalimentaire",
+        "icon": "fa-seedling",
+        "brochure": "DUT/DUT-Industrie-AgroAlimentaire.pdf"
+      },
+      {
+        "nom": "Agrochimie",
+        "icon": "fa-vial",
+        "brochure": "DUT/DUT-AgroChimie.pdf"
+      },
+      {
+        "nom": "Informatique décisionnelle et Statistique",
+        "icon": "fa-chart-pie",
+        "brochure": "DUT/Informatiques.pdf"
+      },
+      {
+        "nom": "Géométallurgie et géotechnique minière",
+        "icon": "fa-gem",
+        "brochure": "DUT/GGMm.pdf"
+      },
+      {
+        "nom": "Chimie & Techniques d'Analyse",
+        "icon": "fa-flask",
+        "brochure": "DUT/Chimie.pdf"
+      },
+      {
+        "nom": "Agro-énergie",
+        "icon": "fa-bolt",
+        "brochure": null
+      },
+      {
+        "nom": "Gestion et Technologie de l'Eau",
+        "icon": "fa-water",
+        "brochure": null
+      }
+    ]
+  },
+  "dbt": {
+    "label": "Filières DBT — Bachelor (Bac+3)",
+    "icon": "fa-award",
+    "items": [
+      {
+        "nom": "Génie Civil",
+        "icon": "fa-hard-hat",
+        "brochure": null
+      },
+      {
+        "nom": "Infrastructures, Traitement et Analyse de données Massives (BIG DATA)",
+        "icon": "fa-database",
+        "brochure": null
+      },
+      {
+        "nom": "Sciences Agronomique",
+        "icon": "fa-seedling",
+        "brochure": null
+      },
+      {
+        "nom": "Biotechnologies Agroalimentaires",
+        "icon": "fa-flask",
+        "brochure": null
+      },
+      {
+        "nom": "Ingénierie Minière et Géologique",
+        "icon": "fa-mountain",
+        "brochure": null
+      }
+    ]
+  }
+}

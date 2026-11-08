@@ -1,0 +1,279 @@
+{% extends 'admin/layout.html' %}
+
+{% set page_title = ('Modifier la publication' if publication.pk else 'Nouvelle publication') %}
+
+{% block content %}
+    <link rel="stylesheet" href="{{ asset('vendor/quill/quill.snow.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/publication-richtext.css') }}">
+    <style>
+        .pub-editor-toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
+        .pub-editor-note { font-size: 12px; line-height: 1.6; color: #66758a; margin: 8px 0; }
+        .pub-content-editor textarea { width: 100%; }
+        .pub-button-options { display: grid; gap: 16px; margin-top: 18px; }
+        .pub-button-options[hidden] { display: none; }
+        .pub-button-preview { display: flex; justify-content: center; padding: 16px; background: #f4f7fa; border-radius: 8px; }
+    </style>
+
+    <section class="pub-panel">
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="pub-editor pub-editor-with-cover"
+            action="{{ (route('admin.publications.update', publication) if publication.pk else route('admin.publications.store')) }}"
+        >
+            {{ csrf_input }}
+            {% if publication.pk %}
+                
+            {% endif %}
+
+            <div class="pub-fields">
+                <label>Titre *
+                    <input name="titre" required maxlength="255" value="{{ old('titre', publication.titre) }}">
+                </label>
+
+                <div class="pub-two">
+                    <label>Type *
+                        <select name="type">
+                            {% for type in ['Actualité', 'Événement'] %}
+                                <option {% if old('type', publication.type) == type %}selected{% endif %}>{{ type }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <label>Catégorie
+                        <input name="categorie" maxlength="80" value="{{ old('categorie', publication.categorie) }}">
+                    </label>
+                </div>
+
+                <label>Résumé *
+                    <small>Texte affiché sur la carte de l’accueil.</small>
+                    <textarea name="resume" rows="3" required maxlength="1500">{{ old('resume', publication.resume) }}</textarea>
+                </label>
+
+                
+                
+                <div class="pub-content-editor">
+                    <label for="publication-contenu">Contenu complet *</label>
+                    <p class="pub-editor-note">Rédigez et mettez en forme votre annonce. Sélectionnez du texte pour changer son style ou ajouter un lien.</p>
+
+                    <div id="publication-visual-tools" hidden>
+                        <div class="pub-rich-tools">
+                            <span class="pub-rich-badge">Éditeur visuel</span>
+                            <div class="pub-rich-shortcuts">
+                                <button type="button" id="publication-undo" title="Annuler (Ctrl+Z)">↶ Annuler</button>
+                                <button type="button" id="publication-redo" title="Rétablir (Ctrl+Maj+Z)">↷ Rétablir</button>
+                                <button type="button" id="publication-preview-toggle" aria-expanded="false" aria-controls="publication-content-preview">Aperçu</button>
+                            </div>
+                        </div>
+
+                        <div id="publication-rich-toolbar" aria-label="Mise en forme du contenu">
+                            <span class="ql-formats">
+                                <select class="ql-header" aria-label="Style de paragraphe" title="Style de paragraphe">
+                                    <option selected>Paragraphe</option>
+                                    <option value="2">Titre 1</option>
+                                    <option value="3">Titre 2</option>
+                                    <option value="4">Titre 3</option>
+                                </select>
+                                <select class="ql-font" aria-label="Police" title="Police">
+                                    <option selected>Sans sérif</option>
+                                    <option value="serif">Sérif</option>
+                                    <option value="monospace">Monospace</option>
+                                </select>
+                                <select class="ql-size" aria-label="Taille du texte" title="Taille du texte">
+                                    <option value="small">Petit</option>
+                                    <option selected>Normal</option>
+                                    <option value="large">Grand</option>
+                                    <option value="huge">Très grand</option>
+                                </select>
+                            </span>
+                            <span class="ql-formats">
+                                <button type="button" class="ql-bold" aria-label="Gras" title="Gras (Ctrl+B)"></button>
+                                <button type="button" class="ql-italic" aria-label="Italique" title="Italique (Ctrl+I)"></button>
+                                <button type="button" class="ql-underline" aria-label="Souligné" title="Souligné (Ctrl+U)"></button>
+                                <button type="button" class="ql-strike" aria-label="Barré" title="Barré"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <select class="ql-color" aria-label="Couleur du texte" title="Couleur du texte"></select>
+                                <select class="ql-background" aria-label="Surlignage" title="Surlignage"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button type="button" class="ql-list" value="bullet" aria-label="Liste à puces" title="Liste à puces"></button>
+                                <button type="button" class="ql-list" value="ordered" aria-label="Liste numérotée" title="Liste numérotée"></button>
+                                <select class="ql-align" aria-label="Alignement" title="Alignement">
+                                    <option selected></option>
+                                    <option value="center"></option>
+                                    <option value="right"></option>
+                                    <option value="justify"></option>
+                                </select>
+                                <button type="button" class="ql-direction" value="rtl" aria-label="Écriture de droite à gauche" title="Arabe : droite à gauche"></button>
+                                <button type="button" class="ql-blockquote" aria-label="Citation" title="Citation"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <button type="button" class="ql-script" value="sub" aria-label="Indice" title="Indice"></button>
+                                <button type="button" class="ql-script" value="super" aria-label="Exposant" title="Exposant"></button>
+                                <button type="button" class="ql-link" id="publication-insert-link" aria-label="Insérer un lien" title="Insérer un lien ou téléverser un document"></button>
+                                <button type="button" id="publication-remove-link" aria-label="Supprimer le lien" title="Supprimer le lien">↛</button>
+                                <button type="button" class="ql-clean" aria-label="Effacer la mise en forme" title="Effacer la mise en forme"></button>
+                            </span>
+                        </div>
+                        <div id="publication-rich-editor" aria-label="Contenu complet"></div>
+                        <div class="pub-rich-status">
+                            <span id="publication-word-count" aria-live="polite"></span>
+                            <span>Ctrl+Z pour annuler</span>
+                        </div>
+                    </div>
+
+                    <p id="publication-editor-message" class="pub-editor-note" role="status">Chargement de l’éditeur visuel…</p>
+                    <textarea id="publication-contenu" name="contenu" rows="12" required maxlength="50000">{{ initial_text }}</textarea>
+                    <textarea id="publication-delta" name="contenu_delta" hidden disabled>{{ initial_delta }}</textarea>
+                    <textarea id="publication-initial-html" hidden>{{ initial_html }}</textarea>
+
+                    <div id="publication-content-preview" class="pub-rich-preview" hidden>
+                        <p class="pub-rich-preview-label">Aperçu du contenu</p>
+                        <div id="publication-preview-body" class="pub-richtext"></div>
+                    </div>
+                </div>
+
+                
+                <div class="pub-setting-box">
+                    <h3>Bouton en bas de l’article</h3>
+                    <input type="hidden" name="afficher_bouton" value="0">
+                    <label class="pub-check">
+                        <input
+                            type="checkbox"
+                            id="publication-button-enabled"
+                            name="afficher_bouton"
+                            value="1"
+                            aria-controls="publication-button-options"
+                            {% if old('afficher_bouton', publication.afficher_bouton) %}checked{% endif %}
+                        >
+                        Afficher un bouton centré
+                    </label>
+                    <p class="pub-editor-note">Facultatif : liste d’attente PDF, résultats, inscriptions… Vous pouvez garder les liens dans le texte sans afficher ce bouton.</p>
+
+                    <div id="publication-button-options" class="pub-button-options" {% if not old('afficher_bouton', publication.afficher_bouton) %} hidden {% endif %}>
+                        <label>Texte du bouton *
+                            <input
+                                id="publication-button-label"
+                                name="texte_bouton"
+                                maxlength="100"
+                                placeholder="Consulter la liste d’attente"
+                                value="{{ old('texte_bouton', publication.texte_bouton) }}"
+                            >
+                        </label>
+                        <label>Adresse du document ou de la page
+                            <input
+                                id="publication-button-url"
+                                type="text" inputmode="url"
+                                name="lien"
+                                maxlength="1000"
+                                placeholder="https://… ou /emplois-du-temps"
+                                value="{{ old('lien', publication.lien) }}"
+                            >
+                        </label>
+                        <label for="publication-button-file">Ou téléverser un PDF ou une image
+                            <input type="file" id="publication-button-file" name="document_lien" accept=".pdf,.jpg,.jpeg,.png,.webp">
+                        </label>
+                        <p class="pub-editor-note">PDF, JPG, PNG ou WebP · 20 Mo maximum. Le fichier choisi remplace le lien du bouton lors de l’enregistrement.</p>
+                        <input type="hidden" name="bouton_nouvel_onglet" value="0">
+                        <label class="pub-check">
+                            <input type="checkbox" name="bouton_nouvel_onglet" value="1" {% if old('bouton_nouvel_onglet', publication.bouton_nouvel_onglet) %}checked{% endif %}>
+                            Ouvrir dans un nouvel onglet
+                        </label>
+                        <div>
+                            <p class="pub-editor-note">Aperçu du bouton :</p>
+                            <div class="pub-button-preview">
+                                <span id="publication-button-preview" class="pub-btn primary">{{ old('texte_bouton', publication.texte_bouton) }} ↗</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-settings">
+                <div class="pub-setting-box">
+                    <h3>Publication</h3>
+                    <label for="publication-order">Ordre d’affichage
+                        <input id="publication-order" name="ordre" type="number" min="1" max="99999" step="1" placeholder="Automatique" value="{{ old('ordre', publication.ordre) }}">
+                    </label>
+                    <p class="pub-help">1 en premier, 2 ensuite, 3 après… Les publications numérotées passent avant les autres. Laissez vide pour garder le tri par date, après les publications numérotées.</p>
+                    <label>Date de publication *
+                        <input type="datetime-local" name="date_publication" required value="{{ old('date_publication', fmt_date(publication.date_publication, 'Y-m-d\TH:i')) }}">
+                    </label>
+                    <small>Heure de Casablanca. Une date future programme l’affichage.</small>
+                    <input type="hidden" name="publie" value="0">
+                    <label class="pub-check">
+                        <input type="checkbox" name="publie" value="1" {% if old('publie', publication.publie) %}checked{% endif %}>
+                        Publier sur le site
+                    </label>
+                    <p class="pub-help">Décochez pour conserver un brouillon.</p>
+                </div>
+
+                {% if can('publications','delete') %}
+                <div class="pub-setting-box">
+                    <h3>Suppression automatique</h3>
+                    <label for="publication-delete-days">Supprimer après combien de jours ?
+                        <input id="publication-delete-days" type="number" name="suppression_apres_jours" min="1" max="3650" step="1" placeholder="Jamais" value="{{ old('suppression_apres_jours', publication.suppression_apres_jours) }}">
+                    </label>
+                    <p class="pub-help">À partir de la date de publication. Par exemple : 7, 15 ou 30 jours. Laissez vide pour conserver cette publication sans limite.</p>
+                    <p class="pub-help">La publication sera retirée du site à l’échéance, puis supprimée définitivement par la tâche de nettoyage. Celle-ci doit être activée sur le PC ou serveur.</p>
+                    {% if publication.date_suppression %}<p class="pub-help"><strong>Échéance enregistrée : {{ fmt_date(publication.date_suppression, 'd/m/Y à H:i') }}</strong></p>{% endif %}
+                </div>
+                {% endif %}
+
+                <div class="pub-setting-box">
+                    <h3>Événement</h3>
+                    <label>Date de l’événement
+                        <input type="date" name="date_evenement" value="{{ old('date_evenement', fmt_date(publication.date_evenement, 'Y-m-d')) }}">
+                    </label>
+                    <label>Lieu
+                        <input name="lieu" maxlength="150" value="{{ old('lieu', publication.lieu) }}">
+                    </label>
+                </div>
+
+                <div class="pub-setting-box">
+                    <h3>Image de couverture</h3>
+                    <img class="pub-cover-preview" id="pub-image-preview" src="{{ publication.image_url }}" alt="Couverture actuelle">
+                    <label>Image
+                        <input type="file" name="image" id="pub-image-file" accept="image/jpeg,image/png,image/webp">
+                    </label>
+                    <small>JPG, PNG ou WebP · 5 Mo maximum.</small>
+                    <a class="pub-btn secondary" href="{{ route('admin.cover_creator') }}{{ '?publication=' ~ publication.pk if publication.pk else '' }}" target="_blank" rel="noopener noreferrer">Ouvrir le créateur d’images ↗</a>
+                    <p class="pub-help">Créez et téléchargez votre PNG dans l’outil séparé, puis choisissez-le dans le champ Image ci-dessus.</p>
+                    <label class="pub-check">
+                        <input type="checkbox" name="remove_image" value="1">
+                        Utiliser l’image par défaut
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="pub-editor-actions">
+                <a class="pub-btn secondary" href="{{ route('admin.publications.index') }}">Annuler</a>
+                <button type="submit" class="pub-btn primary">Enregistrer la publication</button>
+            </div>
+        </form>
+    </section>
+
+    <dialog data-upload-url="{{ route('admin.documents.store', [], False) }}" id="publication-link-dialog" class="pub-link-dialog" aria-labelledby="publication-link-title">
+        <form id="publication-link-form">
+            <h2 id="publication-link-title">Insérer un lien</h2>
+            <label for="publication-link-text">Texte cliquable</label>
+            <input id="publication-link-text" required maxlength="1000" placeholder="Attestation d’assurance">
+            <label for="publication-link-address">Adresse du lien ou du document</label>
+            <input id="publication-link-address" type="text" inputmode="url" required maxlength="2000" placeholder="https://… ou /emplois-du-temps">
+            <label for="publication-link-file">Ou choisir un PDF ou une image</label>
+            <input id="publication-link-file" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp">
+            <button type="button" id="publication-upload-link" class="pub-btn secondary">Téléverser le fichier</button>
+            <p class="pub-editor-note">PDF, JPG, PNG ou WebP · 20 Mo maximum. Après le téléversement, cliquez sur Insérer le lien puis enregistrez la publication.</p>
+            <p id="publication-upload-status" class="pub-editor-note" role="status" aria-live="polite"></p>
+            <p id="publication-link-error" class="pub-rich-error" role="alert"></p>
+            <div class="pub-link-actions">
+                <button type="button" class="pub-btn secondary" id="publication-link-cancel">Annuler</button>
+                <button type="submit" class="pub-btn primary">Insérer le lien</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="{{ asset('vendor/quill/quill.js') }}" defer></script>
+    <script src="{{ asset('js/publication-editor.js') }}?v=documents-1" defer></script>
+{% endblock %}

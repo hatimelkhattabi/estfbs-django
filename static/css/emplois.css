@@ -1,0 +1,136 @@
+/* Styles des emplois du temps, limités à cette page et ses formulaires. */
+
+/* Tableau public : deux années DUT et quatre semestres. */
+.edt-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e1e6ec;
+    border-top: 3px solid #c4a15c;
+    border-radius: 8px;
+}
+.edt-semester-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #252525;
+}
+.edt-semester-table .edt-filiere-col { width: 44%; }
+.edt-table-annual .edt-filiere-col { width: 70%; }
+.edt-table-dbt .edt-filiere-col { width: 60%; }
+.edt-old-document { margin-top: 8px; color: #765c2b; }
+.edt-old-document a { text-decoration: underline; text-underline-offset: 3px; }
+.edt-semester-table thead { background: #183c57; color: #fff; }
+.edt-semester-table thead th { padding: 13px 8px; text-align: center; border: 1px solid #38576e; font-weight: 600; }
+.edt-semester-table thead .edt-filiere-col { text-align: left; padding-left: 20px; }
+.edt-semester-table small { display: block; font-size: 11px; font-weight: 400; }
+.edt-semester-table tbody th,
+.edt-semester-table tbody td { padding: 15px 10px; border-bottom: 1px solid #e5e9ee; }
+.edt-semester-table tbody th { padding-left: 20px; text-align: left; font-weight: 600; overflow-wrap: anywhere; }
+.edt-semester-table tbody td { text-align: center; border-left: 1px solid #e5e9ee; }
+.edt-semester-table tbody tr:nth-child(even) { background: #f6f8fa; }
+.edt-semester-table tbody tr:last-child th,
+.edt-semester-table tbody tr:last-child td { border-bottom: 0; }
+.edt-doc { display: inline-flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; min-width: 54px; min-height: 54px; border-radius: 6px; color: #202020; font-weight: 600; font-size: 10px; }
+.pub-inner-page .edt-doc:hover { color: #6d511b; background: #f2ead8; }
+.edt-doc:focus-visible { outline: 2px solid #98711c; outline-offset: 3px; }
+.edt-wait { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 54px; color: #788492; }
+.edt-wait > span[aria-hidden] { font-size: 17px; }
+.edt-mobile-filiere, .edt-mobile-semestre, .edt-semester-table .edt-mobile-academic { display: none; }
+.edt-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.edt-coming { padding: 22px; background: #f6f8fa; border: 1px solid #e1e6ec; border-radius: 8px; }
+.edt-coming .edt-cycle-heading h2 { margin: 0; color: #18202b; font-size: 17px; font-weight: 700; }
+.edt-coming p { margin: 0; font-size: 13px; line-height: 1.8; color: #64748b; }
+
+@media (max-width: 640px) {
+    .edt-table-wrap { border: 0; border-radius: 0; overflow: visible; }
+    .edt-semester-table,
+    .edt-semester-table tbody { display: block; width: 100%; }
+    .edt-semester-table thead { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+    .edt-semester-table tbody tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 16px; border: 1px solid #e1e6ec; border-top: 3px solid #c4a15c; border-radius: 8px; background: #fff; overflow: hidden; }
+    .edt-semester-table tbody th { display: block; grid-column: 1 / -1; padding: 16px; background: #f6f8fa; border-bottom: 1px solid #e5e9ee; }
+    .edt-semester-table tbody td { display: block; min-width: 0; padding: 13px 8px; border-left: 0; border-bottom: 1px solid #e5e9ee; }
+    .edt-semester-table tbody td:nth-of-type(even) { border-left: 1px solid #e5e9ee; }
+    .edt-semester-table tbody td:nth-last-child(-n+2) { border-bottom: 0; }
+    .edt-table-annual tbody td { grid-column: 1 / -1; }
+    .edt-mobile-filiere { display: inline; }
+    .edt-mobile-semestre { display: block; font-size: 11px; margin-bottom: 6px; color: #596774; }
+    .edt-semester-table .edt-mobile-academic { display: block; margin-top: 5px; color: #64748b; }
+    .edt-doc { font-size: 11px; }
+}
+
+.edt-public-intro,.edt-public-empty{color:#64748b;font-size:15px;line-height:1.8;margin:0 0 28px}
+
+.edt-year{margin:32px 0}
+.edt-year h2{font:700 20px/1.4 'Outfit',system-ui,sans-serif;color:#233649;margin:0 0 18px}
+
+.edt-list{border-top:1px solid #e2e8f0}
+.edt-row{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 0;border-bottom:1px solid #e2e8f0}
+
+.edt-name{min-width:0;overflow-wrap:anywhere;color:#183c57;font-size:15px;line-height:1.6}
+.edt-name span{display:block;color:#718095;font-size:13px;margin-top:3px}
+
+.edt-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;flex-shrink:0;min-height:44px;padding:11px 22px;border-radius:7px;background:#183c57;color:#fff;text-decoration:none;font:600 13px/1.5 'Plus Jakarta Sans',system-ui,sans-serif}
+
+.pub-inner-page .edt-button,.pub-inner-page .edt-button:visited{color:#fff}
+.pub-inner-page .edt-button:hover{background:#102d43;color:#fff}
+.edt-button:focus-visible{outline:2px solid #98711c;outline-offset:4px}
+.edt-muted{color:#7b8591;font-size:13px}
+
+.edt-admin-intro{display:flex;gap:20px;align-items:center;justify-content:space-between;margin:0 0 24px}
+.edt-admin-intro p{max-width:650px;margin:0;font-size:14px;line-height:1.7;color:#64748b}
+
+.edt-admin-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.edt-admin-actions form{margin:0}
+.edt-admin-level{display:block;margin-top:5px;color:#718095}
+.edt-admin-link{color:#183c57;white-space:nowrap}
+
+.edt-admin-form{max-width:900px}
+.edt-editor{display:grid;gap:12px}
+.edt-editor label{font-size:13px;font-weight:600;color:#243b50;margin-top:8px}
+.edt-editor input:not([type=checkbox]){width:100%;box-sizing:border-box;min-height:44px}
+.edt-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.edt-form-grid>div{display:grid;gap:12px;min-width:0}
+.edt-help{font-size:12px;line-height:1.7;color:#718095;margin:0}
+.edt-checkbox{display:flex;align-items:center;gap:10px;padding:12px 0}
+.edt-editor .edt-admin-actions{margin-top:12px}
+
+.edt-cycle{margin:28px 0 36px}
+
+.edt-cycle-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+
+.edt-cycle-heading h3{margin:0;color:#18202b;font-size:17px;font-weight:700}
+
+.edt-cycle-heading>span{font-size:12px;color:#718095}
+
+.edt-links{display:flex;gap:10px;align-items:center;flex-shrink:0;flex-wrap:wrap}
+
+.edt-links .edt-button{min-width:80px}
+
+.edt-unavailable{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px;box-sizing:border-box;border:1px solid #e2e8f0;border-radius:7px;color:#64748b;font-size:12px;background:#f8fafc}
+
+.edt-link-fields{display:grid;gap:12px;border:1px solid #e2e8f0;padding:20px;margin:12px 0;border-radius:10px;min-width:0}
+
+.edt-link-fields[hidden]{display:none!important}
+
+.edt-link-fields legend{padding:0 8px;font-weight:700;font-size:13px;color:#183c57}
+
+.edt-editor select{width:100%;min-height:44px;box-sizing:border-box}
+
+.edt-legacy-note{padding:16px;border-left:3px solid #c4a15c;background:#faf9f6;border-radius:6px;font-size:13px;line-height:1.7}
+
+.edt-legacy-note label{display:block}
+.edt-legacy-note p{margin:8px 0 12px;color:#64748b}
+
+@media(max-width:760px){.edt-row{flex-direction:column;align-items:stretch;gap:14px;padding:20px 0}
+.edt-form-grid{grid-template-columns:1fr;gap:8px}
+.edt-admin-intro{align-items:flex-start;flex-direction:column}
+.edt-year h2{font-size:18px}
+.edt-cycle-heading{align-items:flex-start;flex-direction:column;gap:4px}
+.edt-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;flex-shrink:1}
+.edt-links>.edt-button:only-child,.edt-links>.edt-unavailable:only-child{grid-column:1/-1}
+.edt-links .edt-button{min-width:0;padding:10px 12px}
+.edt-link-fields{padding:16px}
+}
+

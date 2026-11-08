@@ -1,0 +1,16 @@
+<aside class="tp-panel tp-print-queue" id="tp-print-queue" data-print-queue aria-labelledby="tp-print-queue-title">
+<h2 id="tp-print-queue-title" tabindex="-1">Demandes d’impression</h2>
+<p class="tp-help">Tous les enseignants · Noms masqués</p>
+<div class="tp-table-wrap"><table>
+<caption class="tp-queue-caption">Total des exemplaires des documents.</caption>
+<thead><tr><th scope="col">Enseignant</th><th scope="col">Copies</th><th scope="col">Date souhaitée</th></tr></thead>
+<tbody>{% for row in shared_print_page %}<tr><td class="tp-queue-mask">****</td><td><strong>{{ row.copies }}</strong></td><td>{{ fmt_date(row.date_souhaitee) }}</td></tr>{% else %}<tr><td colspan="3">Aucune demande d’impression pour le moment.</td></tr>{% endfor %}</tbody>
+</table></div>
+<div class="tp-queue-footer"><span>{{ shared_print_page.paginator.count }} demande(s)</span><nav class="tp-queue-links" aria-label="Pages des demandes d’impression">
+{% if shared_print_page.has_previous() %}<a data-print-queue-page href="?impressions_page={{ shared_print_page.previous_page_number() }}#tp-print-queue" aria-label="Page précédente">←</a>{% endif %}
+<span>{{ shared_print_page.number }} / {{ shared_print_page.paginator.num_pages }}</span>
+{% if shared_print_page.has_next() %}<a data-print-queue-page href="?impressions_page={{ shared_print_page.next_page_number() }}#tp-print-queue" aria-label="Page suivante">→</a>{% endif %}
+</nav></div>
+<a class="tp-queue-refresh" data-print-queue-page href="?impressions_page={{ shared_print_page.number }}#tp-print-queue">Actualiser la liste ↻</a>
+<p class="tp-queue-status" data-queue-status role="status" aria-live="polite"></p>
+</aside>

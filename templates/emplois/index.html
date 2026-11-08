@@ -1,0 +1,31 @@
+{% extends 'layouts/public.html' %}
+{% set page_title = 'Emplois du temps' %}
+{% set content_class = 'pub-detail-timetable' %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ asset('css/emplois.css') }}?v=20261106-1">
+{% endblock %}
+
+{% block content %}
+<p class="pub-eyebrow">Scolarité</p>
+<h1 class="est-page-title">Emplois du temps</h1>
+<p class="pub-detail-lead">Consultez les horaires de votre filière et de votre semestre.</p>
+
+{% for annee, cycles in annees.items() %}
+<section class="edt-year" aria-label="Année universitaire {{ annee }}">
+    <h2>Année universitaire {{ annee }}</h2>
+    {% for cycle, items in cycles.items() %}
+    {% set label = 'DBT' if cycle == 'Bachelor' else cycle_labels.get(cycle, 'Autres formations') %}
+    <section class="edt-cycle" aria-label="{{ label }} — Emplois du temps — {{ annee }}">
+        <div class="edt-cycle-heading">
+            <h3>{{ label }} — Emplois du temps</h3>
+            <span>{{ items|length }} {{ 'filière' if items|length == 1 else 'filières' }}</span>
+        </div>
+        {% include 'emplois/semester-table.html' %}
+    </section>
+    {% endfor %}
+</section>
+{% else %}
+<p class="edt-coming">Les emplois du temps seront prochainement disponibles.</p>
+{% endfor %}
+{% endblock %}

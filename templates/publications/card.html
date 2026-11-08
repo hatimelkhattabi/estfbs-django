@@ -1,0 +1,20 @@
+{% set publication_url = route('publications.show', publication) %}
+{% set card_date = publication.date_evenement or publication.date_publication %}
+<article class="pub-site-card pub-editorial-card">
+    <a class="pub-site-image-link" href="{{ publication_url }}" aria-label="Consulter : {{ publication.titre }}">
+        <img src="{{ publication.image_url }}" alt="{{ publication.titre }}"
+             class="pub-site-cover {{ 'pub-cover-contain' if 'eid-al-wahda' in publication.image else '' }}" loading="lazy">
+    </a>
+    <div class="pub-site-card-body">
+        <p class="pub-site-kind">{{ publication.type }}</p>
+        <h3 class="pub-site-title" dir="auto"><a href="{{ publication_url }}">{{ publication.titre }}</a></h3>
+        <p class="pub-site-summary" dir="auto">{{ publication.resume }}</p>
+        {% if publication.lieu %}
+        <p class="pub-site-location">{{ publication.lieu }}</p>
+        {% endif %}
+    </div>
+    <div class="pub-site-card-footer">
+        <time datetime="{{ fmt_date(card_date, 'Y-m-d') }}">{{ fmt_date(card_date, 'j F Y') }}</time>
+        <a href="{{ publication_url }}" aria-label="Lire la suite : {{ publication.titre }}">Lire la suite <span aria-hidden="true">→</span></a>
+    </div>
+</article>

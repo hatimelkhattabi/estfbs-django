@@ -1,0 +1,111 @@
+{% extends teacher_layout|default('layouts/public.html') %}
+
+{% set page_title = 'Suivi de Demande de Véhicule - EST-FBS' %}
+
+{% block extra_head %}<style>#main-content > .pub-detail-meta {display:none} .vehicle-reference {overflow-wrap:anywhere}</style>{% endblock %}
+{% block content %}
+<div class="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-2xl mx-auto">
+
+    <!-- En-tête -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-900 text-xs font-bold uppercase tracking-wider mb-2">
+        <i class="fas fa-bus-alt text-orange-500"></i> Service Transport & Véhicules
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-900">
+        Suivi de Demande de Véhicule
+      </h1>
+      <p class="text-slate-600 text-xs sm:text-sm mt-1">
+        Consultez l'état d'avancement de votre demande ou téléchargez votre ordre de mission en PDF.
+      </p>
+    </div>
+
+    <!-- Carte Recherche -->
+    <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 sm:p-8 mb-8">
+      <form method="GET" action="{{ route('vehicule.suivi') }}" class="space-y-4">
+        <div>
+          <label for="code" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+            Code de référence de la demande (ex : ESTFBS-VEH-2026-XXXX)
+          </label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fas fa-hashtag"></i>
+            </span>
+            <input 
+              type="text" 
+              id="code" 
+              name="code" maxlength="64" 
+              value="{{ code }}"
+              required 
+              placeholder="Saisissez votre code..." 
+              class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none uppercase font-mono font-bold vehicle-reference"
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-blue-900 hover:bg-blue-950 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
+          <i class="fas fa-search"></i>
+          <span>Rechercher le dossier</span>
+        </button>
+      </form>
+
+      {% if error %}
+        <div class="mt-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs flex items-center gap-2">
+          <i class="fas fa-exclamation-circle text-base text-red-500"></i>
+          <span>{{ error }}</span>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Si demande trouvée -->
+    {% if demande %}
+      <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+        <div class="bg-blue-900 text-white p-5 flex items-center justify-between">
+          <div>
+            <span class="text-xs text-blue-200 block">Dossier trouvé :</span>
+            <strong class="font-mono text-base font-bold vehicle-reference">{{ demande.code_suivi }}</strong>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-bold border {{ demande.status_badge }}">
+            {{ demande.statut }}
+          </span>
+        </div>
+
+        <div class="p-6 space-y-4 text-xs">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <span class="text-slate-500 block">Professeur demandeur :</span>
+              <strong class="text-slate-800 text-sm">{{ professor_name }}</strong>
+            </div>
+            <div>
+              <span class="text-slate-500 block">Destination :</span>
+              <strong class="text-blue-900 text-sm">{{ demande.destination }}</strong>
+            </div>
+            <div>
+              <span class="text-slate-500 block">Date de la visite :</span>
+              <strong class="text-slate-800">{{ fmt_date(demande.date_visite, 'd/m/Y') }}</strong>
+            </div>
+            <div>
+              <span class="text-slate-500 block">Effectif étudiants :</span>
+              <strong class="text-orange-600">{{ demande.effectif_etudiants }} étudiants</strong>
+            </div>
+          </div>
+
+          {% if not demande.ordre_mission_disponible %}<p class="p-4 text-xs text-slate-600 bg-slate-50 border-b border-slate-200"><i class="fas fa-lock" aria-hidden="true"></i> Ordre de mission indisponible : la demande doit être validée par l’administration.</p>{% endif %}
+          <div class="pt-4 border-t border-slate-200 flex flex-wrap justify-end gap-2">
+            <a href="{{ route('vehicule.status', demande.code_suivi) }}" class="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold">
+              Voir le suivi complet
+            </a>
+            {% if demande.ordre_mission_disponible %}<a href="{{ route('vehicule.ordre-mission.pdf', {'code': demande.code_suivi, 'download': 1}) }}" class="px-4 py-2 rounded-lg bg-blue-900 hover:bg-blue-950 text-white font-bold flex items-center gap-1.5 shadow">
+              <i class="fas fa-file-signature text-orange-400"></i> Ordre de Mission (PDF)
+            </a>{% endif %}
+            <a href="{{ route('vehicule.pdf', {'code': demande.code_suivi, 'download': 1}) }}" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold flex items-center gap-1.5 shadow">
+              <i class="fas fa-file-pdf"></i> {{ 'Télécharger Demande + Ordre (PDF)' if demande.ordre_mission_disponible else 'Télécharger la demande (PDF)' }}
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

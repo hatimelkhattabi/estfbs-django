@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organigramme de EST-FBS | École Supérieure de Technologie de Fquih Ben Salah - USMS</title>
+  <meta name="description" content="Organigramme officiel hiérarchique de l'École Supérieure de Technologie de Fquih Ben Salah (EST-FBS) — Université Sultan Moulay Slimane : Direction, Direction Adjointe, Ordonnancement & Finances, Secrétariat Général." />
+  <meta name="keywords" content="Organigramme EST FBS, EST Fquih Ben Salah, USMS, Direction, Formation, Scolarité, Ordonnancement, Secrétariat Général, Prof. El Mostapha RAKIB" />
+
+  <!-- Favicon -->
+  <!-- Tailwind CSS CDN avec configuration personnalisée -->
+
+  <!-- FontAwesome 6 Icons -->
+  <!-- Styles personnalisés & animations -->
+  <style id="org-staff-connections-styles">
+    #org-col-left .org-staff-tree {
+      --staff-gap: 12px;
+      --branch-left: calc(25% - var(--staff-gap) / 4);
+      --branch-right: calc(75% + var(--staff-gap) / 4);
+      width: 100%;
+    }
+    #org-col-left .org-staff-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--staff-gap);
+      width: 100%;
+    }
+    #org-col-left .org-staff-row .org-service-card { min-width: 0; }
+    #org-col-left .org-staff-row button { overflow-wrap: anywhere; }
+    #org-col-left .org-staff-single {
+      width: calc((100% - var(--staff-gap)) / 2);
+      min-width: 0;
+      margin-inline: 0;
+    }
+    #org-col-left .org-staff-single > .org-service-card { width: 100%; }
+    #org-col-left .org-staff-connector { position: relative; height: 32px; width: 100%; flex: none; }
+    #org-col-left .org-staff-connector > i { position: absolute; display: block; background: #3c3f86; font-style: normal; }
+    #org-col-left .org-staff-line-left { left: var(--branch-left); top: 0; width: 4px; height: 100%; transform: translateX(-50%); }
+    #org-col-left .org-staff-line-right { left: var(--branch-right); top: 0; width: 4px; height: 100%; transform: translateX(-50%); }
+    #org-col-left .org-staff-line-cross { left: var(--branch-left); right: var(--branch-left); top: 50%; height: 4px; transform: translateY(-50%); }
+    #org-col-left .org-staff-line-center { left: 50%; top: 0; width: 4px; height: 50%; transform: translateX(-50%); }
+    #org-col-left .org-staff-connector.is-split .org-staff-line-left,
+    #org-col-left .org-staff-connector.is-split .org-staff-line-right { top: 50%; height: 50%; }
+    #org-col-left .org-staff-connector.is-merge .org-staff-line-left,
+    #org-col-left .org-staff-connector.is-merge .org-staff-line-right { height: 50%; }
+    #org-col-left .org-staff-connector.is-merge .org-staff-line-center { left: var(--branch-left); top: 50%; height: 50%; }
+    #org-col-left .org-staff-connector .org-node-square { left: 50%; top: 50%; }
+    @media (min-width: 640px) {
+      #org-col-left .org-staff-tree { --staff-gap: 16px; }
+    }
+  </style>
+{% include 'partials/site-head.html' %}
+</head>
+
+<body data-home-url="{{ route('home', [], False) }}" data-organigramme-url="{{ url('/organigramme.html') }}" data-emplois-url="{{ route('emplois.index') }}" class="bg-white text-blue-950 font-sans relative">
+{% include 'partials/header.html' %}
+
+
+  <!-- ========================================================================
+       PAGE OFFICIELLE ORGANIGRAMME EST-FBS
+       Chemin : Accueil > EST > Organigramme de EST-FBS
+       ======================================================================== -->
+  <main class="min-h-screen bg-white py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto space-y-10">
+
+      <!-- Fil d'Ariane (Breadcrumbs conforme à la demande : EST -- Organigramme de EST-FBS) -->
+      <nav class="flex items-center gap-2 text-xs font-semibold text-slate-500" aria-label="Breadcrumb">
+        <a href="{{ url('index.html#accueil') }}" class="hover:text-orange-600 transition flex items-center gap-1.5">
+          <i class="fas fa-home text-orange-500"></i>
+          <span>Accueil</span>
+        </a>
+        <i class="fas fa-chevron-right text-[10px] text-slate-400"></i>
+        <a href="{{ url('index.html#presentation') }}" class="hover:text-orange-600 transition">EST</a>
+        <i class="fas fa-chevron-right text-[10px] text-slate-400"></i>
+        <span class="text-blue-900 font-extrabold flex items-center gap-1.5">
+          <i class="fas fa-sitemap text-orange-500"></i>
+          <span>Organigramme de EST-FBS</span>
+        </span>
+      </nav>
+
+      <!-- Bannière En-tête Officielle -->
+      <div class="bg-white text-blue-950 rounded-3xl p-6 sm:p-10 md:p-12 shadow-xl border-2 border-slate-200 relative overflow-hidden">
+        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="max-w-3xl space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-orange-50 text-orange-600 border border-orange-200">
+              <i class="fas fa-sitemap"></i>
+              <span>Structure Organisationnelle Officielle — USMS</span>
+            </div>
+            <h1 class="est-title-heading">
+                {% with title="Organigramme de EST-FBS" %}{% include 'partials/ribbon-title.html' %}{% endwith %}
+            </h1>
+            <p class="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed font-medium">
+              Direction • Direction Adjointe Chargée de la formation • Ordonnancement & Finances (Rattaché à la Direction) • Secrétariat Général
+            </p>
+          </div>
+
+          <!-- Actions Rapides -->
+          <div class="flex flex-wrap items-center gap-3 shrink-0 org-no-print">
+            <button type="button" onclick="window.print()" class="px-4 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold transition shadow-md flex items-center gap-2" title="Imprimer l'organigramme">
+              <i class="fas fa-print"></i>
+              <span>Imprimer</span>
+            </button>
+            
+            
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ====================================================================
+           ARBRE COMPLET DE L'ORGANIGRAMME (STRICTEMENT CONFORME AU SCHÉMA FOURNI)
+           ==================================================================== -->
+      <section class="bg-white p-6 sm:p-10 md:p-14 rounded-3xl shadow-xl border-2 border-slate-200 relative overflow-hidden">
+        
+        <!-- NIVEAU 1 : DIRECTION -->
+        <div class="flex flex-col items-center relative z-10">
+          
+          <!-- Carte Direction Principale -->
+          <div class="org-main-card bg-white p-6 sm:p-8 max-w-lg w-full text-center relative overflow-hidden group">
+            
+            <!-- Logo officiel de l'organigramme (Mortier, Arbre hiérarchique, Colonnes, Silhouettes) -->
+            <div class="flex justify-center mb-3">
+              <img 
+                src="{{ asset('assets/img/organigramme-icon.png') }}" 
+                alt="Logo officiel de l'organigramme EST-FBS" 
+                class="w-32 sm:w-36 md:w-40 h-auto object-contain block mx-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-sm" 
+              />
+            </div>
+
+            <!-- Sous-titre officiel : - DIRECTEUR - -->
+            <div class="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-slate-500">
+              - DIRECTEUR -
+            </div>
+
+            <!-- Nom officiel en Bleu Roi : Mr RAKIB El Mostapha -->
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-[#1e3a8a] tracking-tight mt-1 font-heading">
+              Mr RAKIB El Mostapha
+            </h2>
+
+          </div>
+
+          <!-- Tige verticale descendante depuis la Direction -->
+          <div class="w-1 h-12 bg-[#3c3f86] relative">
+            <div class="org-node-square" style="left: 50%; top: 100%;"></div>
+          </div>
+
+        </div>
+
+        <!-- NIVEAU 2 : CONNECTEURS ARBORESCENTS ET LES TROIS PÔLES ADMINISTRATIFS -->
+        <div class="max-w-6xl xl:max-w-7xl mx-auto w-full relative z-10 mt-0" id="org-level2-container">
+
+          <!-- Connecteur Horizontal Arborescent (Desktop) -->
+          <div class="hidden lg:block relative w-full h-12" id="org-connector-wrap">
+            <div id="org-h-bar" class="absolute top-0 h-1 bg-[#3c3f86] transition-all duration-150" style="left: 16.67%; width: 66.66%;">
+              <!-- Nœud carré gauche : Pôle Formation -->
+              <div id="org-node-col1" class="org-node-square" style="left: 0; top: 50%;" title="Pôle Formation & Scolarité"></div>
+              <!-- Nœud carré central : Pôle Financier & Régie -->
+              <div id="org-node-col2" class="org-node-square" style="left: 50%; top: 50%;" title="Pôle Ordonnancement & Régie"></div>
+              <!-- Nœud carré droite : Pôle Secrétariat Général -->
+              <div id="org-node-col3" class="org-node-square" style="left: 100%; top: 50%;" title="Pôle Secrétariat Général & Moyens"></div>
+            </div>
+          </div>
+
+          <!-- Grille des Trois Pôles (3 Colonnes Dédiées) -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 xl:gap-10 relative">
+
+            <!-- ==========================================================
+                 COLONNE 1 : DIRECTION ADJOINTE & PÔLE FORMATION / SCOLARITÉ
+                 ========================================================== -->
+            <div id="org-col-left" class="flex flex-col items-center">
+              
+              <!-- Tige verticale descendante vers la carte gauche -->
+              <div class="w-1 h-12 bg-[#3c3f86] hidden lg:block -mt-12 mb-0"></div>
+
+              <!-- Carte Directeur Adjoint -->
+              <div class="org-main-card p-5 sm:p-6 w-full text-center relative rounded-2xl border-2 border-slate-200 bg-white shadow-lg hover:border-[#3c3f86] transition-all min-h-[145px] flex flex-col justify-center items-center">
+                <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-800 mx-auto flex items-center justify-center text-sm mb-2 shadow-sm">
+                  <i class="fas fa-user-tie"></i>
+                </div>
+                <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug">
+                  Directeur Adjoint Chargé de la formation
+                </h3>
+                <p class="text-sm sm:text-base font-bold text-[#1e3a8a] mt-2">
+                  - Mr AMINE Abd ellah -
+                </p>
+              </div>
+
+<!-- Cartes individuelles et liaisons bleues du pôle Formation / Scolarité -->
+<div class="org-staff-tree">
+<div class="org-staff-connector is-split" aria-hidden="true">
+      <i class="org-staff-line-left"></i><i class="org-staff-line-right"></i>
+      <i class="org-staff-line-cross"></i><i class="org-staff-line-center"></i>
+      <span class="org-node-square"></span>
+    </div>
+<div class="org-staff-row"><div class="org-service-card p-3 sm:p-4 text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all flex flex-col justify-between min-h-[125px]">
+                  <div>
+                    <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-700 mx-auto flex items-center justify-center text-xs mb-1.5 shadow-sm">
+                      <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
+                      Scolarité
+                    </h4>
+                  </div>
+                  <!-- Rectangle blanc d'affectation (comme sur le schéma) -->
+                  <div class="mt-2.5 px-2 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1 min-h-[26px] transition">
+                    <i class="fas fa-user-circle text-slate-400 text-xs"></i>
+                    <span>Mme Nouhaila HANDAOUI</span>
+                  </div>
+                </div>
+<div class="org-service-card p-3 sm:p-4 text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all flex flex-col justify-between min-h-[125px]">
+                  <div>
+                    <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-700 mx-auto flex items-center justify-center text-xs mb-1.5 shadow-sm">
+                      <i class="fas fa-id-card"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
+                      Scolarité
+                    </h4>
+                  </div>
+                  <!-- Rectangle blanc d'affectation (comme sur le schéma) -->
+                  <div class="mt-2.5 px-2 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1 min-h-[26px] transition">
+                    <i class="fas fa-user-circle text-slate-400 text-xs"></i>
+                    <span>Mr ZABOUL Ayoub</span>
+                  </div>
+                </div></div>
+<div class="org-staff-connector " aria-hidden="true">
+      <i class="org-staff-line-left"></i><i class="org-staff-line-right"></i>
+      <i class="org-staff-line-cross"></i>
+      <span class="org-node-square"></span>
+    </div>
+<div class="org-staff-row"><div class="org-service-card p-3 sm:p-4 text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all flex flex-col justify-between min-h-[125px]">
+                  <div>
+                    <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-700 mx-auto flex items-center justify-center text-xs mb-1.5 shadow-sm">
+                      <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
+                      Scolarité
+                    </h4>
+                  </div>
+                  <!-- Rectangle blanc d'affectation -->
+                  <div class="mt-2.5 px-2 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1 min-h-[26px] transition">
+                    <i class="fas fa-user-circle text-slate-400 text-xs"></i>
+                    <span>Mr KASMI Achraf</span>
+                  </div>
+                </div>
+<div class="org-service-card p-3 sm:p-4 text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all flex flex-col justify-between min-h-[125px]">
+                  <div>
+                    <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-700 mx-auto flex items-center justify-center text-xs mb-1.5 shadow-sm">
+                      <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
+                      Scolarité
+                    </h4>
+                  </div>
+                  <!-- Rectangle blanc d'affectation -->
+                  <div class="mt-2.5 px-2 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1 min-h-[26px] transition">
+                    <i class="fas fa-user-circle text-slate-400 text-xs"></i>
+                    <span>Mr EL KHATTABI Hatim</span>
+                  </div>
+                </div></div>
+<div class="org-staff-connector " aria-hidden="true">
+      <i class="org-staff-line-left"></i><i class="org-staff-line-right"></i>
+      <i class="org-staff-line-cross"></i>
+      <span class="org-node-square"></span>
+    </div>
+<div class="org-staff-row"><div class="org-service-card p-3 sm:p-4 text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all flex flex-col justify-between min-h-[125px]">
+                  <div>
+                    <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-700 mx-auto flex items-center justify-center text-xs mb-1.5 shadow-sm">
+                      <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
+                      Scolarité
+                    </h4>
+                  </div>
+                  <!-- Rectangle blanc d'affectation -->
+                  <div class="mt-2.5 px-2 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1 min-h-[26px] transition">
+                    <i class="fas fa-user-circle text-slate-400 text-xs"></i>
+                    <span>Mr BOUKAIR Mouad</span>
+                  </div>
+                </div>
+<div class="org-service-card p-3 sm:p-4 text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all flex flex-col justify-between min-h-[125px]">
+                  <div>
+                    <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-700 mx-auto flex items-center justify-center text-xs mb-1.5 shadow-sm">
+                      <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
+                      Scolarité 
+                    </h4>
+                  </div>
+                  <!-- Rectangle blanc d'affectation -->
+                  <div class="mt-2.5 px-2 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1 min-h-[26px] transition">
+                    <i class="fas fa-user-circle text-slate-400 text-xs"></i>
+                    <span>Mr BOUGHALEM Taha</span>
+                  </div>
+                </div></div>
+<div class="org-staff-connector is-merge" aria-hidden="true">
+      <i class="org-staff-line-left"></i><i class="org-staff-line-right"></i>
+      <i class="org-staff-line-cross"></i><i class="org-staff-line-center"></i>
+      <span class="org-node-square"></span>
+    </div>
+<div class="org-staff-single"><div class="org-service-card p-3 sm:p-4 text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all flex flex-col justify-between min-h-[125px]">
+                  <div>
+                    <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-700 mx-auto flex items-center justify-center text-xs mb-1.5 shadow-sm">
+                      <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
+                      Scolarité
+                    </h4>
+                  </div>
+                  <!-- Rectangle blanc d'affectation -->
+                  <div class="mt-2.5 px-2 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1 min-h-[26px] transition">
+                    <i class="fas fa-user-circle text-slate-400 text-xs"></i>
+                    <span>Mme BOUMHANDI Oumaima</span>
+                  </div>
+                </div></div>
+</div>
+
+            </div>
+
+            <!-- ==========================================================
+                 COLONNE 2 : PÔLE FINANCES, ORDONNANCEMENT & RÉGIE (DIRECTION)
+                 ========================================================== -->
+            <div id="org-col-center" class="flex flex-col items-center">
+              
+              <!-- Tige verticale descendante depuis la jonction centrale -->
+              <div class="w-1 h-12 bg-[#3c3f86] hidden lg:block -mt-12 mb-0"></div>
+
+              <!-- Carte En-tête Ordonnancement & Finances -->
+              <div class="org-main-card p-5 sm:p-6 w-full text-center relative rounded-2xl border-2 border-slate-200 bg-white shadow-lg hover:border-[#3c3f86] transition-all min-h-[145px] flex flex-col justify-center items-center">
+                <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 mx-auto flex items-center justify-center text-sm mb-2 shadow-sm">
+                  <i class="fas fa-coins"></i>
+                </div>
+                <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug">
+                  Ordonnancement & Finances
+                </h3>
+                <p class="text-xs sm:text-sm font-bold text-emerald-700 mt-2 uppercase tracking-wider">
+                  - RATTACHÉ À LA DIRECTION -
+                </p>
+              </div>
+
+              <!-- Tige verticale descendante vers les bureaux financiers -->
+              <div class="w-1 h-8 bg-[#3c3f86] relative">
+                <div class="org-node-square" style="left: 50%; top: 50%;" title="Jonction Bureaux Financiers"></div>
+              </div>
+
+              <!-- Connecteur en T pour les bureaux financiers -->
+              <div class="relative w-full h-6">
+                <!-- Ligne horizontale reliant les 2 bureaux -->
+                <div class="absolute top-0 left-[25%] right-[25%] h-1 bg-[#3c3f86]">
+                  <div class="org-node-square" style="left: 0; top: 50%;"></div>
+                  <div class="org-node-square" style="left: 50%; top: 50%;"></div>
+                  <div class="org-node-square" style="left: 100%; top: 50%;"></div>
+                </div>
+                <!-- Tige descendante vers Bureau d'ordonnancement -->
+                <div class="absolute top-0 left-[25%] w-1 h-6 bg-[#3c3f86] -translate-x-1/2"></div>
+                <!-- Tige descendante vers Bureau des engagements et liquidation -->
+                <div class="absolute top-0 left-[75%] w-1 h-6 bg-[#3c3f86] -translate-x-1/2"></div>
+              </div>
+
+              <!-- Sous-grille : Les 2 Bureaux Financiers (Zones 4 & 5) -->
+              <div class="grid grid-cols-2 gap-3 sm:gap-4 w-full">
+                
+                <!-- Zone 4 : Bureau d’ordonnancement -->
+                <div class="org-service-card p-3 sm:p-4 text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all flex flex-col justify-between min-h-[125px]">
+                  <div>
+                    <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 mx-auto flex items-center justify-center text-xs mb-1.5 shadow-sm">
+                      <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
+                      Finance
+                    </h4>
+                  </div>
+                  <!-- Rectangle blanc d'affectation -->
+                  <div class="mt-2.5 px-2 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1 min-h-[26px] transition">
+                    <i class="fas fa-user-circle text-slate-400 text-xs"></i>
+                    <span>Mme AZIZY Rachida</span>
+                  </div>
+                </div>
+
+                <!-- Zone 5 : Bureau des engagements et liquidation -->
+                <div class="org-service-card p-3 sm:p-4 text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all flex flex-col justify-between min-h-[125px]">
+                  <div>
+                    <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 mx-auto flex items-center justify-center text-xs mb-1.5 shadow-sm">
+                      <i class="fas fa-calculator"></i>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
+                      Finance
+                    </h4>
+                  </div>
+                  <!-- Rectangle blanc d'affectation -->
+                  <div class="mt-2.5 px-2 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1 min-h-[26px] transition">
+                    <i class="fas fa-user-circle text-slate-400 text-xs"></i>
+                    <span>Mr RAMI Abderrahim</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- ==========================================================
+                 COLONNE 3 : SECRÉTARIAT GÉNÉRAL & MOYENS / LABORATOIRES
+                 ========================================================== -->
+            <div id="org-col-right" class="flex flex-col items-center">
+              
+              <!-- Tige verticale descendante vers la carte droite -->
+              <div class="w-1 h-12 bg-[#3c3f86] hidden lg:block -mt-12 mb-0"></div>
+
+              <!-- Carte Secrétaire générale -->
+              <div class="org-main-card p-5 sm:p-6 w-full text-center relative rounded-2xl border-2 border-slate-200 bg-white shadow-lg hover:border-[#3c3f86] transition-all min-h-[145px] flex flex-col justify-center items-center">
+                <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 mx-auto flex items-center justify-center text-sm mb-2 shadow-sm">
+                  <i class="fas fa-building-columns"></i>
+                </div>
+                <h3 class="text-base sm:text-lg font-black text-slate-900 leading-snug">
+                  Secrétaire générale
+                </h3>
+                <p class="text-sm sm:text-base font-bold text-[#1e3a8a] mt-2">
+                  - Mme OULED HOUSSEINE Hind -
+                </p>
+              </div>
+
+              <!-- Tige verticale descendante vers Bureau d'ordre -->
+              <div class="w-1 h-8 bg-[#3c3f86] relative">
+                <div class="org-node-square" style="left: 50%; top: 50%;" title="Jonction Bureau d'ordre"></div>
+              </div>
+
+              <!-- Alignement hauteur équivalente au connecteur en T -->
+              <div class="w-1 h-6 bg-[#3c3f86] relative"></div>
+
+              <!-- Zone 7 : Bureau d’ordre -->
+              <div class="org-service-card p-3 sm:p-4 text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all w-full max-w-sm flex flex-col justify-between min-h-[125px]">
+                <div>
+                  <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-700 mx-auto flex items-center justify-center text-xs mb-1.5 shadow-sm">
+                    <i class="fas fa-mail-bulk"></i>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
+                    Bureau d'ordre
+                  </h4>
+                </div>
+                <!-- Rectangle blanc d'affectation -->
+                <div class="mt-2.5 max-w-[220px] mx-auto w-full px-2 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1 min-h-[26px] transition">
+                  <i class="fas fa-user-circle text-slate-400 text-xs"></i>
+                  <span>Mme LAHAYNI Nohaila</span>
+                </div>
+              </div>
+
+              <!-- Tige verticale descendante vers Laboratoires -->
+              <div class="w-1 h-8 bg-[#3c3f86] relative">
+                <div class="org-node-square" style="left: 50%; top: 50%;"></div>
+              </div>
+
+              <!-- Zone 8 : Laboratoires -->
+              <div class="org-service-card p-4 sm:p-4.5 w-full text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all min-h-[125px] flex flex-col justify-between">
+                <div>
+                  <div class="w-8 h-8 rounded-lg bg-teal-50 text-teal-700 mx-auto flex items-center justify-center text-sm mb-1.5 shadow-sm">
+                    <i class="fas fa-flask"></i>
+                  </div>
+                  <h4 class="text-xs sm:text-sm md:text-base font-extrabold text-slate-900 leading-snug">
+                    Laboratoires
+                  </h4>
+                </div>
+                <!-- Rectangle blanc d'affectation -->
+                <div class="mt-2.5 max-w-[220px] mx-auto w-full px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1.5 min-h-[26px] transition">
+                  <i class="fas fa-user-circle text-slate-400 text-xs"></i>
+                  <span>Mme ABID Wissal</span>
+                </div>
+              </div>
+
+
+              <!-- Service social -->
+              <div class="w-1 h-8 bg-[#3c3f86] relative" aria-hidden="true">
+                <div class="org-node-square" style="left: 50%; top: 50%;"></div>
+              </div>
+              <div class="org-service-card p-4 w-full text-center bg-white border-2 border-slate-200 hover:border-[#3c3f86] transition-all min-h-[125px] flex flex-col justify-between">
+                <div>
+                  <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 mx-auto flex items-center justify-center text-sm mb-1.5 shadow-sm">
+                    <i class="fas fa-hands-helping" aria-hidden="true"></i>
+                  </div>
+                  <h4 class="text-xs sm:text-sm md:text-base font-extrabold text-slate-900 leading-snug">Social</h4>
+                </div>
+                <div class="mt-2.5 max-w-[220px] mx-auto w-full px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-center gap-1.5 min-h-[26px] transition">
+                  <i class="fas fa-user-circle text-slate-400 text-xs" aria-hidden="true"></i>
+                  <span>Mme Fatiha KARIM</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Pied descriptif de l'organigramme -->
+        <div class="mt-12 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <div class="flex items-center gap-2">
+            <i class="fas fa-university text-orange-500 text-sm"></i>
+            <span>Structure officielle conforme aux décrets universitaires de l'École Supérieure de Technologie de Fquih Ben Salah — USMS.</span>
+          </div>
+          <div class="flex items-center gap-3">
+          
+          
+            <a href="{{ url('index.html#contact') }}" class="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-blue-950 font-bold text-xs transition shadow-sm flex items-center gap-1.5">
+              <i class="fas fa-envelope"></i>
+              <span>Contacter la Direction</span>
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       MODALE 1 : AFFICHAGE DU SCHÉMA ORIGINAL FOURNI
+       ======================================================================== -->
+  <div id="modal-org-drawing" class="fixed inset-0 z-[120] hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6" onclick="closeOriginalDrawingModalOnBackdrop(event)">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-hidden shadow-2xl border-2 border-slate-200 dark:border-slate-700 flex flex-col animate-scaleUp">
+      
+      <!-- En-tête de la modale -->
+      <div class="p-4 sm:p-5 bg-gradient-to-r from-blue-950 to-indigo-900 text-white flex items-center justify-between border-b border-blue-800">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-orange-500 text-white flex items-center justify-center text-sm shadow">
+            <i class="fas fa-image"></i>
+          </div>
+          <div>
+            <h5 class="font-extrabold text-sm sm:text-base text-white">Schéma Original de l'Organigramme</h5>
+            <p class="text-[11px] text-blue-200">Dessin officiel fourni de la structure de l'EST-FBS</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeOriginalDrawingModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition" title="Fermer la fenêtre">
+          <i class="fas fa-times text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Image du dessin original -->
+      <div class="p-4 sm:p-6 overflow-y-auto flex-grow flex items-center justify-center bg-slate-100 dark:bg-slate-950/70">
+        <div class="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-lg bg-white">
+          <img 
+            src="{{ asset('assets/img/organigramme-fbs.png') }}" 
+            alt="Dessin original de l'organigramme EST-FBS" 
+            class="max-w-full h-auto max-h-[70vh] object-contain mx-auto" 
+          />
+        </div>
+      </div>
+
+      <!-- Pied de la modale -->
+      <div class="p-4 bg-slate-50 dark:bg-slate-850 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+        <span>Directeur : Mr RAKIB El Mostapha • Dir. Adjoint : Mr AMINE Abd ellah • Secrétaire Générale : Mme OULED HOUSSEINE Hind</span>
+        <div class="flex items-center gap-2">
+          <a href="{{ asset('assets/img/organigramme-fbs.png') }}" download="Organigramme-EST-FBS.png" class="px-3.5 py-1.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs transition flex items-center gap-1.5">
+            <i class="fas fa-download"></i>
+            <span>Télécharger l'image</span>
+          </a>
+          <button type="button" onclick="closeOriginalDrawingModal()" class="px-4 py-1.5 rounded-xl bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs transition">
+            Fermer
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       PIED DE PAGE (Footer standard harmonisé)
+       ======================================================================== -->
+  {% include 'partials/footer.html' %}
+
+  <!-- ========================================================================
+       MODALE DE RECHERCHE (Ctrl + K)
+       ======================================================================== -->
+  
+
+  <!-- ========================================================================
+       ASSISTANT VIRTUEL IA (EST-BOT Widget Flottant)
+       ======================================================================== -->
+  <div id="est-chatbot-widget" class="fixed bottom-6 right-6 z-40 flex flex-col items-end">
+    <div id="chatbot-window" class="chatbot-window hidden-chat w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden mb-4">
+      <div class="bg-white border-b-2 border-orange-500 text-blue-900 p-4 flex justify-between items-center shadow-sm">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-xs shadow">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div>
+            <h4 class="font-bold font-heading text-xs text-blue-900">Assistant Virtuel EST-FBS</h4>
+            <span class="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> En ligne 24h/24
+            </span>
+          </div>
+        </div>
+        <button id="close-chatbot" class="text-blue-900 hover:text-orange-500 p-1 transition">
+          <i class="fas fa-times text-sm"></i>
+        </button>
+      </div>
+      <div id="chatbot-messages" class="p-4 h-72 overflow-y-auto text-xs space-y-3 bg-white/80 dark:bg-slate-950/50">
+        <div class="flex items-start gap-2 mb-3">
+          <div class="w-7 h-7 rounded-full bg-accent-500 text-slate-950 flex items-center justify-center text-xs font-bold shrink-0">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-xs px-4 py-2.5 rounded-2xl rounded-tl-none shadow-sm leading-relaxed">
+            Bonjour ! Vous êtes sur la page officielle de l'<strong>Organigramme de l'EST-FBS</strong>. Comment puis-je vous aider ?
+          </div>
+        </div>
+      </div>
+      <form id="chatbot-form" class="p-3 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex gap-2">
+        <input 
+          id="chatbot-input" 
+          type="text" 
+          placeholder="Posez votre question sur l'organigramme..." 
+          class="flex-grow px-3 py-2 text-xs bg-white/80 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-1 focus:ring-amber-500 dark:text-white" 
+        />
+        <button type="submit" class="w-8 h-8 rounded-xl gradient-gold text-slate-950 flex items-center justify-center shrink-0 shadow">
+          <i class="fas fa-paper-plane text-xs"></i>
+        </button>
+      </form>
+    </div>
+
+    <button id="chatbot-toggle-btn" class="w-14 h-14 rounded-full gradient-gold text-slate-950 shadow-2xl flex items-center justify-center text-xl hover:scale-110 transition-transform pulse-glow" title="Poser une question à l'assistant">
+      <i class="fas fa-comments"></i>
+    </button>
+  </div>
+
+  <!-- Bouton Retour Haut -->
+  <button id="back-to-top" class="fixed bottom-6 left-6 z-40 w-12 h-12 rounded-full bg-white dark:bg-slate-900 text-brand-950 dark:text-accent-400 shadow-xl opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center hover:scale-110 border border-slate-200 dark:border-slate-800" title="Retour en haut">
+    <svg class="scroll-progress-ring absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 48 48">
+      <circle id="progress-circle" class="text-accent-500" stroke-width="3" stroke="currentColor" fill="transparent" r="20" cx="24" cy="24" />
+    </svg>
+    <i class="fas fa-arrow-up text-xs z-10"></i>
+  </button>
+
+  <!-- Scripts Principaux -->
+  {% include 'partials/site-scripts.html' %}
+  
+
+  <!-- Script spécifique de l'organigramme (Modale source, Fiche personnel & alignement dynamique) -->
+  <script>
+    function openOriginalDrawingModal() {
+      const modal = document.getElementById('modal-org-drawing');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeOriginalDrawingModal() {
+      const modal = document.getElementById('modal-org-drawing');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function closeOriginalDrawingModalOnBackdrop(e) {
+      if (e.target.id === 'modal-org-drawing') {
+        closeOriginalDrawingModal();
+      }
+    }
+
+    function updateOrgConnector() {
+      const col1 = document.getElementById('org-col-left');
+      const col2 = document.getElementById('org-col-right');
+      const bar = document.getElementById('org-h-bar');
+      const wrap = document.getElementById('org-connector-wrap');
+      if (!col1 || !col2 || !bar || !wrap) return;
+      const r1 = col1.getBoundingClientRect();
+      const r2 = col2.getBoundingClientRect();
+      const rWrap = wrap.getBoundingClientRect();
+      if (rWrap.width <= 0) return;
+      
+      const c1 = (r1.left + r1.right) / 2 - rWrap.left;
+      const c2 = (r2.left + r2.right) / 2 - rWrap.left;
+      
+      bar.style.left = c1 + 'px';
+      bar.style.width = Math.max(0, c2 - c1) + 'px';
+    }
+
+    window.addEventListener('resize', updateOrgConnector);
+    window.addEventListener('load', updateOrgConnector);
+    document.addEventListener('DOMContentLoaded', updateOrgConnector);
+    setTimeout(updateOrgConnector, 50);
+    setTimeout(updateOrgConnector, 250);
+    setTimeout(updateOrgConnector, 700);
+
+    // Touche Échap pour fermer les modales
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeOriginalDrawingModal();
+      }
+    });
+  </script>
+
+</body>
+</html>

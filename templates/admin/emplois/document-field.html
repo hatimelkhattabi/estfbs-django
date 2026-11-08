@@ -1,0 +1,11 @@
+<label for="{{ inputId }}">{{ label }} — lien</label>
+<input id="{{ inputId }}" name="{{ champ }}" type="text" inputmode="url" maxlength="1000" value="{{ old(champ, getattr(emploi, champ)) }}" placeholder="https://...">
+{% if valid_link(getattr(emploi, champ)) %}
+    <a href="{{ getattr(emploi, champ) }}" target="_blank" rel="noopener noreferrer" class="edt-help">Consulter le document enregistré ↗</a>
+{% endif %}
+<details>
+    <summary style="cursor:pointer;font-size:13px;color:#183c57">Ou téléverser un PDF ou une image</summary>
+    <label for="{{ inputId }}-file">{{ label }} — fichier</label>
+    <input id="{{ inputId }}-file" name="{{ fichier }}" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp">
+    <p class="edt-help">PDF, JPG, PNG ou WebP · 20 Mo maximum. Le fichier choisi remplace le lien saisi.</p>
+</details>

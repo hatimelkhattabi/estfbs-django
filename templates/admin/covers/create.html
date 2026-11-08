@@ -1,0 +1,13 @@
+{% extends 'admin/layout.html' %}
+{% block header_action %}{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{{ asset('css/publication-cover.css') }}?v=standalone-1">
+<section class="pub-panel">
+    <h2>Composer une image sans créer de publication</h2>
+    <p class="pub-help">Choisissez votre fond, votre logo et vos textes, puis téléchargez le PNG. Dans une actualité ou un événement, choisissez ensuite ce fichier dans « Image de couverture ».</p>
+    <form class="pub-editor pub-editor-with-cover cover-standalone-form" aria-label="Créateur d’images">
+        {% include 'admin/publications/cover-designer.html' %}
+    </form>
+</section>
+<script src="{{ asset('js/publication-cover.js') }}?v=standalone-1" defer></script>
+{% endblock %}

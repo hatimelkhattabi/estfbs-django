@@ -1,0 +1,116 @@
+/* Présentation : une photo et un contenu rédactionnel, sans logo ajouté. */
+.est-presentation {
+    max-width: 900px;
+    margin: 0 auto;
+    color: #505a64;
+    font-size: 15px;
+    line-height: 1.95;
+    overflow-wrap: anywhere;
+}
+
+.est-presentation h1,
+.est-presentation h2,
+.est-presentation h3 {
+    color: #171b20;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.est-presentation h1 {
+    margin: 0 0 24px;
+    font-size: clamp(27px, 3.5vw, 36px);
+}
+
+.est-presentation .est-presentation-photo {
+    margin: 0 0 25px;
+}
+
+.est-presentation .est-presentation-photo img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 20 / 9;
+    object-fit: cover;
+    object-position: center;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.est-presentation p {
+    margin: 0 0 20px;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: justify;
+    hyphens: auto;
+}
+
+.est-presentation strong {
+    color: #39434c;
+    font-weight: 650;
+}
+
+.est-presentation section {
+    margin-top: 30px;
+}
+
+.est-presentation h2 {
+    margin: 0 0 14px;
+    font-size: 23px;
+}
+
+.est-presentation h3 {
+    margin: 23px 0 11px;
+    font-size: 18px;
+}
+
+.est-presentation ul {
+    margin: 0 0 20px;
+    padding-left: 23px;
+    list-style: disc outside;
+}
+
+.est-presentation li {
+    margin: 5px 0;
+    padding-left: 3px;
+    line-height: 1.85;
+}
+
+.est-presentation li::marker {
+    color: #987333;
+}
+
+.est-presentation a {
+    color: #0d3a59;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: #aabac5;
+    text-underline-offset: 4px;
+}
+
+.est-presentation a:hover {
+    color: #805e24;
+    text-decoration-color: currentColor;
+}
+
+.est-presentation a:focus-visible {
+    outline: 2px solid #987333;
+    outline-offset: 4px;
+}
+
+@media (max-width: 640px) {
+    .est-presentation {
+        font-size: 14px;
+        line-height: 1.85;
+    }
+    .est-presentation p {
+        text-align: left;
+    }
+    .est-presentation h2 {
+        font-size: 21px;
+    }
+    .est-presentation .est-presentation-photo img {
+        aspect-ratio: 16 / 9;
+    }
+}

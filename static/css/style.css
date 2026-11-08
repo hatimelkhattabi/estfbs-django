@@ -1,0 +1,2021 @@
+/* ==========================================================================*
+
+*   EST Fquih Ben Salah - Styles & Animations Avancées*
+
+*   Université Sultan Moulay Slimane*
+
+*   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel:wght@600;700;800&display=swap');
+
+:root {
+
+  --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+
+  /* Palette demandée : Écritures en Bleu, Orange et touches de Vert */
+
+  --color-primary: #1e40af;       /* Bleu Royal */
+
+  --color-primary-light: #2563eb; /* Bleu Vif */
+
+  --color-primary-dark: #1e3a8a;  /* Bleu Marine */
+
+  --color-accent: #ea580c;        /* Orange */
+
+  --color-accent-hover: #c2410c;  /* Orange Foncé */
+
+  --color-emerald: #059669;       /* Vert Émeraude */
+
+  --bg-surface: #ffffff;
+
+  --text-main: #1e3a8a;           /* Écritures principales en Bleu */
+
+  --text-muted: #475569;
+
+  --border-color: #cbd5e1;
+
+}
+
+.dark {
+
+  --bg-surface: #ffffff;
+
+  --text-main: #1e3a8a;
+
+  --text-muted: #64748b;
+
+  --border-color: #e2e8f0;
+
+}
+
+body {
+
+  font-family: var(--font-main);
+
+  background-color: #ffffff !important;
+
+  color: var(--text-main);
+
+  overflow-x: hidden;
+
+  scroll-behavior: smooth;
+
+}
+
+.dark body {
+
+  background-color: #ffffff !important;
+
+  color: var(--text-main);
+
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+
+  font-family: var(--font-heading);
+
+  color: #1e3a8a; /* Titres en Bleu */
+
+}
+
+/* Glassmorphism Classes (Fonds translucides blancs sans fond bleu) */
+
+.glass-nav {
+
+  background: rgba(255, 255, 255, 0.94);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(219, 234, 254, 0.9);
+
+}
+
+.dark .glass-nav {
+
+  background: rgba(255, 255, 255, 0.95);
+
+  border-bottom: 1px solid rgba(219, 234, 254, 0.9);
+
+}
+
+.glass-card {
+
+  background: rgba(255, 255, 255, 0.92);
+
+  backdrop-filter: blur(8px);
+
+  -webkit-backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(219, 234, 254, 0.9);
+
+}
+
+.dark .glass-card {
+
+  background: rgba(255, 255, 255, 0.95);
+
+  border: 1px solid rgba(219, 234, 254, 0.9);
+
+}
+
+/* Fonds Blancs Épurés Sans Aucun Fond Bleu */
+
+.gradient-primary {
+
+  background: rgba(255, 255, 255, 0.95) !important;
+
+  border: 2px solid #dbeafe !important;
+
+  color: #1e3a8a !important;
+
+  box-shadow: 0 10px 25px -5px rgba(30, 64, 175, 0.08) !important;
+
+}
+
+.gradient-gold {
+
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+
+  color: #ffffff;
+
+}
+
+.gradient-text {
+
+  background: linear-gradient(135deg, #1e40af 0%, #ea580c 100%);
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+}
+
+.dark .gradient-text {
+
+  background: linear-gradient(135deg, #1e40af 0%, #ea580c 100%);
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+}
+
+.gradient-gold-text {
+
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+}
+
+/* Hero Carousel and Zoom Animation */
+
+.hero-slide {
+
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+
+  transform: none !important;
+
+  background-size: cover;
+
+  background-position: center;
+
+}
+
+.hero-slide.active {
+
+  opacity: 1;
+
+  transform: none !important;
+
+}
+
+/* Dropdown Menu Animations */
+
+.nav-dropdown {
+
+  transform-origin: top center;
+
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+
+.group:hover .nav-dropdown {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  transform: translateY(0);
+
+}
+
+/* Scroll Animation Reveal Classes (Désactivées - Contenu visible immédiatement) */
+
+.reveal-on-scroll {
+
+  opacity: 1 !important;
+
+  transform: none !important;
+
+  transition: none !important;
+
+}
+
+.reveal-on-scroll.revealed {
+
+  opacity: 1 !important;
+
+  transform: none !important;
+
+  transition: none !important;
+
+}
+
+/* Card Hover 3D Effects */
+
+.card-hover-effect {
+
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+
+.card-hover-effect:hover {
+
+  transform: translateY(-8px);
+
+  box-shadow: 0 20px 30px -10px rgba(15, 43, 92, 0.15);
+
+}
+
+.dark .card-hover-effect:hover {
+
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.6);
+
+}
+
+/* Animations Flottantes & Pulsations (Désactivées) */
+
+.animate-float,
+
+.pulse-glow,
+
+.animate-ping,
+
+.animate-pulse {
+
+  animation: none !important;
+
+  transform: none !important;
+
+}
+
+/* Custom Scrollbar */
+
+::-webkit-scrollbar {
+
+  width: 10px;
+
+}
+
+::-webkit-scrollbar-track {
+
+  background: #f1f5f9;
+
+}
+
+.dark ::-webkit-scrollbar-track {
+
+  background: #0f172a;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+  background: #94a3b8;
+
+  border-radius: 5px;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+  background: #1e293b;
+
+}
+
+/* Lightbox Modal */
+
+.lightbox-modal {
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 0.3s ease;
+
+}
+
+.lightbox-modal.active {
+
+  opacity: 1;
+
+  pointer-events: auto;
+
+}
+
+/* News Ticker (Animation de défilement continu fluide + badge Flash Info animé) */
+
+.ticker-content {
+
+  display: inline-flex !important;
+
+  flex-wrap: nowrap;
+
+  white-space: nowrap;
+
+  width: max-content;
+
+  animation: flashTickerScroll 32s linear infinite !important;
+
+}
+
+.ticker-content:hover {
+
+  animation-play-state: paused !important;
+
+}
+
+@keyframes flashTickerScroll {
+
+  0% {
+
+    transform: translateX(0);
+
+  }
+
+  100% {
+
+    transform: translateX(-50%);
+
+  }
+
+}
+
+.flash-info-badge {
+
+  animation: flashBadgeGlow 2s ease-in-out infinite !important;
+
+}
+
+.flash-info-dot {
+
+  animation: flashDotPulse 1.2s ease-in-out infinite !important;
+
+}
+
+.flash-info-bell {
+
+  animation: flashBellSwing 2.2s ease-in-out infinite !important;
+
+  transform-origin: top center;
+
+}
+
+@keyframes flashBadgeGlow {
+
+  0%, 100% {
+
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.55);
+
+  }
+
+  50% {
+
+    box-shadow: 0 0 0 6px rgba(244, 63, 94, 0);
+
+  }
+
+}
+
+@keyframes flashDotPulse {
+
+  0%, 100% {
+
+    transform: scale(1);
+
+    opacity: 1;
+
+  }
+
+  50% {
+
+    transform: scale(1.45);
+
+    opacity: 0.4;
+
+  }
+
+}
+
+@keyframes flashBellSwing {
+
+  0%, 100% { transform: rotate(0deg); }
+
+  10% { transform: rotate(16deg); }
+
+  20% { transform: rotate(-14deg); }
+
+  30% { transform: rotate(10deg); }
+
+  40% { transform: rotate(-8deg); }
+
+  50% { transform: rotate(0deg); }
+
+}
+
+/* Circular scroll progress indicator */
+
+.scroll-progress-ring circle {
+
+  transition: stroke-dashoffset 0.1s;
+
+}
+
+/* Chatbot Styles */
+
+.chatbot-window {
+
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  transform-origin: bottom right;
+
+}
+
+.chatbot-window.hidden-chat {
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform: scale(0.8) translateY(20px);
+
+}
+
+.chatbot-window.visible-chat {
+
+  opacity: 1;
+
+  pointer-events: auto;
+
+  transform: scale(1) translateY(0);
+
+}
+
+/* Tab indicator */
+
+.tab-btn.active {
+
+  background-color: #ea580c;
+
+  color: #ffffff;
+
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+
+}
+
+.dark .tab-btn.active {
+
+  background-color: #ea580c;
+
+  color: #ffffff;
+
+}
+
+/* ==========================================================================*
+
+*   Logo Fixe Université USMS (Haut à Droite - Position Fixed)*
+
+*   ========================================================================== */
+
+.logo-usms-fixed-wrapper,
+
+#fixed-university-logo {
+
+  position: absolute !important;
+
+  top: 56px;
+
+  right: 18px;
+
+  z-index: 80;
+
+  transition: none !important;
+
+  transform: none !important;
+
+}
+
+@media (max-width: 640px) {
+
+  .logo-usms-fixed-wrapper,
+
+  #fixed-university-logo {
+
+    top: 48px;
+
+    right: 10px;
+
+  }
+
+}
+
+.logo-fixe-usms {
+
+  display: block;
+
+  object-fit: contain;
+
+}
+
+/* ==========================================================================*
+
+*   Navigation Principale - Écritures des Volets en Bleu (#1e3a8a)*
+
+*   ========================================================================== */
+
+.main-desktop-nav,
+
+.main-desktop-nav > a,
+
+.main-desktop-nav > div > button,
+
+.nav-volet-btn,
+
+.nav-volet-btn > span {
+
+  color: #1e3a8a !important;
+
+  font-weight: 700;
+
+}
+
+.main-desktop-nav > a:hover,
+
+.main-desktop-nav > div > button:hover,
+
+.nav-volet-btn:hover,
+
+.nav-volet-btn:hover > span {
+
+  color: #ea580c !important;
+
+}
+
+.dark .main-desktop-nav,
+
+.dark .main-desktop-nav > a,
+
+.dark .main-desktop-nav > div > button,
+
+.dark .nav-volet-btn,
+
+.dark .nav-volet-btn > span {
+
+  color: #1e3a8a !important;
+
+}
+
+.dark .main-desktop-nav > a:hover,
+
+.dark .main-desktop-nav > div > button:hover,
+
+.dark .nav-volet-btn:hover,
+
+.dark .nav-volet-btn:hover > span {
+
+  color: #ea580c !important;
+
+}
+
+/* Dropdown menus : Fond blanc et titres en bleu */
+
+.nav-dropdown {
+
+  background-color: #ffffff !important;
+
+  border: 1px solid #dbeafe !important;
+
+  box-shadow: 0 20px 25px -5px rgba(30, 58, 138, 0.1), 0 8px 10px -6px rgba(30, 58, 138, 0.1) !important;
+
+}
+
+.dark .nav-dropdown {
+
+  background-color: #ffffff !important;
+
+  border: 1px solid #dbeafe !important;
+
+  box-shadow: 0 20px 25px -5px rgba(30, 58, 138, 0.1), 0 8px 10px -6px rgba(30, 58, 138, 0.1) !important;
+
+}
+
+.nav-dropdown a span.font-bold {
+
+  color: #1e3a8a !important;
+
+}
+
+.nav-dropdown a:hover span.font-bold {
+
+  color: #ea580c !important;
+
+}
+
+.nav-dropdown a:hover {
+
+  background-color: #eff6ff !important;
+
+}
+
+/* Menu déroulant de sélection de langue (FR / English / Arabe) */
+
+.lang-dropdown-menu {
+
+  display: none;
+
+  position: absolute;
+
+  right: 0;
+
+  top: 100%;
+
+  min-width: 155px;
+
+  background-color: #ffffff !important;
+
+  border: 1px solid #dbeafe !important;
+
+  border-radius: 0.75rem;
+
+  box-shadow: 0 20px 25px -5px rgba(30, 58, 138, 0.18), 0 8px 10px -6px rgba(30, 58, 138, 0.1) !important;
+
+  padding: 0.35rem 0;
+
+  z-index: 9999 !important;
+
+}
+
+.lang-dropdown-menu::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: -10px;
+
+  left: 0;
+
+  right: 0;
+
+  height: 12px;
+
+}
+
+.group:hover > .lang-dropdown-menu,
+
+.lang-dropdown-menu.lang-open {
+
+  display: block !important;
+
+}
+
+/* ==========================================================================*
+
+*   Mot du Directeur - Style Parchemin Roulé (Conforme à l'image de référence)*
+
+*   ========================================================================== */
+
+.director-scroll-section {
+
+  background: radial-gradient(circle at 50% 30%, #111e3b 0%, #080f21 70%, #050a17 100%);
+
+  position: relative;
+
+}
+
+.parchment-scroll-container {
+
+  position: relative;
+
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.65));
+
+}
+
+.parchment-scroll-roll {
+
+  position: relative;
+
+  height: 38px;
+
+  background: linear-gradient(180deg, #ecd8b8 0%, #caa472 25%, #fdf5e7 50%, #c59b65 80%, #906633 100%);
+
+  border-radius: 9999px;
+
+  margin-left: -12px;
+
+  margin-right: -12px;
+
+  margin-bottom: -16px;
+
+  z-index: 25;
+
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5), inset 0 2px 2px rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(80, 50, 20, 0.6);
+
+  border: 1px solid #b38851;
+
+}
+
+.parchment-scroll-roll::before,
+
+.parchment-scroll-roll::after {
+
+  content: '';
+
+  position: absolute;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 14px;
+
+  height: 26px;
+
+  background: radial-gradient(ellipse at center, #fbf2e1 0%, #c79e69 60%, #754a1a 100%);
+
+  border-radius: 50%;
+
+  border: 1px solid #754a1a;
+
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.6);
+
+}
+
+.parchment-scroll-roll::before {
+
+  left: 3px;
+
+}
+
+.parchment-scroll-roll::after {
+
+  right: 3px;
+
+}
+
+.parchment-scroll-card {
+
+  position: relative;
+
+  background: linear-gradient(180deg, #fdf8ee 0%, #faf3e1 45%, #f7ecd4 100%);
+
+  border: 2px solid #ecd8bd;
+
+  border-top: none;
+
+  border-radius: 0 0 1.5rem 1.5rem;
+
+  box-shadow: inset 0 10px 25px rgba(214, 181, 134, 0.2);
+
+  z-index: 10;
+
+}
+
+.parchment-title {
+
+  font-family: 'Playfair Display', Georgia, Cambria, serif !important;
+
+  color: #2b1d10 !important;
+
+}
+
+.parchment-body {
+
+  font-family: 'Merriweather', Georgia, Cambria, serif !important;
+
+  color: #382d20 !important;
+
+}
+
+/* ==========================================================================*
+
+*   Stickers Visuels pour Spécialités & Formations (EST-FBS)*
+
+*   ========================================================================== */
+
+.spec-sticker {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.35rem;
+
+  padding: 0.3rem 0.65rem;
+
+  font-size: 0.72rem;
+
+  font-weight: 700;
+
+  border-radius: 9999px;
+
+  border-width: 1.5px;
+
+  border-style: solid;
+
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  user-select: none;
+
+  cursor: default;
+
+}
+
+.spec-sticker:hover {
+
+  transform: translateY(-2px) scale(1.05) rotate(-1.5deg);
+
+  box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.12);
+
+}
+
+.spec-card-sticker {
+
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+
+.spec-card-sticker:hover {
+
+  transform: translateY(-4px);
+
+  box-shadow: 0 12px 24px -4px rgba(30, 64, 175, 0.12);
+
+}
+
+/* ==========================================================================*
+
+*   Flyout Submenus (Sous-menus volants vers la droite)*
+
+*   Exemple : Volet EST > Nos locaux > Administrations / Amphis / Laboratoire*
+
+*   ========================================================================== */
+
+.nav-has-flyout {
+
+  position: relative;
+
+}
+
+.nav-has-flyout > .nav-flyout {
+
+  position: absolute;
+
+  left: 100%;
+
+  top: 0;
+
+  display: none;
+
+  min-width: 260px;
+
+  background-color: #ffffff !important;
+
+  border: 1px solid #dbeafe !important;
+
+  border-radius: 0.75rem;
+
+  box-shadow: 0 20px 25px -5px rgba(30, 58, 138, 0.18), 0 8px 10px -6px rgba(30, 58, 138, 0.1) !important;
+
+  padding: 0.35rem 0;
+
+  z-index: 60;
+
+}
+
+/* Pont invisible pour transition fluide du curseur de souris */
+
+.nav-has-flyout > .nav-flyout::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: -8px;
+
+  bottom: -8px;
+
+  left: -12px;
+
+  width: 14px;
+
+}
+
+.nav-has-flyout:hover > .nav-flyout {
+
+  display: block !important;
+
+  animation: flyoutFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+
+@keyframes flyoutFadeIn {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateX(-4px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+  }
+
+}
+
+.nav-flyout a {
+
+  transition: all 0.15s ease-in-out;
+
+}
+
+.nav-flyout a:hover {
+
+  background-color: #eff6ff !important;
+
+}
+
+.nav-flyout a:hover span.font-bold {
+
+  color: #ea580c !important;
+
+}
+
+/* ==========================================================================*
+
+*   Annuaire Officiel des Enseignants-Chercheurs — Animations & Présentation Moderne*
+
+*   (Styles & Animations exclusivement dédiés à la section Annuaire des Professeurs)*
+
+*   ========================================================================== */
+
+@keyframes profStaggerFadeUp {
+
+  0% {
+
+    opacity: 0;
+
+    transform: translateY(28px) scale(0.92);
+
+  }
+
+  70% {
+
+    opacity: 1;
+
+    transform: translateY(-4px) scale(1.01);
+
+  }
+
+  100% {
+
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
+
+  }
+
+}
+
+@keyframes profOrbitRotate {
+
+  0% {
+
+    transform: rotate(0deg);
+
+  }
+
+  100% {
+
+    transform: rotate(360deg);
+
+  }
+
+}
+
+@keyframes profOrbitRotateReverse {
+
+  0% {
+
+    transform: rotate(360deg);
+
+  }
+
+  100% {
+
+    transform: rotate(0deg);
+
+  }
+
+}
+
+@keyframes profAvatarFloat {
+
+  0%, 100% {
+
+    transform: translateY(0px);
+
+  }
+
+  50% {
+
+    transform: translateY(-5px);
+
+  }
+
+}
+
+@keyframes profPulseDot {
+
+  0%, 100% {
+
+    transform: scale(1);
+
+    opacity: 1;
+
+    box-shadow: 0 0 0 0 var(--prof-color, #3b82f6);
+
+  }
+
+  50% {
+
+    transform: scale(1.25);
+
+    opacity: 0.85;
+
+    box-shadow: 0 0 0 5px transparent;
+
+  }
+
+}
+
+@keyframes profHeaderGradientFlow {
+
+  0% {
+
+    background-position: 0% 50%;
+
+  }
+
+  50% {
+
+    background-position: 100% 50%;
+
+  }
+
+  100% {
+
+    background-position: 0% 50%;
+
+  }
+
+}
+
+/* Conteneur principal de l'annuaire */
+
+.annuaire-modern-shell {
+
+  position: relative;
+
+  background: radial-gradient(circle at 10% 10%, rgba(239, 246, 255, 0.8) 0%, rgba(255, 255, 255, 1) 45%, rgba(255, 247, 237, 0.7) 100%);
+
+  overflow: hidden;
+
+}
+
+/* Barre de contrôle moderne */
+
+.annuaire-control-bar {
+
+  background: rgba(255, 255, 255, 0.95);
+
+  backdrop-filter: blur(16px);
+
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 2px solid #dbeafe;
+
+  box-shadow: 0 15px 35px -10px rgba(30, 58, 138, 0.08);
+
+  transition: all 0.3s ease;
+
+}
+
+.annuaire-control-bar:hover {
+
+  border-color: #93c5fd;
+
+  box-shadow: 0 20px 40px -12px rgba(30, 58, 138, 0.12);
+
+}
+
+/* Boutons de filtre alphabétique */
+
+.prof-alpha-btn {
+
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+}
+
+.prof-alpha-btn:hover {
+
+  transform: translateY(-2px);
+
+}
+
+.prof-alpha-btn.active {
+
+  background: linear-gradient(135deg, #1e3a8a 0%, #ea580c 100%) !important;
+
+  color: #ffffff !important;
+
+  border-color: transparent !important;
+
+  box-shadow: 0 6px 15px -3px rgba(234, 88, 12, 0.35);
+
+  transform: translateY(-1px) scale(1.05);
+
+}
+
+/* Boutons de changement de vue */
+
+.prof-view-btn {
+
+  transition: all 0.25s ease;
+
+}
+
+.prof-view-btn.active {
+
+  background: #1e3a8a !important;
+
+  color: #ffffff !important;
+
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+
+}
+
+/* Élément professeur avec animation d'entrée échelonnée */
+
+.prof-circle-item {
+
+  animation: profStaggerFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  animation-delay: calc(var(--prof-idx, 0) * 40ms);
+
+}
+
+/* Carte moderne du professeur (Par défaut : Mode Cartes Prestige) */
+
+.prof-modern-card {
+
+  position: relative;
+
+  width: 100%;
+
+  background: #ffffff !important;
+
+  border-radius: 1.5rem;
+
+  border: 2px solid rgba(226, 232, 240, 0.9);
+
+  padding: 1.35rem 1rem 1.15rem;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 4px 10px -3px rgba(15, 23, 42, 0.03);
+
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  z-index: 1;
+
+}
+
+/* Barre lumineuse supérieure aux couleurs du professeur */
+
+.prof-modern-card::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 5px;
+
+  background: linear-gradient(90deg, var(--prof-dark), var(--prof-color), var(--prof-mid));
+
+  transition: height 0.35s ease;
+
+  z-index: 2;
+
+}
+
+/* Effet de brillance (Shimmer sweep) au survol */
+
+.prof-modern-card::after {
+
+  content: '';
+
+  position: absolute;
+
+  top: -50%;
+
+  left: -60%;
+
+  width: 45%;
+
+  height: 200%;
+
+  background: linear-gradient(
+
+    to right,
+
+    rgba(255, 255, 255, 0) 0%,
+
+    rgba(255, 255, 255, 0.65) 50%,
+
+    rgba(255, 255, 255, 0) 100%
+
+  );
+
+  transform: rotate(25deg);
+
+  transition: all 0.65s cubic-bezier(0.19, 1, 0.22, 1);
+
+  pointer-events: none;
+
+  z-index: 3;
+
+  opacity: 0;
+
+}
+
+.prof-modern-card:hover {
+
+  transform: translateY(-10px) scale(1.02);
+
+  border-color: var(--prof-color) !important;
+
+  box-shadow: 0 22px 40px -12px rgba(15, 23, 42, 0.14), 0 0 20px -5px var(--prof-light);
+
+}
+
+.prof-modern-card:hover::before {
+
+  height: 7px;
+
+}
+
+.prof-modern-card:hover::after {
+
+  left: 130%;
+
+  opacity: 1;
+
+}
+
+/* Conteneur de l'avatar avec anneaux orbitaux */
+
+.prof-avatar-stage {
+
+  position: relative;
+
+  width: 4.5rem;
+
+  height: 4.5rem;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 0.75rem;
+
+  animation: profAvatarFloat 4s ease-in-out infinite;
+
+  animation-delay: calc(var(--prof-idx, 0) * 120ms);
+
+}
+
+/* Anneau orbital externe pointillé */
+
+.prof-orbit-outer {
+
+  position: absolute;
+
+  inset: -6px;
+
+  border-radius: 9999px;
+
+  border: 2px dashed var(--prof-color);
+
+  opacity: 0.45;
+
+  animation: profOrbitRotate 14s linear infinite;
+
+  transition: all 0.35s ease;
+
+}
+
+/* Anneau orbital interne continu */
+
+.prof-orbit-inner {
+
+  position: absolute;
+
+  inset: -2px;
+
+  border-radius: 9999px;
+
+  border: 2px solid transparent;
+
+  border-top-color: var(--prof-color);
+
+  border-bottom-color: var(--prof-dark);
+
+  opacity: 0.7;
+
+  animation: profOrbitRotateReverse 9s linear infinite;
+
+  transition: all 0.35s ease;
+
+}
+
+.prof-modern-card:hover .prof-orbit-outer {
+
+  inset: -8px;
+
+  opacity: 0.95;
+
+  animation-duration: 5s;
+
+}
+
+.prof-modern-card:hover .prof-orbit-inner {
+
+  inset: -3px;
+
+  opacity: 1;
+
+  animation-duration: 3.5s;
+
+}
+
+/* Sphère initiale du professeur */
+
+.prof-avatar-core {
+
+  position: relative;
+
+  width: 3.5rem;
+
+  height: 3.5rem;
+
+  border-radius: 9999px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-weight: 800;
+
+  font-size: 0.95rem;
+
+  letter-spacing: 0.05em;
+
+  color: #ffffff !important;
+
+  background: linear-gradient(135deg, var(--prof-dark) 0%, var(--prof-mid) 100%);
+
+  box-shadow: 0 8px 18px -4px rgba(15, 23, 42, 0.25);
+
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  overflow: hidden;
+
+  z-index: 2;
+
+}
+
+.prof-modern-card:hover .prof-avatar-core {
+
+  transform: scale(1.1) rotate(-4deg);
+
+}
+
+/* Petit badge académique sur l'avatar */
+
+.prof-cap-badge {
+
+  position: absolute;
+
+  bottom: -2px;
+
+  right: -2px;
+
+  width: 1.35rem;
+
+  height: 1.35rem;
+
+  border-radius: 9999px;
+
+  background: #ffffff;
+
+  color: var(--prof-dark);
+
+  border: 2px solid var(--prof-color);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 0.55rem;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+
+  z-index: 4;
+
+  transition: transform 0.3s ease;
+
+}
+
+.prof-modern-card:hover .prof-cap-badge {
+
+  transform: scale(1.2);
+
+  background: var(--prof-color);
+
+  color: #ffffff;
+
+}
+
+/* Point lumineux animé */
+
+.prof-live-dot {
+
+  width: 6px;
+
+  height: 6px;
+
+  border-radius: 9999px;
+
+  background-color: var(--prof-color);
+
+  display: inline-block;
+
+  animation: profPulseDot 2.2s infinite ease-in-out;
+
+}
+
+/* Barre d'action inférieure de la carte */
+
+.prof-card-footer {
+
+  margin-top: 0.75rem;
+
+  padding-top: 0.65rem;
+
+  border-top: 1px dashed #e2e8f0;
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  font-size: 0.68rem;
+
+  color: #64748b;
+
+  transition: all 0.3s ease;
+
+}
+
+.prof-modern-card:hover .prof-card-footer {
+
+  border-top-color: var(--prof-color);
+
+}
+
+.prof-action-pill {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.25rem;
+
+  padding: 0.2rem 0.55rem;
+
+  border-radius: 9999px;
+
+  font-weight: 700;
+
+  font-size: 0.65rem;
+
+  background: var(--prof-light);
+
+  color: var(--prof-dark);
+
+  transition: all 0.25s ease;
+
+}
+
+.prof-modern-card:hover .prof-action-pill {
+
+  background: var(--prof-dark);
+
+  color: #ffffff !important;
+
+}
+
+/* ==========================================================================*
+
+*   MODE 2 : VUE MÉDAILLONS CIRCULAIRES 3D (Cercles Colorés Modernisés)*
+
+*   ========================================================================== */
+
+.prof-grid-container.view-circles .prof-modern-card {
+
+  width: 12.5rem;
+
+  height: 12.5rem;
+
+  border-radius: 9999px !important;
+
+  border: 4px solid var(--prof-color) !important;
+
+  padding: 1rem;
+
+  justify-content: center;
+
+  box-shadow: 0 14px 30px -8px rgba(15, 23, 42, 0.12), inset 0 0 20px var(--prof-light);
+
+}
+
+.prof-grid-container.view-circles .prof-modern-card::before {
+
+  display: none;
+
+}
+
+.prof-grid-container.view-circles .prof-card-top-meta,
+
+.prof-grid-container.view-circles .prof-card-footer {
+
+  display: none !important;
+
+}
+
+.prof-grid-container.view-circles .prof-avatar-stage {
+
+  width: 3.6rem;
+
+  height: 3.6rem;
+
+  margin-bottom: 0.4rem;
+
+}
+
+.prof-grid-container.view-circles .prof-avatar-core {
+
+  width: 3rem;
+
+  height: 3rem;
+
+  font-size: 0.85rem;
+
+}
+
+/* ==========================================================================*
+
+*   MODE 3 : VUE LISTE COMPACTE OFFICIELLE (Annuaire Exécutif)*
+
+*   ========================================================================== */
+
+.prof-grid-container.view-compact {
+
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+
+  gap: 0.85rem !important;
+
+}
+
+@media (min-width: 640px) {
+
+  .prof-grid-container.view-compact {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+  }
+
+}
+
+@media (min-width: 1024px) {
+
+  .prof-grid-container.view-compact {
+
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+  }
+
+}
+
+.prof-grid-container.view-compact .prof-modern-card {
+
+  flex-direction: row !important;
+
+  text-align: left !important;
+
+  padding: 0.9rem 1.15rem !important;
+
+  border-radius: 1.15rem !important;
+
+  gap: 0.95rem;
+
+  align-items: center;
+
+}
+
+.prof-grid-container.view-compact .prof-modern-card::before {
+
+  width: 5px;
+
+  height: 100%;
+
+  right: auto;
+
+  bottom: 0;
+
+  background: linear-gradient(180deg, var(--prof-dark), var(--prof-color));
+
+}
+
+.prof-grid-container.view-compact .prof-avatar-stage {
+
+  margin-bottom: 0 !important;
+
+  width: 3.6rem;
+
+  height: 3.6rem;
+
+  flex-shrink: 0;
+
+}
+
+.prof-grid-container.view-compact .prof-card-top-meta,
+
+.prof-grid-container.view-compact .prof-card-footer {
+
+  display: none !important;
+
+}
+
+.prof-grid-container.view-compact .prof-identity-block {
+
+  align-items: flex-start !important;
+
+  flex-grow: 1;
+
+}
+
+/* ==========================================================================*
+
+*   ORGANIGRAMME OFFICIEL DE L'EST-FBS (BASÉ SUR LE SCHÉMA OFFICIEL)*
+
+*   Connecteurs arborescents, nœuds carrés et cartes de direction*
+
+*   ========================================================================== */
+
+.org-connector-line {
+
+  background-color: #3c3f86;
+
+  position: relative;
+
+}
+
+.org-node-square {
+
+  width: 14px;
+
+  height: 14px;
+
+  background-color: #3c3f86;
+
+  border-radius: 2px;
+
+  box-shadow: 0 0 0 3px rgba(60, 63, 134, 0.25);
+
+  position: absolute;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 10;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+}
+
+.org-node-square:hover {
+
+  transform: translate(-50%, -50%) scale(1.25);
+
+  box-shadow: 0 0 0 5px rgba(60, 63, 134, 0.4);
+
+}
+
+.org-main-card {
+
+  background: #ffffff;
+
+  border: 2px solid #e2e8f0;
+
+  border-radius: 1.25rem;
+
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.07), 0 4px 10px -3px rgba(15, 23, 42, 0.04);
+
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+}
+
+.org-main-card:hover {
+
+  transform: translateY(-4px);
+
+  border-color: #3c3f86;
+
+  box-shadow: 0 20px 35px -8px rgba(60, 63, 134, 0.15), 0 8px 16px -4px rgba(60, 63, 134, 0.08);
+
+}
+
+.org-service-card {
+
+  background: #ffffff;
+
+  border-radius: 1.15rem;
+
+  border: 1.5px solid #e2e8f0;
+
+  box-shadow: 0 4px 15px -3px rgba(15, 23, 42, 0.05);
+
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+}
+
+.org-service-card:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 14px 28px -5px rgba(15, 23, 42, 0.1);
+
+}
+
+.dark .org-main-card {
+
+  background: #ffffff;
+
+  border-color: #e2e8f0;
+
+}
+
+.dark .org-service-card {
+
+  background: #ffffff;
+
+  border-color: #e2e8f0;
+
+}
+
+@media print {
+
+  .org-no-print {
+
+    display: none !important;
+
+  }
+
+  #organigramme {
+
+    page-break-inside: avoid;
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+  }
+
+}
+
+/* Chiffres clés : cinq colonnes sur ordinateur */
+
+#chiffres-cles .chiffres-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 24px;
+
+    align-items: start;
+
+}
+
+/* Deux colonnes sur mobile, dernier élément centré */
+
+@media (max-width: 767px) {
+
+    #chiffres-cles .chiffres-grid {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        row-gap: 32px;
+
+    }
+
+    #chiffres-cles .chiffres-grid > :last-child {
+
+        grid-column: 1 / -1;
+
+    }
+
+}
+
+/* E-Services : accès aux plateformes externes */
+.eservices-access {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    color: #18283c;
+}
+.eservices-access, .eservices-access * { box-sizing: border-box; }
+.eservices-access__header { margin-bottom: 26px; }
+.eservices-access__label {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #94703a;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.eservices-access__header h3 {
+    margin: 0 0 10px;
+    color: #18202b;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+.eservices-access__header p { margin: 0; color: #667085; font-size: 14px; line-height: 1.7; }
+.eservices-access__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.eservices-access__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    padding: 26px;
+    background: #faf9f6;
+    border: 1px solid #e9e5dc;
+    border-radius: 18px;
+    color: inherit;
+    text-decoration: none;
+    transition: background .2s, border-color .2s;
+}
+.eservices-access__card[href]:hover { background: #f5f0e6; border-color: #c4a15c; }
+.eservices-access__card:focus-visible { outline: 3px solid #c4a15c; outline-offset: 4px; }
+.eservices-access__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    margin-bottom: 20px;
+    background: #fef2f2;
+    border-radius: 13px;
+    color: #dc2626;
+    font-size: 20px;
+}
+.eservices-access__icon i { color: inherit; }
+.eservices-access__card h4 { margin: 0 0 10px; color: #18202b; font-size: 18px; font-weight: 700; line-height: 1.4; }
+.eservices-access__card p { flex: 1; margin: 0 0 24px; color: #667085; font-size: 13px; line-height: 1.8; }
+.eservices-access__action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding-top: 16px;
+    border-top: 1px solid #e6e0d5;
+    color: #795b2e;
+    font-size: 12px;
+    font-weight: 700;
+}
+.eservices-access__action span { font-size: 19px; }
+.eservices-access__card[aria-disabled="true"] { cursor: default; }
+.eservices-access__card[aria-disabled="true"] .eservices-access__action { color: #7b8088; }
+@media (max-width: 760px) {
+    .eservices-access__grid { grid-template-columns: 1fr; gap: 14px; }
+}
+@media (max-width: 600px) {
+    .eservices-access { padding: 22px 18px; border-radius: 18px; }
+    .eservices-access__header h3 { font-size: 22px; }
+    .eservices-access__card { padding: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .eservices-access__card { transition: none; }
+}
+
+
+/* Rendre le bouton Toutes les publications cliquable */
+#evenements {
+  position: relative;
+  isolation: isolate;
+  z-index: 1;
+}
+
+#evenements::before,
+#evenements::after {
+  pointer-events: none;
+}
+
+#evenements #actualites {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto !important;
+}
+
+#evenements #actualites > a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}

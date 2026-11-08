@@ -1,0 +1,1 @@
+{% for cycle,groupe in formations.items() %}<h4>{{ groupe.label }}</h4><ul>{% for formation in groupe['items'] %}<li>{% with contexte='footer' %}{% include 'partials/formation-link.html' %}{% endwith %}</li>{% endfor %}</ul>{% endfor %}

@@ -1,0 +1,10 @@
+<div class="footer-visitor-counter" data-footer-counter data-stats-url="{{ route('api.visitor-stats') }}">
+    <p class="footer-counter-label"><i class="fas fa-fingerprint" aria-hidden="true"></i> Compteur total de consultations</p>
+    <div class="footer-counter-digits" id="odometer-digits-container" role="img"
+         aria-label="{{ stats['total_consultations'] }} consultations au total"
+         title="Nombre total de consultations enregistrées">
+        {% for digit in counter_digits %}
+        <span class="odometer-digit" data-digit="{{ digit }}" aria-hidden="true">{{ digit }}</span>
+        {% endfor %}
+    </div>
+</div>

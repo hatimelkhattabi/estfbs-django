@@ -1,5 +1,7 @@
 # EST-FBS — Projet Django
 
+Dernière mise à jour : [contact avec email et options d’impression par document](MISE-A-JOUR-CONTACT-IMPRESSION-DOCUMENT.md). Exécuter `manage.py migrate` après avoir remplacé les fichiers.
+
 Nouvelles options : [Créateur d’images séparé et suppression programmée](MISE-A-JOUR-OPTIONS-ADMIN.md). Cette mise à jour nécessite `manage.py migrate`.
 
 Présentation des cartes Actualités et Événements : [MISE-A-JOUR-CARTES.md](MISE-A-JOUR-CARTES.md).
@@ -163,8 +165,6 @@ Documentation : [Django 5.2](https://docs.djangoproject.com/en/5.2/), [déploiem
 
 La mise à jour ajoute un portail `/espace-enseignant/` avec connexion PPR, CIN initiale puis changement obligatoire du mot de passe. Services : impressions multi-document avec fournitures d’examen, documents administratifs, listes de présence, véhicules et messages anonymes. Consulte `MISE-A-JOUR-SERVICES-ENSEIGNANTS.md` pour les migrations 0006/0007 et les nouvelles fonctions. Le guide `INSTALLER-ESPACE-ENSEIGNANT.md` explique l’installation, la création manuelle du premier compte et l’import Excel ultérieur. Aucun compte enseignant n’est créé automatiquement.
 
-Dernière mise à jour enseignants : dates distinctes par document, suivi En attente / Vue / Terminée, tableau partagé retiré et liste de présence simplifiée. Voir `MISE-A-JOUR-IMPRESSION-PRESENCE.md`.
+Dernière mise à jour enseignants : type, date et fournitures propres à chaque document. Voir `MISE-A-JOUR-CONTACT-IMPRESSION-DOCUMENT.md`.
 
 Impressions : le propriétaire peut modifier ou supprimer ses demandes en attente. Présence : les listes PDF reprennent les neuf classeurs Excel fournis (27 feuilles), y compris les étudiants sans Apogée. Voir `MISE-A-JOUR-ACTIONS-EXCEL.md`.
-#   e s t f b s - d j a n g o  
- 

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta name="csrf-token" content="{{ csrf_token }}">
+<link rel="stylesheet" href="{{ asset('css/panel.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - EST Fquih Ben Salah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+        }
+    </style>
+</head>
+<body class="bg-transparent text-slate-800 font-sans min-h-screen relative" data-active-tab="{{ query.get('tab', 'etudiants') }}">
+  <!-- Canvas Global Réseau de Nœuds Pointés Interconnectés sur Fond Blanc -->
+  <canvas id="nodes-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-[-1] block"></canvas>
+
+
+    <!-- Top Navigation (Fond Blanc, Écritures Bleu & Orange) -->
+    {% if form_errors %}<div role="alert" style="padding:16px;background:#fff3cd">{{ form_errors[0] }}</div>{% endif %}
+<header class="bg-white/95 backdrop-blur-md text-blue-950 shadow-md border-b-2 border-orange-500 no-print sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 border border-orange-200 flex items-center justify-center font-bold text-lg shadow-sm">
+                    <i class="fas fa-university"></i>
+                </div>
+                <div>
+                    <h1 class="text-base font-extrabold tracking-tight text-blue-900">Portail Administration EST-FBS</h1>
+                    <p class="text-[11px] text-blue-950/70">Université Sultan Moulay Slimane</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 text-xs">
+                <div class="hidden sm:block text-right">
+                    <p class="font-bold text-blue-900">{{ admin_name }}</p>
+                    <span class="inline-block px-2 py-0.5 rounded text-[10px] bg-orange-50 text-orange-600 font-bold border border-orange-200">
+                        {{ admin_role }}
+                    </span>
+                </div>
+                <a href="{{ route('admin.professeurs.index') }}" class="px-3 py-2 rounded-lg bg-blue-50 text-blue-950 font-bold">Professeurs</a><a href="{{ route('admin.photos.index') }}" class="px-3 py-2 rounded-lg bg-blue-50 text-blue-950 font-bold">Photos &amp; vidéos</a>
+<a href="{{ route('admin.emplois.index') }}" class="px-3 py-2 rounded-lg bg-blue-50 text-blue-950 font-bold">Emplois du temps</a><a href="{{ route('admin.reglements.index') }}" class="px-3 py-2 rounded-lg bg-blue-50 text-blue-950 font-bold">Textes et règlements</a>
+{% if can_model('demandeimpression') %}<a href="{{ route('teacher-admin-prints') }}" class="px-3 py-2 rounded-lg bg-blue-50 text-blue-950 font-bold">Impressions enseignants</a>{% endif %}
+{% if can_model('demandedocumentadministratif') %}<a href="{{ route('teacher-admin-documents') }}" class="px-3 py-2 rounded-lg bg-blue-50 text-blue-950 font-bold">Documents enseignants</a>{% endif %}
+<a href="{{ route('admin.publications.index') }}" class="px-3 py-2 rounded-lg bg-amber-400 text-blue-950 font-bold">Actualités &amp; événements</a>
+<a href="{{ url('index.html') }}" target="_blank" class="px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-orange-500 hover:text-white text-blue-900 font-bold border border-blue-200 transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fas fa-external-link-alt text-xs"></i>
+                    <span>Voir le Site</span>
+                </a>
+                <form method="POST" action="{{ route('logout') }}">{{ csrf_input }}<button type="submit" class="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fas fa-sign-out-alt text-xs"></i>
+                    <span>Déconnexion</span>
+                </button></form>
+                <a href="https://usms.ac.ma" target="_blank" rel="noopener noreferrer" class="bg-white p-1 rounded-lg border border-blue-200 shadow-sm hidden md:flex items-center hover:scale-105 transition-transform" title="Portail officiel USMS">
+                    <img src="{{ asset('assets/img/logo-usms.png') }}" alt="Logo Université Sultan Moulay Slimane" class="h-8 w-auto object-contain">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+{% for message in django_messages %}<div class="p-4 bg-emerald-100 border border-emerald-300 text-emerald-800 rounded-xl" role="status">{{ message }}</div>{% endfor %}
+
+        {% if not not (feedback) %}
+            <div class="p-4 bg-emerald-100 border border-emerald-300 text-emerald-800 rounded-xl text-xs flex items-center justify-between no-print animate-fade-in shadow-sm">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-check-circle text-emerald-600 text-base"></i>
+                    <span>{{ feedback }}</span>
+                </div>
+                <button onclick="this.parentElement.remove()" class="text-emerald-700 hover:text-emerald-950 font-bold">&times;</button>
+            </div>
+        {% endif %}
+
+        <!-- Cartes Statistiques / Indicateurs -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 no-print">
+            
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center text-xl shrink-0">
+                    <i class="fas fa-file-invoice"></i>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-500 font-medium">Demandes Étudiants</span>
+                    <h3 class="text-2xl font-black text-slate-900">{{ panel_stats['total_etudiants'] }}</h3>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl shrink-0">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-500 font-medium">En Attente</span>
+                    <h3 class="text-2xl font-black text-amber-600">{{ panel_stats['en_attente_etudiants'] }}</h3>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl shrink-0">
+                    <i class="fas fa-check-double"></i>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-500 font-medium">Prêtes à Délivrer</span>
+                    <h3 class="text-2xl font-black text-emerald-600">{{ panel_stats['pretes_etudiants'] }}</h3>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl shrink-0">
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+                <div>
+                    <span class="text-xs text-slate-500 font-medium">Nouveaux Messages</span>
+                    <h3 class="text-2xl font-black text-indigo-700">{{ panel_stats['nouveaux_messages'] }}</h3>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Fréquentation & Moniteur de Consultations Site Public -->
+        {% if visitorStats %}
+        <div class="bg-gradient-to-r from-slate-900 to-blue-950 p-5 rounded-2xl shadow-sm text-white border border-slate-800 no-print flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center text-lg border border-orange-500/30">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                        <span>Audience & Consultations du Site Public</span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">En direct</span>
+                    </h4>
+                    <p class="text-[11px] text-slate-400">Statistiques visibles sur le moniteur public en bas du site</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-6 text-xs">
+                <div>
+                    <span class="block text-slate-400 text-[10px] uppercase font-bold">Consultations Totales</span>
+                    <span class="text-lg font-black text-amber-400">{{ number_format(visitorStats['total_consultations'], 0, ',', ' ') }}</span>
+                </div>
+                <div class="h-8 w-px bg-slate-800"></div>
+                <div>
+                    <span class="block text-slate-400 text-[10px] uppercase font-bold">Visiteurs Uniques</span>
+                    <span class="text-lg font-black text-blue-300">{{ number_format(visitorStats['unique_visitors'], 0, ',', ' ') }}</span>
+                </div>
+                <div class="h-8 w-px bg-slate-800"></div>
+                <div>
+                    <span class="block text-slate-400 text-[10px] uppercase font-bold">Aujourd'hui</span>
+                    <span class="text-lg font-black text-emerald-400">{{ number_format(visitorStats['today_consultations'], 0, ',', ' ') }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Onglets Navigation -->
+        <div class="border-b border-slate-200 no-print flex flex-wrap gap-6 text-sm font-bold">
+            <button onclick="switchTab('tab-etudiants')" id="btn-tab-etudiants" class="pb-3 border-b-2 border-amber-500 text-slate-900 flex items-center gap-2">
+                <i class="fas fa-user-graduate"></i>
+                <span>Demandes Étudiants ({{ demandes_etudiants.paginator.count }})</span>
+            </button>
+            <button onclick="switchTab('tab-personnel')" id="btn-tab-personnel" class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 flex items-center gap-2">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Personnel & Professeurs ({{ demandes_personnel.paginator.count }})</span>
+            </button>
+            <button onclick="switchTab('tab-contact')" id="btn-tab-contact" class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 flex items-center gap-2">
+                <i class="fas fa-comments"></i>
+                <span>Messages Reçus ({{ messages_contact.paginator.count }})</span>
+            </button>
+            {% if can_model('demandevehicule') %}<button onclick="switchTab('tab-vehicules')" id="btn-tab-vehicules" class="pb-3 border-b-2 border-transparent text-slate-500 hover:text-slate-900 flex items-center gap-2"><i class="fas fa-bus"></i><span>Demandes de véhicule ({{ demandes_vehicule.paginator.count }})</span></button>{% endif %}
+        </div>
+
+        <!-- ================= ONGLET 1 : DEMANDES ÉTUDIANTS ================= -->
+        <section id="tab-etudiants" class="space-y-4">
+            
+            <!-- Barre de Filtre & Recherche & Impression -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-4 no-print shadow-sm">
+                <form method="GET" action="{{ route('admin.dashboard') }}" class="flex flex-wrap items-center gap-3 flex-grow">
+                    
+                    <div class="relative flex-grow max-w-xs">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                            <i class="fas fa-search text-xs"></i>
+                        </span>
+                        <input type="text" name="q" value="{{ search_query }}" placeholder="Rechercher par nom, CNE, code..." 
+                               class="w-full pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                    </div>
+
+                    <select name="filter_status" onchange="this.form.submit()" class="px-3 py-2 text-xs border border-slate-300 rounded-xl bg-white focus:outline-none">
+                        <option value="all" {{ ('selected' if filter_status == 'all' else '') }}>Tous les statuts</option>
+                        <option value="En attente" {{ ('selected' if filter_status == 'En attente' else '') }}>En attente</option>
+                        <option value="En cours" {{ ('selected' if filter_status == 'En cours' else '') }}>En cours</option>
+                        <option value="Prête" {{ ('selected' if filter_status == 'Prête' else '') }}>Prête</option>
+                        <option value="Rejetée" {{ ('selected' if filter_status == 'Rejetée' else '') }}>Rejetée</option>
+                    </select>
+
+                    <button type="submit" class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-bold shadow-sm transition">
+                        Filtrer
+                    </button>
+                    {% if not not (search_query)  or  filter_status != 'all' %}
+                        <a href="{{ route('admin.dashboard') }}" class="text-xs text-red-600 hover:underline">Réinitialiser</a>
+                    {% endif %}
+                </form>
+
+                <button onclick="window.print()" class="px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm transition">
+                    <i class="fas fa-print"></i>
+                    <span>Imprimer la Liste</span>
+                </button>
+            </div>
+
+            <!-- Table des Demandes Étudiants -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-blue-50 text-blue-950 uppercase text-[10px] tracking-wider font-bold border-b-2 border-blue-200">
+                                <th class="p-3.5">Code Suivi</th>
+                                <th class="p-3.5">Étudiant & Filière</th>
+                                <th class="p-3.5">CNE / CIN</th>
+                                <th class="p-3.5">Document Demandé</th>
+                                <th class="p-3.5">Date</th>
+                                <th class="p-3.5 text-center">Statut Actuel</th>
+                                <th class="p-3.5 text-center no-print">Actions Rapides</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            {% if not (demandes_etudiants) %}
+                                <tr>
+                                    <td colspan="7" class="p-8 text-center text-slate-400">
+                                        <i class="fas fa-inbox text-3xl mb-2 block"></i>
+                                        Aucune demande trouvée dans la base de données.
+                                    </td>
+                                </tr>
+                            {% else %}
+                                {% for d in demandes_etudiants %}
+                                    <tr class="hover:bg-amber-50/80/40 transition">
+                                        <td class="p-3.5 font-mono font-bold text-slate-900">
+                                            {{ d['code_suivi'] }}
+                                        </td>
+                                        <td class="p-3.5">
+                                            <strong class="block text-slate-900">{{ d['nom_prenom'] }}</strong>
+                                            <span class="text-[11px] text-slate-500">{{ d['filiere'] }}</span>
+                                            <span class="block text-[10px] text-slate-400">{{ d['email'] }}</span>
+                                        </td>
+                                        <td class="p-3.5 font-mono text-[11px]">
+                                            <div><span class="text-slate-400">CNE:</span> {{ d['cne'] }}</div>
+                                            <div><span class="text-slate-400">CIN:</span> {{ d['cin'] }}</div>
+                                        </td>
+                                        <td class="p-3.5">
+                                            <span class="inline-block px-2.5 py-1 rounded-md bg-slate-100 font-semibold text-slate-700">
+                                                {{ d['type_document'] }}
+                                            </span>
+                                        </td>
+                                        <td class="p-3.5 text-slate-500 text-[11px] whitespace-nowrap">
+                                            {{ fmt_date(d['date_demande'],'d/m/Y H:i') }}
+                                        </td>
+                                        <td class="p-3.5 text-center">
+                                            
+                                            <span class="inline-block px-3 py-1 rounded-full text-[10px] font-bold border {{ status_badge(d.statut) }}">
+                                                {{ d['statut'] }}
+                                            </span>
+                                        </td>
+                                        <td class="p-3.5 text-center no-print">
+                                            {% if can_model('demandeetudiant','change') %}<form method="POST" action="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-1">
+{{ csrf_input }}
+                                                <input type="hidden" name="action" value="update_status_etudiant">
+                                                <input type="hidden" name="id" value="{{ d['id'] }}">
+
+                                                <button type="submit" name="status" value="En cours" title="Mettre en cours" 
+                                                        class="p-1.5 rounded-lg bg-amber-100 hover:bg-slate-200 text-slate-800 transition">
+                                                    <i class="fas fa-spinner"></i>
+                                                </button>
+
+                                                <button type="submit" name="status" value="Prête" title="Marquer comme Prête" 
+                                                        class="p-1.5 rounded-lg bg-emerald-100 hover:bg-emerald-200 text-emerald-800 transition">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+
+                                                <button type="submit" name="status" value="Rejetée" title="Rejeter la demande" 
+                                                        class="p-1.5 rounded-lg bg-red-100 hover:bg-red-200 text-red-800 transition"
+                                                        onclick="return confirm('Confirmer le rejet de cette demande ?')">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </form>{% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {{ dashboard_pagination('etudiants', demandes_etudiants) }}
+        </section>
+
+        <!-- ================= ONGLET 2 : DEMANDES PERSONNEL ================= -->
+        <section id="tab-personnel" class="hidden space-y-4">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-4 bg-white/80 border-b border-slate-200 font-bold text-xs text-slate-700">
+                    Demandes d'Attestations de Travail & Salaire (Enseignants & Fonctionnaires)
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-900 text-white uppercase text-[10px] tracking-wider font-bold">
+                                <th class="p-3.5">Code Suivi</th>
+                                <th class="p-3.5">Nom & PPR</th>
+                                <th class="p-3.5">Fonction</th>
+                                <th class="p-3.5">Attestation</th>
+                                <th class="p-3.5">Motif</th>
+                                <th class="p-3.5">Date</th>
+                                <th class="p-3.5 text-center">Statut</th>
+                                <th class="p-3.5 text-center no-print">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            {% if not (demandes_personnel) %}
+                                <tr>
+                                    <td colspan="8" class="p-8 text-center text-slate-400">Aucune demande enregistrée.</td>
+                                </tr>
+                            {% else %}
+                                {% for p in demandes_personnel %}
+                                    <tr class="hover:bg-white/80">
+                                        <td class="p-3.5 font-mono font-bold text-amber-800">{{ p['code_suivi'] }}</td>
+                                        <td class="p-3.5">
+                                            <strong>{{ p['nom_prenom'] }}</strong>
+                                            <span class="block text-[11px] text-slate-500 font-mono">PPR: {{ p['ppr'] }}</span>
+                                        </td>
+                                        <td class="p-3.5 text-slate-600">{{ p['fonction'] }}</td>
+                                        <td class="p-3.5 font-semibold text-slate-900">{{ p['type_attestation'] }}</td>
+                                        <td class="p-3.5 text-slate-500 max-w-xs truncate">{{ (p['motif'] or '-') }}</td>
+                                        <td class="p-3.5 text-slate-500">{{ fmt_date(p['date_demande'],'d/m/Y') }}</td>
+                                        <td class="p-3.5 text-center">
+                                            <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">
+                                                {{ p['statut'] }}
+                                            </span>
+                                        </td>
+                                        <td class="p-3.5 text-center no-print">
+                                            {% if can_model('demandepersonnel','change') %}<form method="POST" action="{{ route('admin.dashboard') }}" class="inline-flex gap-1">
+{{ csrf_input }}
+                                                <input type="hidden" name="action" value="update_status_pers">
+                                                <input type="hidden" name="id" value="{{ p['id'] }}">
+                                                <button type="submit" name="status" value="Prête" class="p-1 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            </form>{% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {{ dashboard_pagination('personnel', demandes_personnel) }}
+        </section>
+
+        <!-- ================= ONGLET 3 : MESSAGES CONTACT ================= -->
+        <section id="tab-contact" class="hidden space-y-4">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-4 bg-white/80 border-b border-slate-200 font-bold text-xs text-slate-700">
+                    Boîte de Réception des Messages & Réclamations du Site
+                </div>
+                <div class="divide-y divide-slate-100">
+                    {% if not (messages_contact) %}
+                        <div class="p-8 text-center text-slate-400 text-xs">Aucun message de contact dans la base de données.</div>
+                    {% else %}
+                        {% for m in messages_contact %}
+                            <div class="p-5 hover:bg-white/80 transition flex flex-col md:flex-row justify-between gap-4">
+                                <div class="space-y-1.5 flex-grow">
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="font-bold text-sm text-slate-900">{{ m['sujet'] }}</h4>
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold {{ ('bg-red-100 text-red-700' if m['statut'] == 'Nouveau' else 'bg-slate-200 text-slate-700') }}">
+                                            {{ m['statut'] }}
+                                        </span>
+                                    </div>
+                                    <p class="text-xs text-slate-700 leading-relaxed bg-white/80 p-3 rounded-xl border border-slate-200">
+                                        <span style="white-space:pre-wrap">{{ m.message }}</span>
+                                    </p>
+                                    <div class="text-[11px] text-slate-500 flex items-center gap-4">
+                                        <span><i class="fas fa-user text-slate-400 mr-1"></i>{{ m['nom_complet'] }}</span>
+                                        {% if m.apogee %}<span>Apogée : {{ m.apogee }}</span>{% endif %}
+                                        <span><i class="fas fa-envelope text-slate-400 mr-1"></i>{{ m['email'] }}</span>
+                                        <span><i class="fas fa-clock text-slate-400 mr-1"></i>{{ fmt_date(m['date_envoi'],'d/m/Y à H:i') }}</span>
+                                    </div>
+                                </div>
+                                <div class="shrink-0 flex items-center gap-2 no-print">
+                                    {% if can_model('messagecontact','change') %}<form method="POST" action="{{ route('admin.dashboard') }}">
+{{ csrf_input }}
+                                        <input type="hidden" name="action" value="update_message_status">
+                                        <input type="hidden" name="id" value="{{ m['id'] }}">
+                                        <button type="submit" name="status" value="Traité" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold">
+                                            <i class="fas fa-check mr-1"></i> Traité
+                                        </button>
+                                    </form>{% endif %}
+                                    <a href="mailto:{{ m['email'] }}?subject=Re: {{ m.sujet|urlencode }}" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-lg text-xs font-semibold">
+                                        <i class="fas fa-reply mr-1"></i> Répondre
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            {{ dashboard_pagination('contact', messages_contact) }}
+        </section>
+
+{% include 'admin/vehicules.html' %}
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            const tabs=['etudiants','personnel','contact','vehicules'];
+            if(!tabs.includes(tabId.replace('tab-','')))return;
+            for(const name of tabs){
+                document.getElementById('tab-'+name)?.classList.toggle('hidden',tabId!=='tab-'+name);
+                const button=document.getElementById('btn-tab-'+name);
+                button?.classList.toggle('border-amber-500',tabId==='tab-'+name);
+                button?.classList.toggle('text-slate-900',tabId==='tab-'+name);
+                button?.classList.toggle('text-slate-500',tabId!=='tab-'+name);
+                button?.classList.toggle('border-transparent',tabId!=='tab-'+name);
+                button?.setAttribute('aria-selected',String(tabId==='tab-'+name));
+            }
+        }
+        const selected=document.body.dataset.activeTab;
+        if(['etudiants','personnel','contact','vehicules'].includes(selected))switchTab('tab-'+selected);
+    </script>
+
+  <script src="{{ asset('js/nodes-canvas.js') }}"></script>
+</body>
+</html>

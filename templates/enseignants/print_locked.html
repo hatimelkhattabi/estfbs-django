@@ -1,0 +1,3 @@
+{% extends 'enseignants/layout.html' %}{% block content %}
+<section class="tp-panel tp-form-panel"><h2>La demande est {{ item.statut|lower }}</h2><p>L’administration a déjà pris en charge cette demande. Pour demander une correction ou une annulation, contacte le service d’impression.</p><div class="tp-form-actions"><a class="tp-button secondary" href="{{ route('teacher-print-detail',{'reference':item.reference}) }}">Retour au suivi</a><a href="{{ route('teacher-requests') }}">Mes demandes</a></div></section>
+{% endblock %}

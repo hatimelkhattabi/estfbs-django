@@ -1,0 +1,266 @@
+/* En-tête commun : correctifs mobiles, sans modifier le footer. */
+.site-mobile-university-logo {
+  display: none;
+}
+
+@media (max-width: 1279.98px) {
+  #fixed-university-logo {
+    display: none !important;
+  }
+
+  .site-top-row,
+  .site-top-contact,
+  .site-top-actions {
+    min-width: 0;
+  }
+
+  .site-top-contact {
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+
+  .site-top-contact > * {
+    margin-inline: 0 !important;
+  }
+
+  .site-top-actions {
+    padding-right: 0 !important;
+    flex-shrink: 0;
+    gap: 8px;
+  }
+
+  .site-top-actions > * {
+    margin-inline: 0 !important;
+  }
+
+  .site-top-actions button,
+  .site-top-actions > a {
+    min-height: 36px;
+  }
+
+  [data-site-header] .site-nav-inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .site-school-brand {
+    min-width: 0;
+  }
+
+  .site-school-brand img {
+    width: auto;
+    height: 64px;
+    max-width: 72px;
+    object-fit: contain;
+  }
+
+  .site-mobile-university-logo {
+    display: flex;
+    justify-self: end;
+    align-items: center;
+    width: clamp(110px, 36vw, 180px);
+    max-width: 100%;
+    min-width: 0;
+    padding: 4px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  .site-mobile-university-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 64px;
+    object-fit: contain;
+  }
+
+  [data-site-header] .main-desktop-nav,
+  .site-nav-actions > div {
+    display: none !important;
+  }
+
+  #mobile-menu-toggle {
+    display: inline-flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    margin: 0 !important;
+    flex-shrink: 0;
+  }
+
+  #mobile-menu-toggle:focus-visible,
+  #mobile-menu-drawer button:focus-visible,
+  #mobile-menu-drawer a:focus-visible {
+    outline: 2px solid #1e40af;
+    outline-offset: 2px;
+  }
+
+  #mobile-menu-backdrop {
+    display: block !important;
+  }
+
+  #mobile-menu-drawer {
+    display: flex !important;
+    width: min(24rem, 92vw);
+    max-width: 92vw;
+    height: 100%;
+    height: 100dvh;
+    min-height: 0;
+    overscroll-behavior: contain;
+    pointer-events: none;
+  }
+
+  #mobile-menu-drawer[data-menu-state="open"] {
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  #mobile-menu-drawer > :not(.site-mobile-menu-links) {
+    flex-shrink: 0;
+  }
+
+  .site-drawer-heading {
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .site-drawer-heading > :first-child {
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .site-drawer-heading > :first-child > :first-child,
+  .site-drawer-heading > :last-child {
+    flex-shrink: 0;
+  }
+
+  .site-drawer-heading > :last-child > a img {
+    width: 48px;
+    height: auto;
+  }
+
+  #mobile-menu-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+
+  .site-mobile-menu-links {
+    min-height: 0;
+    min-width: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .site-mobile-menu-links a,
+  .site-mobile-menu-links button {
+    min-height: 40px;
+    overflow-wrap: anywhere;
+    touch-action: manipulation;
+  }
+
+  .site-drawer-footer {
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  .site-drawer-footer > div {
+    flex-wrap: wrap;
+    gap: 6px 12px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  /* Les deux annonces restent entièrement lisibles sur téléphone. */
+  .site-ticker-viewport {
+    height: auto;
+    min-width: 0;
+    overflow: visible;
+  }
+
+  .site-ticker-track.ticker-content {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    white-space: normal;
+    animation: none !important;
+    transform: none;
+  }
+
+  .site-ticker-track > span {
+    margin: 0 !important;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.6;
+  }
+
+  .site-ticker-track > [aria-hidden="true"] {
+    display: none;
+  }
+}
+
+@media (max-width: 639.98px) {
+  .site-top-row {
+    gap: 6px;
+  }
+
+  .site-top-contact,
+  .site-top-actions {
+    width: 100%;
+  }
+
+  .site-top-actions {
+    justify-content: center;
+  }
+
+  #est-chatbot-widget {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+
+  #chatbot-window {
+    width: min(24rem, calc(100vw - 24px));
+    max-height: calc(100vh - 88px);
+    max-height: calc(100dvh - 88px);
+    overflow-y: auto;
+  }
+
+  #chatbot-toggle-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  #back-to-top {
+    left: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .site-drawer-heading > :first-child > div:last-child > span:first-child {
+    font-size: 12px;
+  }
+
+  .site-drawer-heading > :last-child > a {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #mobile-menu-drawer,
+  #mobile-menu-backdrop {
+    transition: none;
+  }
+}

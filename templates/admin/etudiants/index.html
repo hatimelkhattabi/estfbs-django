@@ -1,0 +1,19 @@
+{% extends 'admin/layout.html' %}
+{% set page_title = 'Étudiants (Apogée)' %}
+{% block header_action %}{% if can('etudiants','add') %}<a class="pub-btn primary" href="{{ route('admin.etudiants.create') }}">+ Ajouter un étudiant</a>{% endif %}{% endblock %}
+{% block content %}
+<section class="pub-panel">
+  <div class="pub-panel-head"><h2>Liste des étudiants autorisés</h2><span>{{ page.paginator.count }} fiche(s)</span></div>
+  <p class="dm-admin-note">Un numéro Apogée présent et autorisé permet d’envoyer un message à l’administration.</p>
+  <form class="pub-filters" method="GET"><input name="q" value="{{ query.get('q', '') }}" placeholder="Apogée, nom, prénom ou filière…" aria-label="Rechercher un étudiant"><button class="pub-btn secondary">Rechercher</button></form>
+  <div class="pub-table-wrap"><table class="pub-table">
+    <thead><tr><th>Apogée</th><th>Nom et prénom</th><th>Filière et niveau</th><th>Autorisation</th><th>Actions</th></tr></thead>
+    <tbody>{% for etudiant in etudiants %}
+      <tr><td><strong>{{ etudiant.apogee }}</strong></td><td>{{ etudiant.nom }} {{ etudiant.prenom }}</td><td>{{ etudiant.filiere }}<br><small>{{ etudiant.niveau }} · {{ etudiant.annee_universitaire }}</small></td><td>{{ 'Autorisé' if etudiant.actif else 'Désactivé' }}</td><td><div class="pub-row-actions">
+        {% if can('etudiants','change') %}<a href="{{ route('admin.etudiants.edit',etudiant) }}">Modifier</a><form method="POST" action="{{ route('admin.etudiants.toggle',etudiant) }}">{{ csrf_input }}<button>{{ 'Désactiver' if etudiant.actif else 'Autoriser' }}</button></form>{% endif %}
+        {% if can('etudiants','delete') %}<form method="POST" action="{{ route('admin.etudiants.destroy',etudiant) }}" data-confirm="Supprimer cet étudiant de la liste autorisée ? Les messages déjà reçus seront conservés.">{{ csrf_input }}<button class="pub-delete">Supprimer</button></form>{% endif %}
+      </div></td></tr>
+    {% else %}<tr><td colspan="5">Aucun étudiant trouvé. Importez le classeur Excel ou ajoutez une fiche.</td></tr>{% endfor %}</tbody>
+  </table></div>{{ pagination(page) }}
+</section>
+{% endblock %}

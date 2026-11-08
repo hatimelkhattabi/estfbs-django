@@ -1,0 +1,10 @@
+{% extends 'layouts/public.html' %}{% set page_title=publication.titre %}
+{% block extra_head %}<link rel="stylesheet" href="{{ asset('css/publication-richtext.css') }}">{% endblock %}
+{% block content %}
+{% if preview %}<div class="pub-alert success">Aperçu administrateur : cette publication peut ne pas être visible au public.</div>{% endif %}
+<p class="pub-eyebrow">{{ publication.type }} · {{ publication.categorie }}</p><h1>{{ publication.titre }}</h1>
+<p class="pub-detail-meta">Publié le {{ fmt_date(publication.date_publication,'d/m/Y à H:i') }}{% if publication.date_evenement %} · Événement le {{ fmt_date(publication.date_evenement) }}{% endif %}{% if publication.lieu %} · {{ publication.lieu }}{% endif %}</p>
+<p class="pub-detail-lead">{{ publication.resume }}</p><img class="pub-detail-image" src="{{ publication.image_url }}" alt="{{ publication.titre }}">
+<div class="pub-detail-content pub-richtext" dir="auto">{{ publication.content_html }}</div>
+{% if publication.afficher_bouton and publication.lien_valide %}<div class="pub-detail-actions"><a class="pub-btn primary" href="{{ publication.lien }}" {% if publication.bouton_nouvel_onglet %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ publication.texte_bouton or 'Consulter le document' }} ↗</a></div>{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'admin/layout.html' %}
+{% set page_title = ('Modifier le document' if reglement.pk else 'Ajouter un document') %}
+{% block header_action %}
+    <a class="pub-btn secondary" href="{{ route('admin.reglements.index') }}">Retour aux documents</a>
+{% endblock %}
+{% block content %}
+    <form class="pub-panel pub-editor" method="post" enctype="multipart/form-data" action="{{ (route('admin.reglements.update', reglement) if reglement.pk else route('admin.reglements.store')) }}">
+        {{ csrf_input }}
+        {% if reglement.pk %}  {% endif %}
+        <div>
+            <label for="reglement-title">Titre du document *
+                <input id="reglement-title" name="titre" required maxlength="255" value="{{ old('titre', reglement.titre) }}">
+            </label>
+            <label for="reglement-file">{{ ('Remplacer le PDF' if reglement.pk else 'Fichier PDF *') }}
+                <input id="reglement-file" type="file" name="fichier" accept=".pdf,application/pdf" {% if not reglement.pk %} required {% endif %}>
+                <small>PDF uniquement, 20 Mo maximum. {{ ('Sans nouveau fichier, le document actuel est conservé.' if reglement.pk else '') }}</small>
+            </label>
+            {% if reglement.document_url %}
+                <p class="pub-help">Document actuel : <a class="pub-btn secondary" href="{{ reglement.document_url }}" target="_blank" rel="noopener noreferrer">Consulter ↗</a></p>
+                {% if reglement.original_name %}<p class="pub-muted">{{ reglement.original_name }}</p>{% endif %}
+            {% endif %}
+        </div>
+        <div class="pub-setting-box">
+            <label for="reglement-order">Ordre d’affichage
+                <input id="reglement-order" type="number" name="ordre" min="0" max="99999" value="{{ old('ordre', (reglement.ordre if reglement.ordre is not none else 0)) }}">
+                <small>Les plus petits nombres apparaissent en premier.</small>
+            </label>
+            <label for="reglement-language">Langue du titre
+                <select id="reglement-language" name="langue">
+                    <option value="fr" {% if old('langue', (reglement.langue if reglement.langue is not none else 'fr')) == 'fr' %}selected{% endif %}>Français</option>
+                    <option value="ar" {% if old('langue', reglement.langue) == 'ar' %}selected{% endif %}>Arabe</option>
+                </select>
+            </label>
+            <input type="hidden" name="publie" value="0">
+            <label class="pub-check"><input type="checkbox" name="publie" value="1" {% if old('publie', reglement.publie) %}checked{% endif %}> Publier sur le site</label>
+        </div>
+        <div class="pub-editor-actions"><a class="pub-btn secondary" href="{{ route('admin.reglements.index') }}">Annuler</a><button type="submit" class="pub-btn primary">Enregistrer</button></div>
+    </form>
+{% endblock %}

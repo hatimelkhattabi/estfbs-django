@@ -1,0 +1,559 @@
+{% extends teacher_layout|default('layouts/public.html') %}
+
+{% set page_title = 'Demande de Véhicule - Professeurs EST-FBS' %}
+
+{% block extra_head %}<style>#main-content > .pub-detail-meta {display:none} .vehicle-reference {overflow-wrap:anywhere}</style>{% endblock %}
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-50/70 via-slate-50 to-slate-100 py-10 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+
+    <!-- Fil d'ariane & En-tête -->
+    <nav class="flex items-center space-x-2 text-xs text-slate-500 mb-6">
+      <a href="{{ route('home') }}" class="hover:text-blue-900 transition flex items-center gap-1">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <span>/</span>
+      <span class="text-blue-900 font-semibold">Espace Enseignants</span>
+      <span>/</span>
+      <span class="text-orange-600 font-bold">Demande de véhicule</span>
+    </nav>
+
+    <!-- Titre et bannière de présentation -->
+    <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 rounded-2xl shadow-xl text-white p-6 sm:p-8 mb-8 relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-orange-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute right-6 top-6 opacity-15 hidden sm:block">
+        <i class="fas fa-bus-alt text-8xl text-white"></i>
+      </div>
+      <div class="relative z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/20 border border-orange-400/30 text-orange-300 text-xs font-semibold uppercase tracking-wider mb-3">
+          <i class="fas fa-graduation-cap"></i> E-Services Enseignants & Chercheurs
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
+          Demande d'Affectation de Véhicule
+        </h1>
+        <p class="text-blue-100/90 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
+          Formulaire officiel destiné au corps professoral de l'EST-FBS pour l'organisation de visites pédagogiques, sorties de terrain, missions scientifiques et déplacements d'étudiants.
+        </p>
+        <div class="flex flex-wrap items-center gap-4 mt-4 text-xs text-blue-200">
+          <span class="flex items-center gap-1.5"><i class="fas fa-file-pdf text-red-400"></i> Ordre de mission après validation</span>
+          <span class="flex items-center gap-1.5"><i class="fas fa-clock text-amber-300"></i> Traitement rapide par le Service Transport</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZONE DE NOTIFICATION SUCCÈS DYNAMIQUE (Affichée après soumission JS ou session) -->
+    <div id="success-confirmation" class="hidden mb-8 transition-all duration-500">
+      <div class="bg-white rounded-2xl shadow-xl border-2 border-emerald-500/50 p-6 sm:p-8 relative overflow-hidden">
+        <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600"></div>
+        
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl shadow-inner shrink-0">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div>
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-300 animate-pulse">
+                <i class="fas fa-hourglass-half"></i> Demande en cours de traitement
+              </div>
+              <h2 class="text-xl font-bold text-slate-800 mt-1">Votre demande a été enregistrée avec succès !</h2>
+              <p class="text-slate-600 text-xs sm:text-sm">
+                Référence officielle : <span id="conf-reference" class="vehicle-reference font-mono font-bold text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200"></span>
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex flex-wrap sm:flex-col gap-2 w-full sm:w-auto">
+            <p id="conf-mission-status" class="text-xs text-slate-600 max-w-xs"><i class="fas fa-lock" aria-hidden="true"></i> Ordre de mission disponible après validation par l’administration.</p>
+            <a id="conf-pdf-btn" href="#" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition">
+              <i class="fas fa-file-pdf text-base"></i> Télécharger la demande (PDF)
+            </a>
+            <a id="conf-status-btn" href="#" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition border border-slate-300">
+              <i class="fas fa-search"></i> Suivre l'avancement
+            </a>
+          </div>
+        </div>
+
+        <!-- Timeline visuelle de traitement -->
+        <div class="py-6 border-b border-slate-100">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Étapes du dossier :</p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs shrink-0 mt-0.5 font-bold">1</div>
+              <div class="text-xs">
+                <strong class="text-emerald-900 block font-semibold">Demande déposée</strong>
+                <span class="text-emerald-700 text-[11px]">Enregistrée dans le système</span>
+              </div>
+            </div>
+            <div class="bg-amber-50 border-2 border-amber-400 rounded-xl p-3 flex items-start gap-3 shadow-sm">
+              <div class="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs shrink-0 mt-0.5 font-bold animate-bounce">2</div>
+              <div class="text-xs">
+                <strong class="text-amber-900 block font-bold">En cours de traitement</strong>
+                <span class="text-amber-700 text-[11px]">Service Transport & Chauffeur</span>
+              </div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-start gap-3 opacity-60">
+              <div class="w-6 h-6 rounded-full bg-slate-400 text-white flex items-center justify-center text-xs shrink-0 mt-0.5 font-bold">3</div>
+              <div class="text-xs">
+                <strong class="text-slate-800 block font-semibold">Validation & Ordre disponible</strong>
+                <span class="text-slate-500 text-[11px]">Affectation finale</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Récapitulatif soumis -->
+        <div id="conf-summary" class="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+          <div class="p-3 bg-slate-50 rounded-lg">
+            <span class="text-slate-500 block">Professeur :</span>
+            <span id="sum-prof" class="font-bold text-slate-800">-</span>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-lg">
+            <span class="text-slate-500 block">Destination :</span>
+            <span id="sum-dest" class="font-bold text-blue-900">-</span>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-lg">
+            <span class="text-slate-500 block">Date de visite :</span>
+            <span id="sum-date" class="font-bold text-slate-800">-</span>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-lg">
+            <span class="text-slate-500 block">Effectif étudiants :</span>
+            <span id="sum-effectif" class="font-bold text-orange-600">-</span>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button id="btn-new-demande" class="text-xs text-blue-800 hover:text-blue-950 underline font-semibold flex items-center gap-1.5">
+            <i class="fas fa-plus-circle"></i> Soumettre une autre demande de véhicule
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULAIRE PRINCIPAL -->
+    <div id="form-container" class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+      <div class="bg-slate-50/80 px-6 sm:px-8 py-4 border-b border-slate-200 flex items-center justify-between">
+        <div class="flex items-center gap-2 text-slate-700 font-bold text-sm">
+          <i class="fas fa-edit text-orange-500"></i> Formulaire de Réservation
+        </div>
+        <span class="text-xs text-slate-500 italic">* Tous les champs indiqués d'un astérisque sont requis</span>
+      </div>
+
+      <form id="vehicule-form" method="POST" action="{{ route('vehicule.store') }}" class="p-6 sm:p-8 space-y-8">
+        {{ csrf_input }}
+
+        {% if form_errors %}
+          <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg text-red-800 text-sm">
+            <strong class="font-bold block mb-1">Veuillez corriger les erreurs suivantes :</strong>
+            <ul class="list-disc pl-5 space-y-1 text-xs">
+              {% for err in form_errors %}
+                <li>{{ err }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <!-- SECTION 1 : RENSEIGNEMENTS DU PROFESSEUR -->
+        <div>
+          <div class="flex items-center gap-2 pb-3 mb-4 border-b border-slate-200">
+            <span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-900 flex items-center justify-center text-xs font-bold">1</span>
+            <h3 class="text-base font-bold text-slate-900">Enseignant Demandeur</h3>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Nom complet du professeur (REQUIS) -->
+            <div>
+              <label for="nom_professeur" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Nom complet du Professeur <span class="text-red-500">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fas fa-user-tie"></i>
+                </span>
+                <input 
+                  type="text" 
+                  id="nom_professeur" readonly 
+                  name="nom_professeur" 
+                  value="{{ old('nom_professeur') }}"
+                  required 
+                  minlength="3"
+                  maxlength="150"
+                  placeholder="Ex : Pr. Mohammed ALAMI"
+                  class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm"
+                />
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Saisissez votre prénom et nom complets avec votre titre.</p>
+            </div>
+
+            <!-- Grade du professeur (PA / PH / PES) -->
+            <div>
+              <label for="grade_professeur" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Grade (الإطار) <span class="text-red-500">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fas fa-id-badge"></i>
+                </span>
+                <select 
+                  id="grade_professeur" {{ 'disabled' if enseignant.grade else '' }} 
+                  name="grade_professeur" 
+                  required
+                  class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm bg-white"
+                >
+                  {% for gradeOption in grades %}
+                    <option value="{{ gradeOption }}" {{ 'selected' if old('grade_professeur', 'PES') == gradeOption else '' }}>
+                      {{ gradeOption }}
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Choisissez votre grade pour l'ordre de mission (PA, PH ou PES).</p>
+            </div>
+
+            <!-- Département (Optionnel / Sélecteur) -->
+            <div>
+              <label for="departement" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Département d'attache
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fas fa-university"></i>
+                </span>
+                <select 
+                  id="departement" {{ 'disabled' if enseignant.departement else '' }} 
+                  name="departement" 
+                  class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm bg-white"
+                >
+                  <option value="">Sélectionnez votre département...</option>
+                  {% for dept in departements %}
+                    <option value="{{ dept }}" {{ 'selected' if old('departement') == dept else '' }}>{{ dept }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <!-- Email universitaire -->
+            <div>
+              <label for="email_professeur" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Email universitaire (@usms.ac.ma)
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fas fa-envelope"></i>
+                </span>
+                <input 
+                  type="email" 
+                  id="email_professeur" {{ 'readonly' if enseignant.email else '' }} 
+                  name="email_professeur" 
+                  value="{{ old('email_professeur') }}"
+                  placeholder="m.alami@usms.ac.ma"
+                  class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm"
+                />
+              </div>
+            </div>
+
+            <!-- Téléphone de contact -->
+            <div>
+              <label for="telephone_professeur" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                N° Téléphone mobile
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fas fa-phone"></i>
+                </span>
+                <input 
+                  type="tel" 
+                  id="telephone_professeur" 
+                  name="telephone_professeur" 
+                  value="{{ old('telephone_professeur') }}"
+                  placeholder="06 12 34 56 78"
+                  class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm"
+                />
+              </div>
+            </div>
+
+            <!-- Accompagnateurs éventuels -->
+            <div>
+              <label for="accompagnateurs" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Autres accompagnateurs (optionnel)
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fas fa-user-friends"></i>
+                </span>
+                <input 
+                  type="text" 
+                  id="accompagnateurs" 
+                  name="accompagnateurs" 
+                  value="{{ old('accompagnateurs') }}"
+                  placeholder="Ex : Pr. BENNANI + 1 Technicien"
+                  class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2 : CARACTÉRISTIQUES DU DÉPLACEMENT & VISITE -->
+        <div>
+          <div class="flex items-center gap-2 pb-3 mb-4 border-b border-slate-200">
+            <span class="w-7 h-7 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center text-xs font-bold">2</span>
+            <h3 class="text-base font-bold text-slate-900">Détails de la Visite & Destination</h3>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Destination (REQUIS) -->
+            <div class="md:col-span-2">
+              <label for="destination" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Destination de la visite <span class="text-red-500">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fas fa-map-marker-alt text-red-500"></i>
+                </span>
+                <input 
+                  type="text" 
+                  id="destination" 
+                  name="destination" 
+                  value="{{ old('destination') }}"
+                  required 
+                  minlength="2"
+                  maxlength="200"
+                  placeholder="Ex : Casablanca - Technopark & Station d'épuration Lydec"
+                  class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm"
+                />
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Précisez la ville et le ou les sites visités (entreprise, laboratoire, chantier...).</p>
+            </div>
+
+            <!-- Date de visite (REQUIS) -->
+            <div>
+              <label for="date_visite" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Date de la visite <span class="text-red-500">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fas fa-calendar-day"></i>
+                </span>
+                <input 
+                  type="date" 
+                  id="date_visite" 
+                  name="date_visite" 
+                  value="{{ old('date_visite', default_visit) }}"
+                  min="{{ today }}"
+                  required 
+                  class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm bg-white"
+                />
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Date prévue pour le départ de la mission.</p>
+            </div>
+
+            <!-- Durée de la visite (REQUIS) -->
+            <div>
+              <label for="duree_visite" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Durée de la visite <span class="text-red-500">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fas fa-stopwatch"></i>
+                </span>
+                <select 
+                  id="duree_visite" 
+                  name="duree_visite" 
+                  required 
+                  class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm bg-white"
+                >
+                  <option value="">Sélectionnez la durée...</option>
+                  {% for dur in durees %}
+                    <option value="{{ dur }}" {{ 'selected' if old('duree_visite') == dur else '' }}>{{ dur }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <!-- Horaires prévus (Heure départ et retour) -->
+            <div class="md:col-span-2">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Horaires prévus (Heure de départ & Heure de retour)
+              </label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-xs font-semibold">
+                    <i class="fas fa-clock mr-1 text-slate-400"></i> Départ
+                  </span>
+                  <input 
+                    type="time" 
+                    id="heure_depart" 
+                    name="heure_depart" 
+                    value="{{ old('heure_depart', '08:30') }}"
+                    class="w-full pl-20 pr-3 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm bg-white"
+                  />
+                </div>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 text-xs font-semibold">
+                    <i class="fas fa-clock mr-1 text-slate-400"></i> Retour
+                  </span>
+                  <input 
+                    type="time" 
+                    id="heure_retour" 
+                    name="heure_retour" 
+                    value="{{ old('heure_retour', '17:30') }}"
+                    class="w-full pl-20 pr-3 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm bg-white"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3 : EFFECTIF ET CADRE PÉDAGOGIQUE -->
+        <div>
+          <div class="flex items-center gap-2 pb-3 mb-4 border-b border-slate-200">
+            <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">3</span>
+            <h3 class="text-base font-bold text-slate-900">Groupe d'Étudiants & Objectifs</h3>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Effectifs des étudiants (REQUIS) -->
+            <div>
+              <label for="effectif_etudiants" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Effectif des étudiants participants <span class="text-red-500">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fas fa-users text-blue-800"></i>
+                </span>
+                <input 
+                  type="number" 
+                  id="effectif_etudiants" 
+                  name="effectif_etudiants" 
+                  value="{{ old('effectif_etudiants', '24') }}"
+                  min="1" 
+                  max="150" 
+                  required 
+                  class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm"
+                />
+              </div>
+              <div id="capacity-hint" class="mt-1.5 flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                <i class="fas fa-info-circle text-blue-600"></i>
+                <span id="capacity-text">Adapté pour un Minibus de 25 places</span>
+              </div>
+            </div>
+
+            <!-- Filière concernée -->
+            <div>
+              <label for="filiere" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Filière / Promotion
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                  <i class="fas fa-user-graduate"></i>
+                </span>
+                <select 
+                  id="filiere" 
+                  name="filiere" 
+                  class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm bg-white"
+                >
+                  <option value="">Sélectionnez la filière...</option>
+                  {% for fil in filieres %}
+                    <option value="{{ fil }}" {{ 'selected' if old('filiere') == fil else '' }}>{{ fil }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <!-- Motif / Objectif pédagogique -->
+            <div class="md:col-span-2">
+              <label for="motif_visite" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Objectif de la visite & Cadre pédagogique
+              </label>
+              <textarea 
+                id="motif_visite" 
+                name="motif_visite" 
+                rows="3" 
+                maxlength="2000"
+                placeholder="Décrivez brièvement le cadre de la visite (ex : Sortie terrain dans le cadre du module Géotechnique, visite industrielle des ateliers OCP, découverte de serveurs en Datacenter...)"
+                class="w-full p-4 rounded-xl border border-slate-300 focus:border-blue-700 focus:ring-2 focus:ring-blue-100 text-sm text-slate-800 transition outline-none shadow-sm"
+              >{{ old('motif_visite') }}</textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ZONE D'ENGAGEMENT ET SUBMIT -->
+        <div class="bg-blue-50/60 rounded-xl p-4 border border-blue-100 flex items-start gap-3">
+          <input type="checkbox" id="engagement" required checked class="mt-1 w-4 h-4 text-blue-800 rounded focus:ring-blue-600 border-slate-300">
+          <label for="engagement" class="text-xs text-slate-700 leading-relaxed cursor-pointer">
+            Je certifie l'exactitude des informations fournies et confirme que cette visite entre dans le cadre des activités pédagogiques et scientifiques de l'École Supérieure de Technologie de Fkih Ben Salah.
+          </label>
+        </div>
+
+        <!-- Message d'erreur dynamique JS -->
+        <div id="js-error-alert" class="hidden bg-rose-50 border border-rose-200 text-rose-800 px-4 py-3 rounded-xl text-xs flex items-center gap-2">
+          <i class="fas fa-exclamation-triangle text-base text-rose-500"></i>
+          <span id="js-error-text">Une erreur est survenue.</span>
+        </div>
+
+        <!-- Boutons d'action -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200">
+          <a href="{{ route('home') }}" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs text-center transition">
+            <i class="fas fa-arrow-left mr-1.5"></i> Retour à l'accueil
+          </a>
+
+          <div class="flex items-center gap-3 w-full sm:w-auto">
+            <button 
+              type="submit" 
+              id="submit-btn" 
+              class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 hover:from-blue-950 hover:to-indigo-950 text-white font-bold text-sm shadow-lg hover:shadow-xl transition transform active:scale-[0.99] flex items-center justify-center gap-2"
+            >
+              <i class="fas fa-paper-plane"></i>
+              <span>Envoyer la demande</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- CARTE D'AIDE ET INFORMATIONS COMPLÉMENTAIRES -->
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex items-start gap-3.5">
+        <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-800 flex items-center justify-center text-lg shrink-0">
+          <i class="fas fa-file-contract"></i>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-900 uppercase">Document PDF</h4>
+          <p class="text-[11px] text-slate-500 mt-1">
+            La demande est enregistrée à l’envoi. L’ordre de mission devient téléchargeable après validation par l’administration.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex items-start gap-3.5">
+        <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center text-lg shrink-0">
+          <i class="fas fa-clock"></i>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-900 uppercase">Délai de traitement</h4>
+          <p class="text-[11px] text-slate-500 mt-1">
+            Les demandes doivent être déposées au moins 48 heures avant la date prévue du départ pour assigner chauffeur et carburant.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex items-start gap-3.5">
+        <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center text-lg shrink-0">
+          <i class="fas fa-headset"></i>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-900 uppercase">Service Transport FBS</h4>
+          <p class="text-[11px] text-slate-500 mt-1">
+            Responsable Transport & Affaires Sociales (EST-FBS) — Contact direct bureau d'ordre : contact@estfbs.usms.ac.ma.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SCRIPT JS INTERACTIF -->
+<script src="{{ asset('js/vehicle-request.js') }}?v=20261106-3" defer></script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% if valid_link(url) %}
+<a class="edt-doc" href="{{ url }}" target="_blank" rel="noopener noreferrer"
+   aria-label="{{ emploi.filiere }} — {{ document_label }} — {{ emploi.annee }} — ouvrir le document"
+   title="{{ document_label }} — Consulter l’emploi du temps">
+    <svg width="23" height="27" viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+        <path d="M14 2H5a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9z"/>
+        <path d="M14 2v7h7M7 14h10M7 18h10M7 22h6"/>
+    </svg>
+    <span>Consulter <span aria-hidden="true">↗</span></span>
+</a>
+{% else %}
+<span class="edt-wait"><span aria-hidden="true">—</span><span class="edt-sr-only">{{ document_label }} · Bientôt disponible</span><small>À venir</small></span>
+{% endif %}

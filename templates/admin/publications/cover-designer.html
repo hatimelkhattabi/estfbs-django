@@ -1,0 +1,136 @@
+
+
+<details
+    id="cover-designer"
+    class="cover-designer"
+    data-mode="{{ 'standalone' if standalone|default(False) else 'publication' }}"
+    data-background-url="{{ asset('assets/cover-designer/genie-civil.png') }}"
+    data-logo-url="{{ asset('assets/img/logo-est.jpg') }}"
+    data-saved-background-url="{{ cover_asset_url('backgroundAsset') }}"
+    data-saved-logo-url="{{ cover_asset_url('logoAsset') }}"
+    data-retry="{{ 'true' if cover_retry else 'false' }}"
+    {% if standalone|default(False) or initial_cover %} open {% endif %}
+>
+    <summary>
+        <span><strong>Créer une image de couverture</strong><small>Votre fond, votre logo et vos textes, sans quitter le panneau.</small></span>
+        <span class="cover-badge">Génie civil + fond personnel</span>
+    </summary>
+
+    <div class="cover-body">
+        <noscript><p>Activez JavaScript pour composer un visuel. Vous pourrez ensuite choisir l’image téléchargée dans le formulaire de publication.</p></noscript>
+        <textarea data-cover-initial hidden>{{ initial_cover_json }}</textarea>
+        <input type="hidden" name="cover_design" data-cover-config disabled>
+
+        <div class="cover-workspace">
+            <div class="cover-stage">
+                <div class="cover-stage-head"><strong>Aperçu du visuel</strong><span>Format 2:1 · 1 600 × 800 px</span></div>
+                <canvas data-cover-canvas width="1600" height="800" tabindex="0" role="img" aria-label="Aperçu de la couverture. Sélectionnez et déplacez un texte ou le logo ; les flèches du clavier ajustent sa position."></canvas>
+                <p class="cover-tip">Cliquez sur un texte ou le logo pour le déplacer. Utilisez aussi les réglages de position ou les flèches du clavier.</p>
+
+                <div class="cover-thumbnail-row">
+                    <div><strong>À la taille d’une carte</strong><p>Vérifiez que le titre reste lisible en petit.</p></div>
+                    <canvas data-cover-thumbnail width="400" height="200" role="img" aria-label="Aperçu de la vignette à la taille d’une carte"></canvas>
+                </div>
+            </div>
+
+            <div class="cover-controls">
+                <fieldset>
+                    <legend>1. Image de fond</legend>
+                    <label>Fond
+                        <select data-cover-control="background">
+                            <option value="genie-civil">Génie civil</option>
+                            <option value="custom">Mon image</option>
+                            <option value="plain">Couleur unie</option>
+                        </select>
+                    </label>
+                    <label data-cover-custom-background hidden>Choisir mon fond
+                        <input type="file" name="cover_background" data-cover-background-file accept="image/jpeg,image/png,image/webp" disabled>
+                        <small>JPG, PNG ou WebP · 10 Mo maximum.</small>
+                        {% if not not (saved_cover.get('backgroundAsset')) %}<small>Un fond personnel est déjà enregistré. Choisissez un fichier seulement pour le remplacer.</small>{% endif %}
+                    </label>
+                    <div class="cover-pair">
+                        <label>Couleur du voile
+                            <input type="color" data-cover-control="backgroundColor" value="#f5eee3">
+                        </label>
+                        <label>Voile <output data-cover-output="veil">0 %</output>
+                            <input type="range" data-cover-control="veil" min="0" max="95" value="0">
+                        </label>
+                    </div>
+                    <details class="cover-subdetails">
+                        <summary>Cadrage du fond</summary>
+                        <label>Horizontal <input type="range" data-cover-control="cropX" min="0" max="100" value="50"></label>
+                        <label>Vertical <input type="range" data-cover-control="cropY" min="0" max="100" value="50"></label>
+                    </details>
+                </fieldset>
+
+                <fieldset>
+                    <legend>2. Logo</legend>
+                    <label class="cover-check"><input type="checkbox" data-cover-logo="visible" checked> Afficher le logo</label>
+                    <label>Logo à utiliser
+                        <select data-cover-logo="source">
+                            <option value="default">Logo de l’EST</option>
+                            <option value="custom">Mon logo</option>
+                        </select>
+                    </label>
+                    <label data-cover-custom-logo hidden>Choisir mon logo
+                        <input type="file" name="cover_logo" data-cover-logo-file accept="image/jpeg,image/png,image/webp" disabled>
+                        <small>PNG transparent conseillé · 5 Mo maximum.</small>
+                        {% if not not (saved_cover.get('logoAsset')) %}<small>Un logo personnel est déjà enregistré. Choisissez un fichier seulement pour le remplacer.</small>{% endif %}
+                    </label>
+                    <label>Largeur du logo <output data-cover-output="logoWidth"></output>
+                        <input type="range" data-cover-logo="width" min="5" max="35" value="14">
+                    </label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>3. Textes et position</legend>
+                    <div class="cover-element-row">
+                        <label>Élément sélectionné<select data-cover-selection aria-label="Élément à modifier"></select></label>
+                        <button type="button" class="pub-btn secondary" data-cover-add>+ Texte</button>
+                    </div>
+                    <div data-cover-text-settings>
+                        <label>Texte <small>Entrée pour ajouter une ligne · 240 caractères maximum.</small>
+                            <textarea data-cover-text="text" rows="3" maxlength="240"></textarea>
+                        </label>
+                        <div class="cover-pair">
+                            <label>Police
+                                <select data-cover-text="font">
+                                    <option value="outfit">Outfit</option><option value="sans">Arial</option><option value="serif">Georgia</option>
+                                </select>
+                            </label>
+                            <label>Couleur<input type="color" data-cover-text="color" value="#18202b"></label>
+                        </div>
+                        <div class="cover-pair">
+                            <label>Taille<input type="number" data-cover-text="size" min="18" max="140" step="1"></label>
+                            <label>Alignement
+                                <select data-cover-text="align"><option value="center">Centré</option><option value="left">Gauche</option><option value="right">Droite</option></select>
+                            </label>
+                        </div>
+                        <label class="cover-check"><input type="checkbox" data-cover-text="bold" checked> Texte en gras</label>
+                        <label>Largeur du bloc <output data-cover-output="textWidth"></output>
+                            <input type="range" data-cover-text="width" min="15" max="90">
+                        </label>
+                    </div>
+                    <div class="cover-pair">
+                        <label>Position X <output data-cover-output="x"></output><input type="range" data-cover-position="x" min="0" max="100" step="0.5"></label>
+                        <label>Position Y <output data-cover-output="y"></output><input type="range" data-cover-position="y" min="0" max="100" step="0.5"></label>
+                    </div>
+                    <div class="cover-element-actions">
+                        <button type="button" class="pub-btn secondary" data-cover-center>Centrer horizontalement</button>
+                        <button type="button" class="cover-remove" data-cover-remove>Supprimer ce texte</button>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="cover-actions">
+            <div class="cover-action-buttons">
+                {% if not standalone|default(False) %}<button type="button" class="pub-btn primary" data-cover-apply disabled>Utiliser ce visuel</button>{% endif %}
+                <button type="button" class="pub-btn secondary" data-cover-download disabled>Télécharger en PNG</button>
+                {% if not standalone|default(False) %}<button type="button" class="pub-btn secondary" data-cover-cancel>Conserver la couverture actuelle</button>{% endif %}
+            </div>
+            <p data-cover-status role="status" aria-live="polite">Ouvrez le créateur pour charger l’aperçu.</p>
+            <p class="cover-save-note">{% if standalone|default(False) %}Le créateur produit uniquement un fichier PNG sur votre ordinateur. Ajoutez ensuite ce fichier à votre publication.{% else %}« Utiliser ce visuel » prépare la couverture. Cliquez ensuite sur « Enregistrer la publication » pour sauvegarder l’image et ses réglages.{% endif %}</p>
+        </div>
+    </div>
+</details>

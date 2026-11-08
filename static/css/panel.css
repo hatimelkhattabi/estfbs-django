@@ -1,0 +1,21 @@
+/* Ajustements de compatibilité et d’accessibilité de l’interface d’origine. */
+[hidden]{display:none!important}.pub-admin input,.pub-admin select,.pub-admin textarea{box-sizing:border-box;max-width:100%}.pub-row-actions form{margin:0}.pub-pagination{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:24px 0;font-size:13px}.pub-row-actions button:focus-visible,.pub-nav:focus-visible,.pub-btn:focus-visible{outline:3px solid #c4a15c;outline-offset:3px}.pub-alert.error ul{margin:0;padding-left:18px}.pub-table-wrap{overflow-x:auto}.pub-admin video.dm-admin-preview{width:100%;height:auto;max-height:420px}.pub-panel form label>small{font-weight:400}.pub-account form{margin-top:12px}.pub-link-dialog input{border:1px solid #ccd8e5;border-radius:7px;padding:10px}.pub-admin button:disabled{opacity:.6;cursor:wait}@media(max-width:850px){.pub-sidebar{position:static!important;width:auto!important;min-height:0!important;padding:18px!important}.pub-main{margin-left:0!important;padding:20px!important}.pub-admin{display:block!important}.pub-account{margin-top:20px!important}.pub-page-head{flex-wrap:wrap;gap:18px}.pub-editor{grid-template-columns:1fr!important}.pub-settings{min-width:0}.pub-table{min-width:720px}}@media print{.pub-sidebar,.pub-editor-actions,.pub-page-head>a{display:none}.pub-main{margin:0!important}}
+
+/* Le menu entier reste accessible à la molette et au clavier. */
+@media (min-width: 851px) {
+    .pub-sidebar {
+        height: 100vh;
+        height: 100dvh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior-y: contain;
+        scrollbar-width: thin;
+        scrollbar-color: #8fa8c3 #102a4b;
+        scrollbar-gutter: stable;
+    }
+    .pub-sidebar > * { flex-shrink: 0; }
+    .pub-account { padding-bottom: 8px; }
+}
+@media (max-width: 850px) {
+    .pub-sidebar { height: auto; max-height: none; overflow: visible; }
+}

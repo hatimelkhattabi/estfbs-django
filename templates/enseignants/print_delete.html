@@ -1,0 +1,9 @@
+{% extends 'enseignants/layout.html' %}{% from 'enseignants/fields.html' import error_summary %}
+{% block content %}
+<section class="tp-panel tp-form-panel">
+<h2>Confirmer la suppression</h2>
+<p>La demande <strong>{{ item.intitule or item.nom_document }}</strong> et les PDF qui lui sont propres seront supprimés. Cette action est définitive.</p>
+<ul>{% for document in item.documents_a_imprimer %}<li>{{ document.nom_document }} · {{ document.exemplaires }} exemplaires · {{ fmt_date(document.date_souhaitee) }}</li>{% endfor %}</ul>
+<form method="post" class="tp-form">{{ csrf_input }}{{ form.revision }}{{ error_summary(form) }}<div class="tp-form-actions"><button class="tp-button">Oui, supprimer cette demande</button><a class="tp-button secondary" href="{{ route('teacher-print-detail',{'reference':item.reference}) }}">Conserver ma demande</a></div></form>
+</section>
+{% endblock %}

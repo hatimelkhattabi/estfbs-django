@@ -1,0 +1,81 @@
+/* Shared typography for published articles and the admin preview. */
+.pub-richtext { white-space: normal !important; overflow-wrap: anywhere; line-height: 1.85; color: #34465c; }
+.pub-richtext p { margin: 0 0 1em; }
+.pub-richtext h2, .pub-richtext h3, .pub-richtext h4, .pub-richtext h5, .pub-richtext h6 { color: #132d4c; font-family: inherit; font-weight: 700; line-height: 1.35; margin: 1.3em 0 .6em; }
+.pub-richtext h2 { font-size: 1.65em; }
+.pub-richtext h3 { font-size: 1.35em; }
+.pub-richtext h4, .pub-richtext h5, .pub-richtext h6 { font-size: 1.15em; }
+.pub-richtext ul { list-style: disc outside; margin: .6em 0 1.2em; padding-left: 1.7em; }
+.pub-richtext ol { list-style: decimal outside; margin: .6em 0 1.2em; padding-left: 1.7em; }
+.pub-richtext li { display: list-item; margin-bottom: .4em; }
+.pub-richtext strong { font-weight: 700; }
+.pub-richtext em { font-style: italic; }
+.pub-richtext u { text-decoration: underline; }
+.pub-richtext s { text-decoration: line-through; }
+.pub-richtext a { color: #16559b !important; text-decoration: underline !important; text-underline-offset: 3px; font-weight: 600; }
+.pub-richtext blockquote { margin: 1.2em 0; border-left: 4px solid #d6aa46; padding: 12px 18px; background: #f4f6f9; color: #53657c; }
+.pub-richtext .pub-rich-small, .pub-richtext .ql-size-small { font-size: .8em; }
+.pub-richtext .pub-rich-large, .pub-richtext .ql-size-large { font-size: 1.5em; }
+.pub-richtext .pub-rich-huge, .pub-richtext .ql-size-huge { font-size: 2em; }
+.pub-richtext .pub-rich-serif, .pub-richtext .ql-font-serif { font-family: Georgia, 'Times New Roman', serif; }
+.pub-richtext .pub-rich-monospace, .pub-richtext .ql-font-monospace { font-family: Consolas, monospace; }
+.pub-richtext .ql-align-center { text-align: center; }
+.pub-richtext .ql-align-right { text-align: right; }
+.pub-richtext .ql-align-justify { text-align: justify; }
+.pub-richtext sub { vertical-align: sub; font-size: .8em; }
+.pub-richtext sup { vertical-align: super; font-size: .8em; }
+
+/* Visual editor shell. Quill assets are served locally. */
+.pub-content-editor { min-width: 0; margin-bottom: 24px; }
+.pub-content-editor [hidden] { display: none !important; }
+.pub-rich-tools { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 12px 14px; background: #edf3f8; border: 1px solid #d8e1eb; border-bottom: 0; border-radius: 10px 10px 0 0; }
+.pub-rich-badge { color: #173958; font-size: 12px; font-weight: 700; }
+.pub-rich-shortcuts { display: flex; gap: 6px; flex-wrap: wrap; }
+.pub-rich-shortcuts button { border: 1px solid #d8e1eb; border-radius: 6px; padding: 7px 10px; background: white; color: #344b66; font-size: 11px; }
+.pub-rich-shortcuts button:hover, .pub-rich-shortcuts button[aria-expanded="true"] { background: #173958; color: white; }
+#publication-rich-toolbar.ql-toolbar { border-color: #d8e1eb; background: #fbfcfd; font-family: inherit; padding: 12px 10px 5px; }
+#publication-rich-toolbar .ql-formats { margin-right: 12px; margin-bottom: 8px; }
+#publication-rich-toolbar button { width: 30px; height: 28px; border-radius: 4px; font-size: 20px; line-height: 1; }
+#publication-rich-toolbar button:hover, #publication-rich-toolbar button:focus-visible { background: #edf3f8; }
+#publication-rich-toolbar .ql-picker { font-size: 12px; }
+#publication-rich-toolbar .ql-picker-label { padding-top: 2px; }
+#publication-rich-toolbar .ql-picker.ql-header { width: 110px; }
+#publication-rich-toolbar .ql-picker.ql-header .ql-picker-label::before,
+#publication-rich-toolbar .ql-picker.ql-header .ql-picker-item::before { content: 'Paragraphe'; }
+#publication-rich-toolbar .ql-picker.ql-header [data-value="2"]::before { content: 'Titre 1'; }
+#publication-rich-toolbar .ql-picker.ql-header [data-value="3"]::before { content: 'Titre 2'; }
+#publication-rich-toolbar .ql-picker.ql-header [data-value="4"]::before { content: 'Titre 3'; }
+#publication-rich-toolbar .ql-picker.ql-size .ql-picker-label::before,
+#publication-rich-toolbar .ql-picker.ql-size .ql-picker-item::before { content: 'Normal'; }
+#publication-rich-toolbar .ql-picker.ql-size [data-value="small"]::before { content: 'Petit'; }
+#publication-rich-toolbar .ql-picker.ql-size [data-value="large"]::before { content: 'Grand'; }
+#publication-rich-toolbar .ql-picker.ql-size [data-value="huge"]::before { content: 'Très grand'; }
+#publication-rich-toolbar .ql-picker-options { z-index: 20; }
+#publication-rich-editor.ql-container { border-color: #d8e1eb; font-family: inherit; font-size: 15px; border-radius: 0 0 10px 10px; background: white; }
+#publication-rich-editor .ql-editor { min-height: 350px; max-height: 650px; padding: 24px; line-height: 1.85; color: #34465c; }
+#publication-rich-editor .ql-editor h2 { font-size: 1.65em; }
+#publication-rich-editor .ql-editor h3 { font-size: 1.35em; }
+#publication-rich-editor .ql-editor h4 { font-size: 1.15em; }
+#publication-rich-editor .ql-tooltip { display: none; }
+#publication-rich-editor .ql-editor ul, #publication-rich-editor .ql-editor ol { padding-left: 1.7em; }
+.pub-rich-status { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px 2px; color: #6d7b8c; font-size: 11px; }
+.pub-rich-error { color: #a33e2e !important; font-size: 12px; }
+.pub-rich-preview { margin-top: 20px; border: 1px solid #d8e1eb; border-radius: 10px; padding: 22px; background: #fff; }
+.pub-rich-preview-label { color: #798596; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 18px; }
+.pub-rich-preview .pub-richtext { padding: 0; font-size: 15px; }
+.pub-link-dialog { border: 1px solid #d8e1eb; border-radius: 14px; padding: 26px; width: min(480px, calc(100vw - 32px)); color: #173958; box-shadow: 0 20px 80px #102a4b40; }
+.pub-link-dialog::backdrop { background: #102a4b80; }
+.pub-link-dialog h2 { margin: 0 0 22px; font: 700 21px Georgia, serif; }
+.pub-link-dialog label { display: block; font-size: 12px; font-weight: 600; margin: 16px 0 7px; }
+.pub-link-dialog input { box-sizing: border-box; width: 100%; }
+.pub-link-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; }
+
+
+@media (max-width: 650px) {
+    #publication-rich-editor .ql-editor { min-height: 300px; padding: 16px; }
+    .pub-rich-status > span:last-child { display: none; }
+    .pub-rich-preview { padding: 16px; }
+}
+
+
+

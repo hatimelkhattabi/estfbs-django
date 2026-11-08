@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administrations — Nos locaux | EST Fquih Ben Salah - USMS</title>
+  <meta name="description" content="Bâtiments administratifs, Direction, Secrétariat Général et Service de Scolarité de l'École Supérieure de Technologie de Fquih Ben Salah." />
+  <meta name="keywords" content="EST FBS, EST Fquih Ben Salah, USMS, Université Sultan Moulay Slimane, DUT, Bachelor, Licence Professionnelle, Génie Informatique, Génie Civil, Agroalimentaire" />
+
+  <!-- Favicon -->
+  <!-- Tailwind CSS CDN avec configuration personnalisée -->
+
+  <!-- FontAwesome 6 Icons -->
+  <!-- Styles personnalisés & animations -->
+  {% include 'partials/site-head.html' %}
+</head>
+
+<body data-home-url="{{ route('home', [], False) }}" data-organigramme-url="{{ url('/organigramme.html') }}" data-emplois-url="{{ route('emplois.index') }}" class="bg-white text-blue-950 font-sans relative">
+{% include 'partials/header.html' %}
+
+
+  
+  <!-- ========================================================================
+       PAGE ADMINISTRATIONS (RUBRIQUE 1 DE NOS LOCAUX)
+       ======================================================================== -->
+  <main class="min-h-screen bg-slate-50/50 dark:bg-slate-900 py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto space-y-10">
+
+      <!-- Fil d'Ariane (Breadcrumbs) -->
+      <nav class="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+        <a href="{{ url('index.html#accueil') }}" class="hover:text-orange-600 transition flex items-center gap-1.5">
+          <i class="fas fa-home text-orange-500"></i>
+          <span>Accueil</span>
+        </a>
+        <i class="fas fa-chevron-right text-[10px] text-slate-400"></i>
+        <a href="{{ url('index.html#presentation') }}" class="hover:text-orange-600 transition">EST FBS</a>
+        <i class="fas fa-chevron-right text-[10px] text-slate-400"></i>
+        <a href="{{ url('index.html#nos-locaux') }}" class="hover:text-orange-600 transition">Nos locaux</a>
+        <i class="fas fa-chevron-right text-[10px] text-slate-400"></i>
+        <span class="text-blue-900 dark:text-blue-300 font-bold">Administrations</span>
+      </nav>
+
+      <!-- Bannière En-tête -->
+      <div class="bg-gradient-to-r from-blue-900 via-blue-950 to-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-blue-800 relative overflow-hidden">
+        <div class="relative z-10 max-w-3xl space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-orange-500/20 text-orange-400 border border-orange-500/40">
+            <i class="fas fa-briefcase"></i>
+            <span>Nos Locaux — Rubrique Officielle</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading text-white tracking-tight">
+            Administrations
+          </h1>
+          <p class="text-sm sm:text-base text-blue-100 leading-relaxed font-normal">
+            Direction générale, secrétariat, service de scolarité, gestion des bourses, ressources humaines et guichet d'accueil des étudiants et enseignants-chercheurs de l'EST-FBS.
+          </p>
+        </div>
+
+        <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      </div>
+
+      
+      <!-- Onglets d'accès direct aux 3 rubriques de Nos Locaux -->
+      <div class="flex flex-wrap items-center justify-center gap-3 p-2.5 bg-blue-50/80 rounded-2xl border border-blue-100 max-w-3xl mx-auto shadow-sm">
+        <a href="{{ url('administrations.html') }}" class="bg-orange-500 text-white shadow-md font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition transform scale-105">
+          <i class="fas fa-briefcase"></i>
+          <span>1. Administrations</span>
+        </a>
+        <a href="{{ url('amphis.html') }}" class="bg-white text-blue-900 hover:bg-blue-50 border border-blue-200 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition hover:text-orange-600 shadow-sm">
+          <i class="fas fa-landmark"></i>
+          <span>2. Amphis</span>
+        </a>
+        <a href="{{ url('laboratoire.html') }}" class="bg-white text-blue-900 hover:bg-blue-50 border border-blue-200 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition hover:text-orange-600 shadow-sm">
+          <i class="fas fa-flask"></i>
+          <span>3. Laboratoire</span>
+        </a>
+        <a href="{{ url('index.html#nos-locaux') }}" class="bg-white text-slate-600 hover:text-blue-900 hover:bg-slate-100 border border-slate-200 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition shadow-sm ml-auto sm:ml-2">
+          <i class="fas fa-arrow-left text-orange-500"></i>
+          <span>Vue d'ensemble Campus</span>
+        </a>
+      </div>
+
+      <!-- Bandeau 4 Chiffres Clés Administratifs -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="p-5 bg-white dark:bg-slate-800 rounded-2xl border-2 border-blue-100 shadow-sm text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-orange-600 font-heading">8h30 - 16h30</div>
+          <div class="text-xs text-blue-950 dark:text-white font-bold mt-1">Accueil & Guichets</div>
+          <p class="text-[10px] text-slate-500 mt-0.5">Du Lundi au Vendredi</p>
+        </div>
+        <div class="p-5 bg-white dark:bg-slate-800 rounded-2xl border-2 border-blue-100 shadow-sm text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-blue-900 dark:text-blue-400 font-heading">100%</div>
+          <div class="text-xs text-blue-950 dark:text-white font-bold mt-1">E-Services en Ligne</div>
+          <p class="text-[10px] text-slate-500 mt-0.5">Demandes dématérialisées</p>
+        </div>
+        <div class="p-5 bg-white dark:bg-slate-800 rounded-2xl border-2 border-blue-100 shadow-sm text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-emerald-600 font-heading">24h - 48h</div>
+          <div class="text-xs text-blue-950 dark:text-white font-bold mt-1">Délai Attestations</div>
+          <p class="text-[10px] text-slate-500 mt-0.5">Délivrance rapide</p>
+        </div>
+        <div class="p-5 bg-white dark:bg-slate-800 rounded-2xl border-2 border-blue-100 shadow-sm text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-purple-600 font-heading">5 Pôles</div>
+          <div class="text-xs text-blue-950 dark:text-white font-bold mt-1">Services Dédiés</div>
+          <p class="text-[10px] text-slate-500 mt-0.5">Organisation structurée</p>
+        </div>
+      </div>
+
+      <!-- Section 1 : Direction de l'Établissement & Gouvernance -->
+      <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border-2 border-blue-100 shadow-md space-y-6">
+        <div class="flex items-center gap-3 border-b border-blue-50 dark:border-slate-700 pb-4">
+          <div class="w-12 h-12 rounded-2xl bg-orange-500 text-white flex items-center justify-center text-xl shadow">
+            <i class="fas fa-university"></i>
+          </div>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-blue-950 dark:text-white font-heading">
+              1. Direction & Secrétariat Général
+            </h2>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              Pilotage stratégique, coordination pédagogique, partenariats universitaires et relations extérieures
+            </p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 items-center">
+          <div class="relative h-64 sm:h-80 rounded-2xl overflow-hidden shadow-md bg-slate-100">
+            <img src="{{ asset('assets/img/entree-estfbs.jpg') }}" alt="Bâtiment Direction EST FBS" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-blue-950/70 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 left-4 text-white">
+              <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-orange-500 text-white uppercase tracking-wider">
+                Bâtiment Central EST-FBS
+              </span>
+              <p class="text-xs font-semibold text-blue-100 mt-1">Siège de la Direction et du Secrétariat Général</p>
+            </div>
+          </div>
+
+          <div class="space-y-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+            <p>
+              Le bâtiment administratif central de l'<strong>École Supérieure de Technologie de Fquih Ben Salah</strong> abrite l'ensemble des organes de gouvernance et de direction de l'établissement.
+            </p>
+            <div class="space-y-3 pt-2">
+              <div class="p-4 rounded-xl bg-blue-50/70 dark:bg-slate-700/50 border border-blue-100 dark:border-slate-600 flex items-start gap-3">
+                <i class="fas fa-user-tie text-orange-500 text-base mt-0.5"></i>
+                <div>
+                  <h3 class="font-extrabold text-blue-950 dark:text-white">Bureau du Directeur</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400">
+                    Piloté par <strong>Prof. Dr. El Mostapha RAKIB</strong>, Directeur de l'EST-FBS. Gestion générale, développement académique, conventionnements industriels (OCP, entreprises régionales) et relations avec l'Université Sultan Moulay Slimane.
+                  </p>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-blue-50/70 dark:bg-slate-700/50 border border-blue-100 dark:border-slate-600 flex items-start gap-3">
+                <i class="fas fa-graduation-cap text-blue-700 text-base mt-0.5"></i>
+                <div>
+                  <h3 class="font-extrabold text-blue-950 dark:text-white">Direction Adjointe Chargée de la Formation</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400">
+                    Pilotée par <strong>Mr AMINE Abd ellah</strong>. Coordination pédagogique des filières technologiques, gestion des calendriers d'examens, suivi des 3 départements et innovation pédagogique.
+                  </p>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-blue-50/70 dark:bg-slate-700/50 border border-blue-100 dark:border-slate-600 flex items-start gap-3">
+                <i class="fas fa-landmark text-amber-600 text-base mt-0.5"></i>
+                <div>
+                  <h3 class="font-extrabold text-blue-950 dark:text-white">Secrétariat Général</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400">
+                    Piloté par <strong>Mme OULED HOUSSEINE Hind</strong>. Coordination administrative, suivi des ressources humaines, exécution du budget d'investissement et de fonctionnement, intendance et logistique matérielle du campus.
+                  </p>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-blue-50/70 dark:bg-slate-700/50 border border-blue-100 dark:border-slate-600 flex items-start gap-3">
+                <i class="fas fa-users-cog text-emerald-600 text-base mt-0.5"></i>
+                <div>
+                  <h3 class="font-extrabold text-blue-950 dark:text-white">Salle du Conseil d'Établissement</h3>
+                  <p class="text-xs text-slate-600 dark:text-slate-400">
+                    Salle de conférence équipée pour les réunions du Conseil d'Établissement, commissions scientifiques de recherche, comités de filières et délibérations semestrielles.
+                  </p>
+                </div>
+              </div>
+
+              <div class="pt-2">
+                <a href="{{ url('organigramme.html') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-900 hover:bg-orange-600 text-white font-bold text-xs shadow-md transition">
+                  <i class="fas fa-sitemap"></i>
+                  <span>Consulter l'Organigramme Hiérarchique Complet</span>
+                  <i class="fas fa-arrow-right text-[10px]"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 : Service de la Scolarité & Affaires Estudiantines -->
+      <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border-2 border-blue-100 shadow-md space-y-6">
+        <div class="flex items-center gap-3 border-b border-blue-50 dark:border-slate-700 pb-4">
+          <div class="w-12 h-12 rounded-2xl bg-blue-900 text-white flex items-center justify-center text-xl shadow">
+            <i class="fas fa-id-card"></i>
+          </div>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-blue-950 dark:text-white font-heading">
+              2. Service de Scolarité & Affaires Estudiantines
+            </h2>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              Guichet physique d'accueil des étudiants, démarches administratives, inscriptions, attestations et bourses
+            </p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 items-center">
+          <div class="space-y-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed order-2 lg:order-1">
+            <p>
+              Le service de la scolarité constitue le point de contact direct permanent entre les étudiants et l'administration universitaire.
+            </p>
+
+            <div class="grid sm:grid-cols-2 gap-3 pt-2">
+              <div class="p-4 rounded-xl border border-blue-100 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm">
+                <div class="flex items-center gap-2 text-orange-600 font-bold mb-1">
+                  <i class="fas fa-file-signature"></i>
+                  <span>Inscriptions & Dossiers</span>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-400">
+                  Accueil des nouveaux bacheliers, contrôle des dossiers originaux, délivrance des cartes d'étudiant et certificats d'inscription.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl border border-blue-100 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm">
+                <div class="flex items-center gap-2 text-emerald-600 font-bold mb-1">
+                  <i class="fas fa-certificate"></i>
+                  <span>Attestations & Relevés</span>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-400">
+                  Délivrance sous 24h à 48h des attestations de scolarité, relevés de notes officiels, attestations de réussite DUT et diplômes.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl border border-blue-100 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm">
+                <div class="flex items-center gap-2 text-purple-600 font-bold mb-1">
+                  <i class="fas fa-hand-holding-usd"></i>
+                  <span>Bourses Minhaty & AMOE</span>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-400">
+                  Suivi des listes de boursiers ONOUSC, distribution des cartes bancaires Al Barid Bank et immatriculation à l'Assurance Maladie Obligatoire.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl border border-blue-100 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm">
+                <div class="flex items-center gap-2 text-blue-600 font-bold mb-1">
+                  <i class="fas fa-briefcase"></i>
+                  <span>Stages PFE & Conventions</span>
+                </div>
+                <p class="text-xs text-slate-600 dark:text-slate-400">
+                  Édition et signature des conventions tripartites de stage de fin d'études PFE, assurances et attestations d'accueil en entreprise.
+                </p>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <a href="{{ url('index.html#espace-etudiants') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-md transition">
+                <i class="fas fa-laptop-code"></i>
+                <span>Accéder au Guichet E-Services en Ligne</span>
+                <i class="fas fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="relative h-64 sm:h-80 rounded-2xl overflow-hidden shadow-md bg-slate-100 order-1 lg:order-2">
+            <img src="{{ asset('assets/img/EST1.jpg') }}" alt="Guichet Scolarité EST FBS" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-blue-950/70 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 left-4 text-white">
+              <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-blue-600 text-white uppercase tracking-wider">
+                Espace Scolarité
+              </span>
+              <p class="text-xs font-semibold text-blue-100 mt-1">Guichets d'accueil des étudiants et retrait des documents</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3 : Services RH, Finances & Logistique -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border-2 border-blue-100 shadow-md space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-lg">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-blue-950 dark:text-white font-heading">Ressources Humaines</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Gestion des carrières des professeurs chercheurs et du personnel administratif, mobilité Harakiya, autorisations d'absence et dossiers administratifs CNRST.
+          </p>
+          <div class="text-[11px] font-semibold text-purple-700 dark:text-purple-400 pt-2 border-t border-slate-100 dark:border-slate-700">
+            Bureau A12 • 1er Étage
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border-2 border-blue-100 shadow-md space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg">
+            <i class="fas fa-file-invoice-dollar"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-blue-950 dark:text-white font-heading">Finances & Budget</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Gestion comptable des marchés publics, achats d'équipements de laboratoire, frais de missions scientifiques et bourses d'études.
+          </p>
+          <div class="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 pt-2 border-t border-slate-100 dark:border-slate-700">
+            Bureau A14 • 1er Étage
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 border-2 border-blue-100 shadow-md space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-lg">
+            <i class="fas fa-network-wired"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-blue-950 dark:text-white font-heading">Service Informatique (DSI)</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            Support des plateformes numériques, gestion des comptes institutionnels USMS, réseau fibre 1 Gbps, sécurité informatique et Wi-Fi campus.
+          </p>
+          <div class="text-[11px] font-semibold text-blue-700 dark:text-blue-400 pt-2 border-t border-slate-100 dark:border-slate-700">
+            Centre de Calcul • RDC
+          </div>
+        </div>
+      </div>
+
+      <!-- Tableau Récapitulatif des Contacts Administratifs -->
+      <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border-2 border-blue-100 shadow-md space-y-4">
+        <h3 class="text-lg font-extrabold text-blue-950 dark:text-white font-heading flex items-center gap-2">
+          <i class="fas fa-address-book text-orange-500"></i>
+          <span>Coordonnées & Horaires des Services Administratifs</span>
+        </h3>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-600 dark:text-slate-300">
+            <thead class="bg-blue-50 dark:bg-slate-700 text-blue-950 dark:text-white font-bold uppercase text-[10px]">
+              <tr>
+                <th class="p-3 rounded-l-xl">Service</th>
+                <th class="p-3">Emplacement</th>
+                <th class="p-3">Horaires de Réception</th>
+                <th class="p-3">Contact</th>
+                <th class="p-3 rounded-r-xl">Démarches Clés</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-blue-50 dark:divide-slate-700">
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-750">
+                <td class="p-3 font-bold text-blue-950 dark:text-white">Direction de l'Établissement (Prof. Dr. El Mostapha RAKIB)</td>
+                <td class="p-3">Bâtiment Central, 1er Étage</td>
+                <td class="p-3">Lundi - Vendredi (9h00 - 16h00)</td>
+                <td class="p-3">estfbs@usms.ac.ma</td>
+                <td class="p-3">Sur rendez-vous, partenariats, coopération</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-750">
+                <td class="p-3 font-bold text-blue-950 dark:text-white">Direction Adjointe - Formation (Mr AMINE Abd ellah)</td>
+                <td class="p-3">Bâtiment Central, 1er Étage</td>
+                <td class="p-3">Lundi - Vendredi (9h00 - 16h30)</td>
+                <td class="p-3">pedagogie.estfbs@usms.ac.ma</td>
+                <td class="p-3">Coordination pédagogique, filières & examens</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-750">
+                <td class="p-3 font-bold text-blue-950 dark:text-white">Secrétariat Général (Mme OULED HOUSSEINE Hind)</td>
+                <td class="p-3">Bâtiment Central, Bureau A10</td>
+                <td class="p-3">Lundi - Vendredi (8h30 - 16h30)</td>
+                <td class="p-3">+212 523 48 51 12</td>
+                <td class="p-3">Ressources humaines, marchés, logistique</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-750">
+                <td class="p-3 font-bold text-blue-950 dark:text-white">Service des Bourses & AMOE</td>
+                <td class="p-3">Bureau Scolarité 2</td>
+                <td class="p-3">Mardi & Jeudi (9h30 - 14h30)</td>
+                <td class="p-3">bourses.estfbs@usms.ac.ma</td>
+                <td class="p-3">Cartes Minhaty, immatriculation AMOE</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+<!-- ========================================================================
+       PIED DE PAGE (Fond Blanc Épuré, Écritures en Bleu, Orange et touches de Vert)
+       ======================================================================== -->
+  {% include 'partials/footer.html' %}
+
+  <!-- ========================================================================
+       MODALE 1: DÉTAILS D'UNE FORMATION
+       ======================================================================== -->
+  <div id="formation-detail-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 relative">
+      <button id="close-formation-modal" class="absolute top-5 right-5 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-800 dark:hover:text-white transition">
+        <i class="fas fa-times text-lg"></i>
+      </button>
+
+      <span id="modal-formation-badge" class="inline-block px-3 py-1 rounded-md text-[11px] font-bold uppercase bg-brand-100 dark:bg-brand-900/60 text-brand-900 dark:text-amber-400 mb-3"></span>
+      <h3 id="modal-formation-title" class="text-2xl font-black font-heading text-brand-950 dark:text-white mb-2"></h3>
+      
+      <div class="flex flex-wrap gap-4 text-xs text-slate-500 dark:text-slate-400 mb-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+        <div><i class="far fa-clock text-accent-500 mr-1.5"></i> <span id="modal-formation-duration"></span></div>
+        <div><i class="fas fa-award text-accent-500 mr-1.5"></i> <span id="modal-formation-diplome"></span></div>
+      </div>
+
+      <div class="space-y-6 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+        <div>
+          <h4 class="font-bold text-brand-950 dark:text-white text-sm mb-2">Description & Objectifs du Programme</h4>
+          <p id="modal-formation-desc" class="leading-relaxed text-slate-600 dark:text-slate-300"></p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-brand-950 dark:text-white text-sm mb-2">Modules Pédagogiques Clés</h4>
+          <div id="modal-formation-modules" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-brand-950 dark:text-white text-sm mb-2">Débouchés & Opportunités Métiers</h4>
+          <ul id="modal-formation-debouches" class="space-y-2 text-slate-600 dark:text-slate-300"></ul>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-end">
+        <a href="{{ url('index.html#contact') }}" class="px-6 py-2.5 rounded-xl gradient-gold text-slate-950 font-bold text-xs uppercase tracking-wider shadow">
+          Se renseigner sur cette filière
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========================================================================
+       MODALE 2: MOT COMPLET DU DIRECTEUR
+       ======================================================================== -->
+  <div id="director-speech-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border-2 border-blue-100 p-5 sm:p-7 relative">
+      <button id="close-director-modal" class="absolute top-4 right-4 p-2.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-800 transition z-20">
+        <i class="fas fa-times text-lg"></i>
+      </button>
+
+      <div class="grid md:grid-cols-12 gap-6 items-start">
+        
+        <!-- Colonne Gauche : Affiche Officielle Haute Résolution -->
+        <div class="md:col-span-5 flex flex-col items-center">
+          <div class="w-full rounded-2xl overflow-hidden border-2 border-orange-300 shadow-xl relative bg-slate-900 group">
+            <img 
+              src="{{ asset('assets/img/mot-Directeur.jpg') }}" 
+              alt="Affiche Officielle du Mot du Directeur - Prof. Dr. RAKIB El Mostapha" 
+              class="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-102"
+            />
+          </div>
+          <a href="{{ asset('assets/img/mot-Directeur.jpg') }}" target="_blank" class="mt-3.5 w-full py-2.5 px-4 rounded-xl bg-blue-900 hover:bg-orange-600 text-white text-xs font-bold transition shadow text-center flex items-center justify-center gap-2">
+            <i class="fas fa-expand"></i>
+            <span>Afficher l'Affiche en Plein Écran (HD)</span>
+          </a>
+        </div>
+
+        <!-- Colonne Droite : Discours Officiel Français & Arabe -->
+        <div class="md:col-span-7 space-y-4">
+          
+          <!-- En-tête -->
+          <div class="border-b border-blue-100 pb-3">
+            <span class="text-xs uppercase font-bold text-orange-600 tracking-wider">
+              Université Sultan Moulay Slimane • Béni Mellal
+            </span>
+            <h3 class="text-xl sm:text-2xl font-bold font-heading text-blue-900 mt-0.5">
+              Mot du Directeur de l'EST-FBS
+            </h3>
+            <p class="text-xs font-bold text-blue-950/80">Prof. Dr. RAKIB El Mostapha</p>
+          </div>
+
+          <!-- Texte Officiel Français extrait de l'affiche -->
+          <div class="p-3.5 bg-blue-50/70 rounded-2xl border border-blue-200/60">
+            <h4 class="text-xs font-bold uppercase text-orange-600 mb-1.5 flex items-center gap-1.5">
+              <i class="fas fa-quote-left"></i> Message Officiel (Français)
+            </h4>
+            <p class="text-xs sm:text-sm text-blue-950 leading-relaxed font-medium text-justify">
+              « En tant que directeur, c'est un immense honneur de vous accueillir au sein de notre école. L'EST de Fkih Ben Salah est dédiée à l'excellence académique, à l'innovation et à la formation de la prochaine génération de scientifiques. Ensemble, nous bâtissons un avenir prometteur qui vous ouvre les horizons de la créativité et du leadership. »
+            </p>
+          </div>
+
+          <!-- Texte Officiel Arabe extrait de l'affiche -->
+          <div class="p-3.5 bg-amber-50/70 rounded-2xl border border-amber-200/60 text-right" dir="rtl">
+            <h4 class="text-xs font-bold uppercase text-orange-600 mb-1.5 flex items-center gap-1.5 justify-end">
+              <span>الرسالة الرسمية (باللغة العربية)</span> <i class="fas fa-quote-right"></i>
+            </h4>
+            <p class="text-xs sm:text-sm text-blue-950 leading-relaxed font-arabic font-medium text-justify">
+              « بصفتي مديراً، إنه لشرف كبير لي أن أرحب بكم في مؤسستنا. تلتزم المدرسة العليا للتكنولوجيا بالفقيه بن صالح بالأكاديمي، والابتكار، وتكوين جيل من الكفاءات العلمية والتقنية. معاً، نبني مستقبلاً واعداً يفتح أمامكم آفاق الإبداع والريادة. »
+            </p>
+          </div>
+
+          <!-- Orientations Stratégiques -->
+          <div class="space-y-2 text-xs text-blue-950/80 leading-relaxed text-justify pt-1">
+            <h4 class="font-bold text-blue-900 text-xs uppercase tracking-wide">Projet de développement institutionnel :</h4>
+            <ul class="space-y-1.5 pl-2">
+              <li><i class="fas fa-check-circle text-emerald-600 mr-1.5"></i><strong>Formation de pointe :</strong> Cursus professionnalisants adaptés aux besoins réels du tissu industriel.</li>
+              <li><i class="fas fa-check-circle text-emerald-600 mr-1.5"></i><strong>Recherche & Innovation :</strong> Valorisation des biotechnologies, énergies renouvelables et solutions IA.</li>
+              <li><i class="fas fa-check-circle text-emerald-600 mr-1.5"></i><strong>Entrepreneuriat :</strong> Incubation des initiatives étudiantes et accompagnement de projets innovants.</li>
+              <li><i class="fas fa-check-circle text-emerald-600 mr-1.5"></i><strong>Partenariats Stratégiques :</strong> Collaboration continue avec le groupe OCP et les acteurs économiques.</li>
+            </ul>
+          </div>
+
+          <!-- Signature Officielle -->
+          <div class="pt-3 border-t border-blue-100 flex justify-between items-center text-xs">
+            <div>
+              <p class="font-extrabold text-blue-900">Le Directeur, Prof. Dr. RAKIB El Mostapha</p>
+              <p class="text-[10px] text-orange-600 font-semibold">École Supérieure de Technologie de Fquih Ben Salah</p>
+            </div>
+            <img src="{{ asset('assets/img/logo-est.jpg') }}" alt="Logo EST" class="h-9 w-auto rounded border border-blue-200" />
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========================================================================
+       MODALE 3: REÇU DEMANDE E-SERVICES EN LIGNE
+       ======================================================================== -->
+  <div id="eservice-success-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 text-center relative animate-float">
+      
+      <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-3xl mx-auto mb-4">
+        <i class="fas fa-check-circle"></i>
+      </div>
+
+      <h3 class="text-xl font-black font-heading text-brand-950 dark:text-white mb-1">Demande Enregistrée avec Succès !</h3>
+      <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Votre demande a été transmise au service de la scolarité.</p>
+
+      <div class="bg-white/80 dark:bg-slate-800/80 rounded-2xl p-5 text-left text-xs space-y-2.5 border border-slate-200 dark:border-slate-700 mb-6">
+        <div class="flex justify-between pb-2 border-b border-slate-200 dark:border-slate-700">
+          <span class="text-slate-500">N° de Référence :</span>
+          <strong id="eservice-receipt-ref" class="text-brand-950 dark:text-accent-400 font-mono font-bold"></strong>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-500">Nom & Prénom :</span>
+          <strong id="eservice-receipt-name" class="text-slate-800 dark:text-white"></strong>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-500">Code CNE :</span>
+          <span id="eservice-receipt-cne" class="font-mono text-slate-700 dark:text-slate-300"></span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-500">Filière :</span>
+          <span id="eservice-receipt-filiere" class="text-slate-700 dark:text-slate-300"></span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-500">Document :</span>
+          <strong id="eservice-receipt-doc" class="text-accent-600 dark:text-accent-400"></strong>
+        </div>
+        <div class="flex justify-between pt-2 border-t border-slate-200 dark:border-slate-700 text-[11px]">
+          <span class="text-slate-400">Date de dépôt :</span>
+          <span id="eservice-receipt-date" class="text-slate-500"></span>
+        </div>
+      </div>
+
+      <p class="text-[11px] text-slate-400 mb-6">Votre demande est enregistrée dans la base de données. Vous pouvez suivre l'état de validation à tout moment.</p>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a id="eservice-receipt-track-btn" href="{{ url('suivi.php') }}" class="flex-1 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 shadow-md">
+          <i class="fas fa-search-location"></i>
+          <span>Suivre en Direct</span>
+        </a>
+        <button id="close-eservice-modal" class="flex-1 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-blue-900 font-bold text-xs uppercase tracking-wider transition border border-slate-200">
+          Fermer
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODALE 4: RECHERCHE GLOBALE (Ctrl + K)
+       ======================================================================== -->
+  
+
+  <!-- ========================================================================
+       VISIONNEUSE PLEIN ÉCRAN (LIGHTBOX)
+       ======================================================================== -->
+  <div id="gallery-lightbox" class="lightbox-modal fixed inset-0 z-50 bg-slate-950/95 flex flex-col items-center justify-center p-4">
+    <div class="lightbox-backdrop absolute inset-0"></div>
+
+    <button id="lightbox-close" class="absolute top-5 right-5 z-20 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+      <i class="fas fa-times text-xl"></i>
+    </button>
+
+    <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+      <i class="fas fa-chevron-left text-lg"></i>
+    </button>
+
+    <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+      <i class="fas fa-chevron-right text-lg"></i>
+    </button>
+
+    <div class="relative z-10 max-w-5xl max-h-[80vh] flex flex-col items-center">
+      <img id="lightbox-image" src="" alt="Aperçu EST FBS" class="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl" />
+      <p id="lightbox-caption" class="text-slate-300 text-xs sm:text-sm mt-4 text-center font-medium"></p>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       ASSISTANT VIRTUEL IA (EST-BOT Widget Flottant)
+       ======================================================================== -->
+  <div id="est-chatbot-widget" class="fixed bottom-6 right-6 z-40 flex flex-col items-end">
+    
+    <!-- Fenêtre de Chat -->
+    <div id="chatbot-window" class="chatbot-window hidden-chat w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden mb-4">
+      
+      <!-- En-tête du Chatbot (Fond Blanc, Titre Bleu, Accents Orange & Vert) -->
+      <div class="bg-white border-b-2 border-orange-500 text-blue-900 p-4 flex justify-between items-center shadow-sm">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-xs shadow">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div>
+            <h4 class="font-bold font-heading text-xs text-blue-900">Assistant Virtuel EST-FBS</h4>
+            <span class="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> En ligne 24h/24
+            </span>
+          </div>
+        </div>
+        <button id="close-chatbot" class="text-blue-900 hover:text-orange-500 p-1 transition">
+          <i class="fas fa-times text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Messages -->
+      <div id="chatbot-messages" class="p-4 h-72 overflow-y-auto text-xs space-y-3 bg-white/80 dark:bg-slate-950/50">
+        
+        <div class="flex items-start gap-2 mb-3">
+          <div class="w-7 h-7 rounded-full bg-accent-500 text-slate-950 flex items-center justify-center text-xs font-bold shrink-0">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-xs px-4 py-2.5 rounded-2xl rounded-tl-none shadow-sm leading-relaxed">
+            Bonjour ! Je suis l'assistant officiel de l'<strong>EST de Fquih Ben Salah</strong>. Comment puis-je vous aider aujourd'hui ?
+          </div>
+        </div>
+
+        <!-- Suggestions de Questions Rapides -->
+        <div class="flex flex-wrap gap-1.5 pt-1">
+          <button class="chatbot-chip text-[10px] bg-white dark:bg-slate-800 text-brand-900 dark:text-accent-400 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full hover:bg-amber-50/80 transition" data-question="Quelles sont les filières DUT disponibles ?">
+            🎓 Filières DUT
+          </button>
+          <button class="chatbot-chip text-[10px] bg-white dark:bg-slate-800 text-brand-900 dark:text-accent-400 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full hover:bg-amber-50/80 transition" data-question="Comment faire une demande d'attestation de scolarité ?">
+            📄 E-Services / Attestation
+          </button>
+          <button class="chatbot-chip text-[10px] bg-white dark:bg-slate-800 text-brand-900 dark:text-accent-400 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full hover:bg-amber-50/80 transition" data-question="Quelles sont les modalités d'inscription pour le Bac ?">
+            📝 Inscription & Bac
+          </button>
+          <button class="chatbot-chip text-[10px] bg-white dark:bg-slate-800 text-brand-900 dark:text-accent-400 border border-slate-200 dark:border-slate-700 px-2.5 py-1 rounded-full hover:bg-amber-50/80 transition" data-question="Donnez-moi les coordonnées et contact de l'école">
+            📞 Contacts & Adresse
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Saisie Utilisateur -->
+      <form id="chatbot-form" class="p-3 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex gap-2">
+        <input 
+          id="chatbot-input" 
+          type="text" 
+          placeholder="Posez votre question..." 
+          class="flex-grow px-3 py-2 text-xs bg-white/80 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-1 focus:ring-amber-500 dark:text-white" 
+        />
+        <button type="submit" class="w-8 h-8 rounded-xl gradient-gold text-slate-950 flex items-center justify-center shrink-0 shadow">
+          <i class="fas fa-paper-plane text-xs"></i>
+        </button>
+      </form>
+
+    </div>
+
+    <!-- Bouton Déclencheur Flottant -->
+    <button id="chatbot-toggle-btn" class="w-14 h-14 rounded-full gradient-gold text-slate-950 shadow-2xl flex items-center justify-center text-xl hover:scale-110 transition-transform pulse-glow" title="Poser une question à l'assistant">
+      <i class="fas fa-comments"></i>
+    </button>
+
+  </div>
+
+  <!-- ========================================================================
+       BOUTON RETOUR EN HAUT AVEC PROGRESSION CIRCULAIRE
+       ======================================================================== -->
+  <button id="back-to-top" class="fixed bottom-6 left-6 z-40 w-12 h-12 rounded-full bg-white dark:bg-slate-900 text-brand-950 dark:text-accent-400 shadow-xl opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center hover:scale-110 border border-slate-200 dark:border-slate-800" title="Retour en haut">
+    <svg class="scroll-progress-ring absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 48 48">
+      <circle id="progress-circle" class="text-accent-500" stroke-width="3" stroke="currentColor" fill="transparent" r="20" cx="24" cy="24" />
+    </svg>
+    <i class="fas fa-arrow-up text-xs z-10"></i>
+  </button>
+
+  <!-- Scripts Principaux -->
+  {% include 'partials/site-scripts.html' %}
+
+</body>
+</html>

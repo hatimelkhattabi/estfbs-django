@@ -1,0 +1,1 @@
+{% extends 'layouts/public.html' %}{% set page_title='Galerie photos et vidéos' %}{% block content %}<p class="pub-eyebrow">Vie du campus</p><h1>Galerie photos et vidéos</h1>{% include 'galerie/grid.html' %}{% with pager=medias %}{% include 'pagination.html' %}{% endwith %}{% endblock %}

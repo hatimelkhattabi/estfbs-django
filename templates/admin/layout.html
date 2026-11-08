@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page_title|default('Actualités & événements') }} | Administration EST-FBS</title>
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <link rel="stylesheet" href="{{ asset('css/publications.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/directory-media.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/panel.css') }}?v=20261108-scroll">
+  <script src="{{ asset('js/directory-media.js') }}" defer></script>
+</head><body class="pub-admin">
+<aside class="pub-sidebar" aria-label="Navigation de l’administration">
+  <a class="pub-brand" href="{{ route('admin.dashboard') }}"><img src="{{ asset('assets/img/logo-est.jpg') }}" alt="EST-FBS"><span>EST Fkih Ben Salah<small>Administration du site</small></span></a>
+  {% if can('publications') or can('publications','add') %}<p class="pub-nav-label">PUBLICATIONS</p>{% endif %}
+  {% if can('publications') %}<a class="pub-nav {{ 'active' if section=='publications' else '' }}" href="{{ route('admin.publications.index') }}">Actualités &amp; événements</a>{% endif %}
+  {% if can('publications','add') %}<a class="pub-nav" href="{{ route('admin.publications.create') }}">+ Nouvelle publication</a>{% endif %}
+  {% if can('publications','add') or can('publications','change') %}<a class="pub-nav {{ 'active' if section=='cover_creator' else '' }}" href="{{ route('admin.cover_creator') }}">Créateur d’images</a>{% endif %}
+  <p class="pub-nav-label">CONTENU DU SITE</p>
+  {% if can('professeurs') %}<a class="pub-nav {{ 'active' if section=='professeurs' else '' }}" href="{{ route('admin.professeurs.index') }}">Professeurs</a>{% endif %}
+  {% if can('photos') %}<a class="pub-nav {{ 'active' if section=='photos' else '' }}" href="{{ route('admin.photos.index') }}">Galerie · photos &amp; vidéos</a>{% endif %}
+  {% if can('emplois') %}<a class="pub-nav {{ 'active' if section=='emplois' else '' }}" href="{{ route('admin.emplois.index') }}">Emplois du temps</a>{% endif %}
+  {% if can('reglements') %}<a class="pub-nav {{ 'active' if section=='reglements' else '' }}" href="{{ route('admin.reglements.index') }}">Textes et règlements</a>{% endif %}
+  <p class="pub-nav-label">ÉTABLISSEMENT</p>
+  {% if can('etudiants') %}<a class="pub-nav {{ 'active' if section=='etudiants' else '' }}" href="{{ route('admin.etudiants.index') }}">Étudiants (Apogée)</a>{% endif %}
+  <p class="pub-nav-label">ESPACE ENSEIGNANTS</p>
+  {% if can_model('enseignant') %}<a class="pub-nav {{ 'active' if section=='teacher-accounts' else '' }}" href="{{ route('teacher-admin-accounts') }}">Comptes enseignants (PPR)</a>{% endif %}
+  {% if can_model('messageanonyme') %}<a class="pub-nav {{ 'active' if section=='teacher-messages' else '' }}" href="{{ route('teacher-admin-messages') }}">Messages anonymes</a>{% endif %}
+  {% if can_model('demandedocumentadministratif') %}<a class="pub-nav {{ 'active' if section=='teacher-documents' else '' }}" href="{{ route('teacher-admin-documents') }}">Documents administratifs</a>{% endif %}
+  {% if can_model('demandeimpression') %}<a class="pub-nav {{ 'active' if section=='teacher-prints' else '' }}" href="{{ route('teacher-admin-prints') }}">Demandes d’impression</a>{% endif %}
+  <a class="pub-nav" href="{{ route('admin.dashboard') }}">Scolarité &amp; messages</a>
+  {% if can_model('demandevehicule') %}<a class="pub-nav" href="{{ route('admin.dashboard') }}?tab=vehicules">Demandes de véhicule</a>{% endif %}
+  <a class="pub-nav" href="{{ route('home') }}" target="_blank" rel="noopener">Voir le site ↗</a>
+  <div class="pub-account"><strong>{{ admin_name }}</strong><small>{{ admin_role }}</small><form method="post" action="{{ route('logout') }}">{{ csrf_input }}<button class="pub-btn secondary">Se déconnecter</button></form></div>
+</aside>
+<main class="pub-main" id="main-content">
+  <header class="pub-page-head"><div><p class="pub-eyebrow">PORTAIL UNIVERSITAIRE · EST-FBS</p><h1>{{ page_title|default('Actualités & événements') }}</h1><p>Informez la communauté, faites vivre le campus.</p></div>
+    {% block header_action %}{% if can('publications','add') %}<a class="pub-btn primary" href="{{ route('admin.publications.create') }}">+ Nouvelle publication</a>{% endif %}{% endblock %}
+  </header>
+  {% for message in django_messages %}<div class="pub-alert success" role="status">{{ message }}</div>{% endfor %}
+  {% if form_errors %}<div class="pub-alert error" role="alert"><ul>{% for error in form_errors %}<li>{{ error }}</li>{% endfor %}</ul></div>{% endif %}
+  {% block content %}{% endblock %}
+  <footer class="pub-footer">EST-FBS · Université Sultan Moulay Slimane</footer>
+</main>
+<script src="{{ asset('js/publications-admin.js') }}" defer></script>
+</body></html>

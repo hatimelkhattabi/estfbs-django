@@ -1,0 +1,9 @@
+{% macro field(bound, wide=false) %}
+<div class="tp-field {{ 'tp-wide' if wide else '' }}">
+<label for="{{ bound.id_for_label }}">{{ bound.label }}{% if bound.field.required %} <span class="tp-required" aria-hidden="true">*</span>{% endif %}</label>
+{{ bound }}
+{% if bound.help_text %}<span class="tp-help">{{ bound.help_text }}</span>{% endif %}
+{{ bound.errors|safe }}
+</div>
+{% endmacro %}
+{% macro error_summary(form) %}{% if form.errors %}<div class="tp-error" role="alert"><strong>Votre demande n’a pas encore été envoyée.</strong><p>Vérifiez les champs signalés ci-dessous.</p>{{ form.non_field_errors()|safe }}</div>{% endif %}{% endmacro %}

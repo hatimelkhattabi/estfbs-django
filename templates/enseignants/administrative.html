@@ -1,0 +1,5 @@
+{% extends 'enseignants/layout.html' %}{% from 'enseignants/fields.html' import field,error_summary %}
+{% block content %}<section class="tp-panel tp-form-panel"><form method="post" class="tp-form">{{ csrf_input }}{{ error_summary(form) }}
+<h2>Quel document souhaitez-vous recevoir ?</h2>{{ field(form.type_document) }}<div data-document-precision>{{ field(form.precision) }}</div>{{ field(form.motif) }}
+<p class="tp-help">Votre nom et votre PPR sont repris depuis votre compte. Le document sera disponible après traitement par l’administration.</p>
+<div class="tp-form-actions"><button class="tp-button">Envoyer ma demande</button><a href="{{ route('teacher-requests') }}">Suivre mes demandes</a></div></form></section>{% endblock %}

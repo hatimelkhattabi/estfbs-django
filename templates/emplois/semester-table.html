@@ -1,0 +1,56 @@
+<div class="edt-table-wrap">
+    <table class="edt-semester-table {{ 'edt-table-dut' if cycle == 'DUT' else ('edt-table-dbt' if cycle == 'Bachelor' else 'edt-table-annual') }}">
+        <caption class="edt-sr-only">{{ label }} — Emplois du temps — {{ annee }}</caption>
+        <thead>
+            {% if cycle in ['DUT', 'Bachelor'] %}
+            <tr>
+                <th rowspan="2" scope="col" class="edt-filiere-col">Filière</th>
+                {% if cycle == 'DUT' %}
+                <th colspan="2" scope="colgroup">1re année <small>{{ annee }}</small></th>
+                <th colspan="2" scope="colgroup">2e année <small>{{ annee }}</small></th>
+                {% else %}
+                <th colspan="2" scope="colgroup">Année universitaire ({{ annee }})</th>
+                {% endif %}
+            </tr>
+            <tr>
+                {% for semestre in ([1, 2, 3, 4] if cycle == 'DUT' else [5, 6]) %}
+                <th scope="col">Semestre {{ semestre }}</th>
+                {% endfor %}
+            </tr>
+            {% else %}
+            <tr>
+                <th scope="col" class="edt-filiere-col">Filière</th>
+                <th scope="col">Année universitaire ({{ annee }})</th>
+            </tr>
+            {% endif %}
+        </thead>
+        <tbody>
+            {% for emploi in items %}
+            <tr data-edt-cycle="{{ cycle }}">
+                <th scope="row">
+                    <span class="edt-mobile-filiere">Filière :</span> {{ emploi.filiere }}
+                    <small class="edt-mobile-academic">Année universitaire ({{ annee }})</small>
+                    {% if cycle == 'Bachelor' and emploi.lien and emploi.lien not in [emploi.lien_s5, emploi.lien_s6] and valid_link(emploi.lien) %}
+                    <small class="edt-old-document">
+                        <a href="{{ emploi.lien }}" target="_blank" rel="noopener noreferrer" aria-label="{{ emploi.filiere }} — ancien document à classer — {{ annee }}">Ancien document ↗</a>
+                    </small>
+                    {% endif %}
+                </th>
+                {% for semestre, url in emploi.liens %}
+                {% set document_label = 'Semestre ' ~ semestre[1:] if cycle in ['DUT', 'Bachelor'] else 'Année universitaire (' ~ annee ~ ')' %}
+                <td>
+                    <span class="edt-mobile-semestre">
+                        {% if cycle == 'DUT' %}
+                        {{ '1re année' if semestre in ['S1', 'S2'] else '2e année' }} · {{ document_label }}
+                        {% else %}
+                        {{ document_label }}
+                        {% endif %}
+                    </span>
+                    {% include 'emplois/document.html' %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

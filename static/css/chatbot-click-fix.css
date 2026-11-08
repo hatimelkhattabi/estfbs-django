@@ -1,0 +1,22 @@
+/* Le widget fermé ne doit pas intercepter les clics sur le site. */
+#est-chatbot-widget {
+    pointer-events: none !important;
+}
+
+#chatbot-toggle-btn {
+    pointer-events: auto !important;
+    cursor: pointer;
+}
+
+#chatbot-window.hidden-chat {
+    display: none !important;
+    pointer-events: none !important;
+}
+
+#chatbot-window.visible-chat {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+}

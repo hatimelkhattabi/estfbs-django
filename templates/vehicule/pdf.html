@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Demande de Véhicule - {{ demande.code_suivi }}</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+        body {
+            font-family: 'DejaVu Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 11pt;
+            color: #1e293b;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+        }
+        .page-demande {
+            position: relative;
+            padding: 12mm 14mm 8mm 14mm;
+            page-break-inside: avoid;
+        }
+        .page-ordre-mission {
+            position: relative;
+            page-break-before: always;
+            width: 100%;
+            height: 292mm;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        /* En-tête */
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #1e3a8a;
+            padding-bottom: 8px;
+        }
+        .header-table td {
+            vertical-align: middle;
+        }
+        .logo-cell {
+            width: 85px;
+            text-align: center;
+        }
+        .logo-img {
+            max-width: 80px;
+            max-height: 70px;
+            height: auto;
+        }
+        .header-center {
+            text-align: center;
+            padding: 0 10px;
+        }
+        .header-center .title-royaume {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #0f172a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 0 2px 0;
+        }
+        .header-center .title-ministere {
+            font-size: 7.5pt;
+            color: #475569;
+            margin: 0 0 2px 0;
+        }
+        .header-center .title-univ {
+            font-size: 8.5pt;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin: 0 0 2px 0;
+        }
+        .header-center .title-est {
+            font-size: 9.5pt;
+            font-weight: bold;
+            color: #ea580c;
+            margin: 0;
+        }
+
+        /* Titre du Document */
+        .doc-title-box {
+            background-color: #f8fafc;
+            border: 1.5px solid #1e3a8a;
+            border-radius: 6px;
+            text-align: center;
+            padding: 10px 12px;
+            margin: 12px 0;
+        }
+        .doc-title {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 0 4px 0;
+        }
+        .doc-subtitle {
+            font-size: 9pt;
+            color: #475569;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* Statut & Référence Meta */
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+        }
+        .meta-table td {
+            padding: 5px 8px;
+            font-size: 9pt;
+            vertical-align: middle;
+        }
+        .badge-status {
+            display: inline-block;
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #f59e0b;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 8.5pt;
+            text-transform: uppercase;
+        }
+        .ref-box {
+            font-size: 9.5pt;
+            color: #0f172a;
+            font-weight: bold;
+        }
+
+        /* Sections */
+        .section-title {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            font-size: 9pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            margin-top: 7px;
+            margin-bottom: 4px;
+            border-radius: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        /* Tableau d'informations */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 6px;
+            font-size: 8.5pt;
+        }
+        .info-table th, .info-table td {
+            border: 1px solid #cbd5e1;
+            padding: 4px 7px;
+            vertical-align: top;
+        }
+        .info-table th {
+            background-color: #f1f5f9;
+            color: #334155;
+            font-weight: bold;
+            width: 28%;
+            text-align: left;
+        }
+        .info-table td {
+            background-color: #ffffff;
+            color: #0f172a;
+        }
+        .highlight-val {
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        /* Cadres signatures */
+        .signature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            page-break-inside: avoid;
+        }
+        .signature-table td {
+            width: 33.33%;
+            border: 1px solid #94a3b8;
+            padding: 6px;
+            height: 68px;
+            vertical-align: top;
+            font-size: 8pt;
+            background-color: #fbfcfe;
+        }
+        .sign-title {
+            font-weight: bold;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            text-align: center;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 3px;
+            margin-bottom: 24px;
+        }
+        .sign-sub {
+            text-align: center;
+            color: #94a3b8;
+            font-style: italic;
+            font-size: 7.5pt;
+        }
+
+        /* Watermark arrière-plan */
+        .watermark {
+            position: absolute;
+            top: 42%;
+            left: 5%;
+            width: 90%;
+            text-align: center;
+            opacity: 0.07;
+            font-size: 40pt;
+            font-weight: bold;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            transform: rotate(-30deg);
+            z-index: -1000;
+        }
+
+        /* Pied de page */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 7.5pt;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 5px;
+        }
+        .page-break {
+            page-break-before: always;
+        }
+        .om-intro {
+            background-color: #eff6ff;
+            border-left: 4px solid #1e3a8a;
+            padding: 7px 11px;
+            margin-bottom: 10px;
+            font-size: 9pt;
+            color: #0f172a;
+        }
+        .visa-box {
+            margin-top: 10px;
+            border: 1px dashed #64748b;
+            border-radius: 4px;
+            padding: 7px 10px;
+            background-color: #f8fafc;
+            font-size: 8pt;
+            color: #334155;
+            page-break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-demande">
+        <!-- Filigrane discret -->
+        <div class="watermark">{{ demande.statut|upper }}</div>
+
+    <!-- En-tête officiel -->
+    <table class="header-table">
+        <tr>
+            <td class="logo-cell">
+                {% if logoEst %}
+                    <img src="{{ logoEst }}" class="logo-img" alt="EST-FBS" />
+                {% endif %}
+            </td>
+            <td class="header-center">
+                <div class="title-royaume">Royaume du Maroc</div>
+                <div class="title-ministere">Ministère de l'Enseignement Supérieur, de la Recherche Scientifique et de l'Innovation</div>
+                <div class="title-univ">Université Sultan Moulay Slimane — Béni Mellal</div>
+                <div class="title-est">École Supérieure de Technologie de Fquih Ben Salah</div>
+                <div style="font-size: 7.5pt; color: #64748b; margin-top: 2px;">Service des Transports & Affaires Générales</div>
+            </td>
+            <td class="logo-cell">
+                {% if logoUsms %}
+                    <img src="{{ logoUsms }}" class="logo-img" alt="USMS" />
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+    <!-- Bloc Titre Document -->
+    <div class="doc-title-box">
+        <div class="doc-title">DEMANDE D'AFFECTATION DE VÉHICULE</div>
+        <div class="doc-subtitle">{{ "Ordre de Mission & Autorisation de Déplacement pour Visite Pédagogique / Scientifique" if demande.ordre_mission_disponible else "Demande de déplacement pour visite pédagogique / scientifique — validation administrative requise" }}</div>
+    </div>
+
+    <!-- Méta & Référence -->
+    <table class="meta-table">
+        <tr>
+            <td style="width: 50%;">
+                <span class="ref-box">RÉFÉRENCE : {{ demande.code_suivi }}</span><br>
+                <span style="color: #64748b; font-size: 8pt;">Date de dépôt : {{ fmt_date(demande.date_demande, 'd/m/Y à H:i') }}</span>
+            </td>
+            <td style="width: 50%; text-align: right;">
+                <span style="font-size: 8.5pt; margin-right: 6px;">État du dossier :</span>
+                <span class="badge-status">● {{ demande.statut }}</span>
+            </td>
+        </tr>
+    </table>
+
+    <!-- 1. Enseignant Demandeur -->
+    <div class="section-title">1. Renseignements sur l'Enseignant Demandeur</div>
+    <table class="info-table">
+        <tr>
+            <th>Nom et Prénom du Professeur</th>
+            <td class="highlight-val">{{ professor_name }}</td>
+        </tr>
+        <tr>
+            <th>Département d'attache</th>
+            <td>{{ demande.departement or 'École Supérieure de Technologie - FBS' }}</td>
+        </tr>
+        <tr>
+            <th>Contact Enseignant</th>
+            <td>
+                Email : <strong>{{ demande.email_professeur or 'Non renseigné' }}</strong>
+                {% if demande.telephone_professeur %}
+                    &nbsp;|&nbsp; Tél : <strong>{{ demande.telephone_professeur }}</strong>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+    <!-- 2. Caractéristiques de la Visite -->
+    <div class="section-title">2. Détails de la Visite & Déplacement</div>
+    <table class="info-table">
+        <tr>
+            <th>Destination de la visite</th>
+            <td class="highlight-val">{{ demande.destination }}</td>
+        </tr>
+        <tr>
+            <th>Date prévue de la visite</th>
+            <td>
+                <strong>{{ fmt_date(demande.date_visite, 'l j F Y') }}</strong>
+                &nbsp;(Départ : {{ demande.heure_depart }} — Retour : {{ demande.heure_retour }})
+            </td>
+        </tr>
+        <tr>
+            <th>Durée de la visite</th>
+            <td><strong>{{ demande.duree_visite }}</strong></td>
+        </tr>
+        <tr>
+            <th>Véhicule sollicité</th>
+            <td>{{ demande.type_vehicule or 'Bus Universitaire EST-FBS' }}</td>
+        </tr>
+    </table>
+
+    <!-- 3. Groupe d'étudiants & Cadre Pédagogique -->
+    <div class="section-title">3. Effectifs & Objectifs Pédagogiques</div>
+    <table class="info-table">
+        <tr>
+            <th>Effectif total des étudiants</th>
+            <td><strong style="color: #ea580c; font-size: 10.5pt;">{{ demande.effectif_etudiants }}</strong> étudiant(s) inscrit(s)</td>
+        </tr>
+        {% if demande.filiere %}
+        <tr>
+            <th>Filière / Promotion</th>
+            <td>{{ demande.filiere }}</td>
+        </tr>
+        {% endif %}
+        {% if demande.motif_visite %}
+        <tr>
+            <th>Objectif / Cadre de la mission</th>
+            <td>{{ demande.motif_visite }}</td>
+        </tr>
+        {% endif %}
+        {% if demande.accompagnateurs %}
+        <tr>
+            <th>Accompagnateurs</th>
+            <td>{{ demande.accompagnateurs }}</td>
+        </tr>
+        {% endif %}
+    </table>
+
+    <!-- 4. Signatures et Visas Réglementaires -->
+    <div class="section-title">4. Visas, Avis & Approbations Réglementaires</div>
+    <table class="signature-table">
+        <tr>
+            <td>
+                <div class="sign-title">L'Enseignant Demandeur</div>
+                <div class="sign-sub">{{ professor_name }}<br>Date & Signature</div>
+            </td>
+            <td>
+                <div class="sign-title">Avis Chef de Département</div>
+                <div class="sign-sub">Avis favorable / défavorable<br>Date, Cachet & Signature</div>
+            </td>
+            <td>
+                <div class="sign-title">Direction EST-FBS</div>
+                <div class="sign-sub">Décision d'affectation<br>Cachet & Signature</div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Note d'information -->
+    <div style="margin-top: 10px; font-size: 7.5pt; color: #64748b; line-height: 1.35; background: #f8fafc; border: 1px dashed #cbd5e1; padding: 6px 10px; border-radius: 4px;">
+        <strong>Remarque importante :</strong> {% if demande.ordre_mission_disponible %}Cette demande est validée par l’administration. L’ordre de mission est joint à ce document.{% else %}Statut de la demande : <em>{{ demande.statut }}</em>. L’ordre de mission sera disponible uniquement après validation par l’administration.{% endif %}
+    </div>
+    </div>
+
+    <!-- =====================================================================
+         PAGE 2 : ORDRE DE MISSION OFFICIEL PRÉ-REMPLI (MODÈLE OFFICIEL EST-FBS)
+         ===================================================================== -->
+    
+
+    {% if demande.ordre_mission_disponible %}
+    <div class="page-ordre-mission">
+        {% if ordreMissionBg %}
+            <img src="{{ ordreMissionBg }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;" alt="Ordre de Mission EST-FBS" />
+        {% endif %}
+
+        <div style="position: absolute; top: 24.4%; left: 0; width: 100%; text-align: center; z-index: 10; font-size: 9pt; font-weight: bold; color: #334155;">
+            Réf : {{ demande.code_suivi.replace('ESTFBS-VEH-', 'ESTFBS-OM-', 1) }}
+        </div>
+
+        <div style="position: absolute; top: 27.6%; left: 16.5%; width: 67%; z-index: 10; font-size: 11pt; font-weight: bold; color: #0f172a;">
+            {{ nomComplet }}
+        </div>
+
+        <div style="position: absolute; top: 32.1%; left: 16.5%; width: 67%; z-index: 10; font-size: 11pt; font-weight: bold; color: #0f172a;">
+            {{ gradeText }}
+        </div>
+
+        <div style="position: absolute; top: 39.5%; left: 16.5%; width: 67%; z-index: 10; font-size: 10.5pt; font-weight: bold; color: #0f172a; line-height: 1.35;">
+            {{ missionText }}
+        </div>
+
+        <div style="position: absolute; top: 51.4%; left: 23.5%; width: 59%; z-index: 10; font-size: 11pt; font-weight: bold; color: #0f172a;">
+            {{ demande.destination }}
+        </div>
+
+        <div style="position: absolute; top: 55.8%; left: 22.0%; width: 60%; z-index: 10; font-size: 11pt; font-weight: bold; color: #0f172a;">
+            {{ dateDepartText }}
+        </div>
+
+        <div style="position: absolute; top: 60.1%; left: 22.0%; width: 60%; z-index: 10; font-size: 11pt; font-weight: bold; color: #0f172a;">
+            {{ dateRetourText }}
+        </div>
+
+        <div style="position: absolute; top: 64.4%; left: 26.5%; width: 56%; z-index: 10; font-size: 11pt; font-weight: bold; color: #0f172a;">
+            {{ transportText }}
+        </div>
+
+        <div style="position: absolute; top: 68.7%; left: 29.0%; width: 54%; z-index: 10; font-size: 11pt; font-weight: bold; color: #0f172a;">
+            {{ personnelText }}
+        </div>
+
+        <div style="position: absolute; top: 73.0%; left: 24.0%; width: 59%; z-index: 10; font-size: 11pt; font-weight: bold; color: #0f172a;">
+            {{ presenteraText }}
+        </div>
+
+        <div style="position: absolute; top: 80.3%; left: 54.0%; width: 32%; z-index: 10; font-size: 11pt; font-weight: bold; color: #0f172a;">
+            {{ dateFaitText }}
+        </div>
+    </div>
+
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" class="scroll-smooth">
+<head>
+ <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>{{ page_title|default('EST Fkih Ben Salah') }} | Université Sultan Moulay Slimane</title>
+ <meta name="description" content="Portail de l’École Supérieure de Technologie de Fkih Ben Salah — Université Sultan Moulay Slimane.">
+ {% include 'partials/site-head.html' %}
+ {% block extra_head %}{% endblock %}
+</head>
+<body data-home-url="/" data-organigramme-url="/organigramme.html" data-emplois-url="/emplois-du-temps" class="pub-inner-page bg-white text-blue-950 font-sans relative">
+ {% include 'partials/header.html' %}
+ <main class="pub-detail pub-detail-body {{ content_class|default('') }}" id="main-content">
+  <nav class="pub-detail-meta" aria-label="Fil d’Ariane" style="margin-bottom:24px"><a href="/">Accueil</a> / <span>{{ page_title|default('EST-FBS') }}</span></nav>
+  {% for message in django_messages %}<div class="pub-alert success">{{ message }}</div>{% endfor %}
+  {% block content %}{% endblock %}
+ </main>
+ {% include 'partials/footer.html' %}
+ {% include 'partials/site-scripts.html' %}
+</body></html>

@@ -1,0 +1,8 @@
+{% extends 'layouts/public.html' %}{% set page_title='Actualités & événements' %}
+{% block content %}
+<section id="publicationArchive"><p class="pub-eyebrow">VIE DU CAMPUS</p><h1>Actualités &amp; événements</h1>
+<form method="get" class="est-search"><label for="publication-search">Rechercher une publication</label><input id="publication-search" name="q" value="{{ q }}" placeholder="Titre, catégorie, contenu…"><button class="pub-btn primary">Rechercher</button></form>
+<nav class="pub-site-filters"><a class="pub-btn secondary" href="/actualites">Tous</a><a class="pub-btn secondary" href="/actualites?type=Actualit%C3%A9">Actualités</a><a class="pub-btn secondary" href="/actualites?type=%C3%89v%C3%A9nement">Événements</a></nav>
+<div class="pub-site-grid">{% for publication in publications %}{% include 'publications/card.html' %}{% else %}<p>Aucune publication disponible.</p>{% endfor %}</div>
+{% with pager=publications %}{% include 'pagination.html' %}{% endwith %}</section>
+{% endblock %}

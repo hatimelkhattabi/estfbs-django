@@ -1,0 +1,56 @@
+{% extends 'layouts/public.html' %}
+{% set page_title = 'Présentation de l’EST-FBS' %}
+{% block content %}
+<link rel="stylesheet" href="{{ asset('css/presentation-page.css') }}?v=2">
+    <article class="est-presentation" aria-labelledby="est-presentation-title">
+        <h1 id="est-presentation-title">Présentation de l’EST-FBS</h1>
+
+        <figure class="est-presentation-photo">
+            <img
+                src="{{ asset('assets/img/entree-estfbs.jpg') }}"
+                alt="Entrée de l’École Supérieure de Technologie de Fkih Ben Salah"
+                width="1000"
+                height="450"
+                decoding="async"
+            >
+        </figure>
+
+        <p>
+            L’<strong>École Supérieure de Technologie de Fkih Ben Salah (EST-FBS)</strong>
+            est une composante de l’<strong>Université Sultan Moulay Slimane</strong>.
+            Sa création a été approuvée par le Conseil du Gouvernement le
+            <strong>11 avril 2019</strong>. Elle a ouvert ses portes en
+            <strong>septembre 2019</strong>.
+        </p>
+        <p>
+            L’EST-FBS propose des formations technologiques conduisant au
+            <strong>Diplôme Universitaire de Technologie (DUT, bac+2)</strong> et au
+            <strong>Diplôme de Bachelor en Technologie (DBT, bac+3)</strong>,
+            dans des domaines techniques variés.
+        </p>
+
+        <section aria-labelledby="est-presentation-mission">
+            <h2 id="est-presentation-mission">Mission</h2>
+            <ul class="est-presentation-missions">
+                <li>Offrir des formations qui correspondent au milieu professionnel.</li>
+                <li>Adopter une démarche pédagogique fondée sur le renouvellement fréquent des filières et l’enrichissement de leur contenu.</li>
+                <li>Conduire des activités de recherche et d’innovation technologiques avec le secteur de l’industrie.</li>
+                <li>Promouvoir la coopération régionale, nationale et internationale.</li>
+            </ul>
+        </section>
+
+        <section aria-labelledby="est-presentation-filieres">
+            <h2 id="est-presentation-filieres">Filières ouvertes à l’EST-FBS</h2>
+
+            
+            {% for cycle,groupe in formations.items() %}
+            <h3>{{ 'Diplôme Universitaire de Technologie (DUT) — Bac+2' if cycle == 'dut' else 'Diplôme de Bachelor en Technologie (DBT) — Bac+3' }}</h3>
+            <ul class="est-presentation-filieres">
+            {% for formation in groupe['items'] %}
+              <li><a href="{{ asset(formation.brochure) if formation.brochure else '#' }}" {% if formation.brochure %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ formation.nom }}</a></li>
+            {% endfor %}
+            </ul>
+            {% endfor %}
+        </section>
+    </article>
+{% endblock %}

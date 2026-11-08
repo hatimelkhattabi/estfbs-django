@@ -1,0 +1,16 @@
+{% extends 'enseignants/layout.html' %}
+{% block content %}
+<section class="tp-welcome"><div><h2>Bonjour {{ enseignant.prenom or enseignant.nom }}.</h2><p>De quoi avez-vous besoin aujourd’hui ?</p></div><a class="tp-button secondary" href="{{ route('teacher-requests') }}">Suivre mes demandes →</a></section>
+<div class="tp-cards">
+{% for number,name,title,description,action in [
+('01','teacher-print','Demande d’impression','Un examen ou plusieurs documents. Choisissez vos exemplaires et les fournitures nécessaires.','Préparer une impression'),
+('02','teacher-administrative','Documents administratifs','Demandez une attestation et retrouvez le document préparé par l’administration.','Demander un document'),
+('03','teacher-attendance','Listes de présence','Retrouvez vos étudiants par filière et niveau, puis téléchargez une liste prête à signer.','Créer une liste de présence'),
+('04','teacher-vehicle','Demande de véhicule','Organisez une visite pédagogique ou un déplacement et suivez sa validation.','Demander un véhicule'),
+('05','teacher-anonymous','Message anonyme','Adressez un message à l’administration sans le rattacher à votre compte.','Écrire un message')
+] %}
+<a class="tp-card {{ 'tp-card-featured' if loop.first else '' }}" href="{{ route(name) }}"><span class="tp-icon" aria-hidden="true">{{ number }}</span><h2>{{ title }}</h2><p>{{ description }}</p><strong>{{ action }} <span aria-hidden="true">→</span></strong></a>
+{% endfor %}
+</div>
+<section class="tp-panel tp-tracking"><div><h2>Vos demandes en cours et passées</h2><p>{{ prints }} impression(s) · {{ administrative }} document(s) administratif(s) · {{ vehicles }} véhicule(s)</p></div><a class="tp-button secondary" href="{{ route('teacher-requests') }}">Consulter le suivi</a></section>
+{% endblock %}

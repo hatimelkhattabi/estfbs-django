@@ -1,0 +1,455 @@
+{
+  "format": 1,
+  "feature": "espace-enseignant",
+  "tests_sqlite": 190,
+  "files": [
+    {
+      "path": "INSTALLER-DEMANDE-VEHICULE.md",
+      "sha256": "438f3ce54eff9d8bb242eea2afd3796b116005b68b8bba332b9933f5ad0008ed"
+    },
+    {
+      "path": "INSTALLER-ESPACE-ENSEIGNANT.md",
+      "sha256": "e5603bb093d07c4c236d45a5264052ae5599d39a4a48ee472ddba567912317ac"
+    },
+    {
+      "path": "INSTALLER-ETUDIANTS.md",
+      "sha256": "943393d0b2076b45ce77660ad712aeb84725f7ff61a7773a4a460f7a01f602f2"
+    },
+    {
+      "path": "MISE-A-JOUR-ACTIONS-EXCEL.md",
+      "sha256": "cf089f4a2d028037ea74439e4b21e21539c744e315259158b4d2cb2632fb2385"
+    },
+    {
+      "path": "MISE-A-JOUR-AFFICHAGE-SERVICES.md",
+      "sha256": "f496f9784b170df56f249ebb731d0b406c46acca3a2ef7c27970f1ea3b71ad82"
+    },
+    {
+      "path": "MISE-A-JOUR-CONTACT-IMPRESSION-DOCUMENT.md",
+      "sha256": "ae75d44e5cf690f9544f95fc779ef60318e8d79c5286266007e296efd6a31ce9"
+    },
+    {
+      "path": "MISE-A-JOUR-IMPRESSION-PRESENCE.md",
+      "sha256": "d1b0ee0b8f6487018f07385577373abd83050fd6108271c30bb7ac00adeae517"
+    },
+    {
+      "path": "MISE-A-JOUR-SERVICES-ENSEIGNANTS.md",
+      "sha256": "510edbfa728350ade4682d0203b7c78e63dbbc0568482f583732366fdff4748a"
+    },
+    {
+      "path": "README.md",
+      "sha256": "b9432be017e8c6c42d30057b58d3dc28f0517f473b2469ecaa933771d75f9573"
+    },
+    {
+      "path": "TESTS.md",
+      "sha256": "1f1d60bf62e93350c3329d5f3a8e6926239348916fbcf933155bde7df73667a7"
+    },
+    {
+      "path": "estfbs/urls.py",
+      "sha256": "41dcde81bc56fb2cce6f53e75f88a11464d54256bea3bd5c18f9d2d74b17186f"
+    },
+    {
+      "path": "portal/admin.py",
+      "sha256": "d3796a6e0a744c8b019b84f38e1551002fad0aad10b2605ccf9a08ffe6d41a17"
+    },
+    {
+      "path": "portal/assets/Modele_Enseignants.xlsx",
+      "sha256": "9b5861afa6e883a5073e5ecc3206391a36a20599041747a10effc00f3876549a"
+    },
+    {
+      "path": "portal/assets/ordre-de-mission-template.png",
+      "sha256": "4bc7ec19090c7abb2f8331b4e12510180f773d92159cfe63f0743493d1005d14"
+    },
+    {
+      "path": "portal/assets/presence/2026-2027_DBA_1.xlsx",
+      "sha256": "3b1342ee9b40d63afedb857194e19f502890090e6649fe912f15adb4aa5dbf03"
+    },
+    {
+      "path": "portal/assets/presence/2026-2027_DBA_2.xlsx",
+      "sha256": "beceeb6608c8ab0556a60d12d81102296c8b07bc9adfa9123adf7663fda671de"
+    },
+    {
+      "path": "portal/assets/presence/2026-2027_DBA_3.xlsx",
+      "sha256": "dfcef6d83a2408bb24dbf56ca829f4baeea2660684049fe36b716197260883af"
+    },
+    {
+      "path": "portal/assets/presence/2026-2027_DGC_1.xlsx",
+      "sha256": "8f7c593eb72536166659d0e6158c47abb4b1753dad30e21d5e4431cc07f18a98"
+    },
+    {
+      "path": "portal/assets/presence/2026-2027_DGC_2.xlsx",
+      "sha256": "ed79d2b1f0189606aaad01f9662e789d90cca89058bd28f08d537a610ab6ff5d"
+    },
+    {
+      "path": "portal/assets/presence/2026-2027_DGC_3.xlsx",
+      "sha256": "6df179cd87f88e276d9f9bbeaefa09a4c717cec6e95cc4a3334b1fb6bf6ff8f4"
+    },
+    {
+      "path": "portal/assets/presence/2026-2027_DIM_1.xlsx",
+      "sha256": "1b80ece3e31d43ec25ec8fa6f7bce47bb6981c742da9bfcbb6d0ae43cc2c43bc"
+    },
+    {
+      "path": "portal/assets/presence/2026-2027_DIM_2.xlsx",
+      "sha256": "d1a595bb9dc2a12b692a32f3185f1d7d628753d98d23dfa0ed11003359fa3e9d"
+    },
+    {
+      "path": "portal/assets/presence/2026-2027_DIM_3.xlsx",
+      "sha256": "49f85ef1cea1c96cda9058b5221cb9d31b87556ceb4dcc4671c287a15d000431"
+    },
+    {
+      "path": "portal/assets/presence/sources.json",
+      "sha256": "1e8db12b58e37300694c66142f74fdb7de05856d65fd845dad5551e5193b55f7"
+    },
+    {
+      "path": "portal/attendance_cohorts.py",
+      "sha256": "d9cf7c81e42fdaf60f3fb7d4e71c48128eab63ae1d98f7cf0dbc54c704c5011b"
+    },
+    {
+      "path": "portal/attendance_excel.py",
+      "sha256": "da8ba23b73cd80cf32bff71666953692f39eea95a6703f029d59cae8d62fda8b"
+    },
+    {
+      "path": "portal/attendance_excel_pdf.py",
+      "sha256": "431c01a3def150996c5743230dffaa3ff263f2cfe7a247784e4e82287c7c631d"
+    },
+    {
+      "path": "portal/attendance_pdf.py",
+      "sha256": "f3cdc2c4b5f13cda14de53605525d04ad52e1fd4903409731d709f26eb2a8e7b"
+    },
+    {
+      "path": "portal/forms.py",
+      "sha256": "bfa10b32ab90f09256b46e5b3418c87fe896248a1ef73bebcd7b74e0c288df3d"
+    },
+    {
+      "path": "portal/jinja.py",
+      "sha256": "1da92c4689cd920ff49a2346d0e3b7ccdd1f1047e267a16814a407ffa24c21b0"
+    },
+    {
+      "path": "portal/management/commands/import_enseignants.py",
+      "sha256": "488458616782c72c907cad97d97fa4a41073ce0362b0fc868e9b8572ed82ca17"
+    },
+    {
+      "path": "portal/middleware.py",
+      "sha256": "f5752aa5fef8f717f6eaefe9795aae016e4aa433e3be80676fa607ccb02dd146"
+    },
+    {
+      "path": "portal/migrations/0002_publication_scheduled_deletion.py",
+      "sha256": "e4ac56d8c8f78eb6fadb622a610e33b2b5592e4b598ca42b12506b8100d8f308"
+    },
+    {
+      "path": "portal/migrations/0003_etudiants_contact_apogee.py",
+      "sha256": "7b4af7f5aa583289b0731fb4cffde731f4ca4b161191f35145c93bd806262f81"
+    },
+    {
+      "path": "portal/migrations/0004_vehicle_mission_details.py",
+      "sha256": "d867855b5d6e61dc42ca91b9fe4276c98775d62efda17b82b99e55c8dd8b8650"
+    },
+    {
+      "path": "portal/migrations/0005_espace_enseignant.py",
+      "sha256": "2d6c17dc58b3b1b31235c1dbbe540bc69b8ec270d45dae755ea61d2c2b94dec8"
+    },
+    {
+      "path": "portal/migrations/0006_services_enseignants.py",
+      "sha256": "58f8da11d218af1c38d2430b321ba26e5f1dc3d9796652d49ac0c39376803b00"
+    },
+    {
+      "path": "portal/migrations/0007_impression_document_dates_status.py",
+      "sha256": "f870e8eac9e510b5f4cb0448408d3a15786b22df2094361b54cc66990ce87fdb"
+    },
+    {
+      "path": "portal/migrations/0008_contact_apogee_only.py",
+      "sha256": "70ef1c647b806b1be0bf807b7e7d591b34ddea149b3e5489f106f1c043d235ee"
+    },
+    {
+      "path": "portal/migrations/0009_impression_options_par_document.py",
+      "sha256": "12efda937cb9afa94a0f481fbc5b5ce26da03132bdf2f82c825be2a81e68335a"
+    },
+    {
+      "path": "portal/models.py",
+      "sha256": "8ee84aebf203b75af2c07bfc9936d711b0cca8b9658312987f8d5e725a1e4341"
+    },
+    {
+      "path": "portal/panel_urls.py",
+      "sha256": "f437174050119f388bc1a4b3075f20e7a1cf1d3f78a11b806c46734c09928d60"
+    },
+    {
+      "path": "portal/pdf.py",
+      "sha256": "58bf70fd6de95c8110530ebc6c031d394899bfb04e2dd51634bde3c0d588e2a7"
+    },
+    {
+      "path": "portal/printing_options.py",
+      "sha256": "ec93b8affc952b368c540bfb9a6f61c698018178fe5cd59ee7685aef177b1221"
+    },
+    {
+      "path": "portal/teacher_access.py",
+      "sha256": "84d2528f4448ddc2cef06b47e358d145a236bf5545d2d3f499bd6e308599c942"
+    },
+    {
+      "path": "portal/teacher_admin.py",
+      "sha256": "cfe9bac3b07049e43b6bb64b2c179fea0f1c8ad38be854f4a72f192c23ac825f"
+    },
+    {
+      "path": "portal/teacher_forms.py",
+      "sha256": "530cc9462ae5785a965fc4404d5c97ad3531f1ccee3e09affb42ff34eb621b51"
+    },
+    {
+      "path": "portal/teacher_import.py",
+      "sha256": "6df442f5d2c4955c78c1a4a80898cea45698fe5d729bc1c7ebeaee0a52762640"
+    },
+    {
+      "path": "portal/teacher_print_actions.py",
+      "sha256": "e9183d1c6dfc8881f42cd0a85bff4da3faa2551a0d526aecd0763920ea856531"
+    },
+    {
+      "path": "portal/teacher_services.py",
+      "sha256": "065753344694d12100ca0fa0e9bcda0e1ee025e54cdc6e5c980f47308c492bb5"
+    },
+    {
+      "path": "portal/teacher_urls.py",
+      "sha256": "8286085ce493cf0e80b4d7d77046161013f4362e7515c5140d2546bb4aeb11f8"
+    },
+    {
+      "path": "portal/teacher_views.py",
+      "sha256": "b6f0a2698e238f734660d9283f4edaa61532eeb035f8b1786b9d1a6927ae48a5"
+    },
+    {
+      "path": "portal/test_attendance_excel.py",
+      "sha256": "d8f6ff84c912deb6822c4845ff8cfc1f49b5ca34dca473123f948948c9e84760"
+    },
+    {
+      "path": "portal/test_etudiants.py",
+      "sha256": "98b9468ab7c2ce08ffbd5ad095994808cd5ffc24e1bc89a8457f3be87d56d688"
+    },
+    {
+      "path": "portal/test_print_actions.py",
+      "sha256": "af30baea527a5ff5357aa1d24f2c5d39d0796bed921fa303706a61c0295996af"
+    },
+    {
+      "path": "portal/test_print_document_options.py",
+      "sha256": "d101fab85a0b830f588b36e8256fddd4e27740d3fc36993afe32c664594f07c8"
+    },
+    {
+      "path": "portal/test_teacher_revision.py",
+      "sha256": "ae645767f2c544af2a763b2047fb2b406235e5d202134e62f29329ae2b5bf2cd"
+    },
+    {
+      "path": "portal/test_teacher_services.py",
+      "sha256": "fc2ed1198ab82ac4842a2f6e7dcd64f9b897c80e5ab1a8af932f86dfeca53169"
+    },
+    {
+      "path": "portal/test_teachers.py",
+      "sha256": "3d23a262a8bd0ded4c3eafb1dcabeea5ed967dac1baf7a0b30272ec5031264f9"
+    },
+    {
+      "path": "portal/test_vehicle_approval.py",
+      "sha256": "6e45af5a4f49829e7f3727af62b84721c2f2cc0b3cd13f1035b25b37b0193c40"
+    },
+    {
+      "path": "portal/test_vehicle_mission.py",
+      "sha256": "f8e5f87c65731897979d63ff17e50ab73d7a2a7653566ef5ef82222f65b33ca6"
+    },
+    {
+      "path": "portal/tests.py",
+      "sha256": "b77cad3850cbf2c1fdcbea3f141679b15d20835958233ba46409bd8cd2b2fce1"
+    },
+    {
+      "path": "portal/vehicle_documents.py",
+      "sha256": "d1807613ed315e36106d98fbc16517cb52b492e486726e8870c107917aad64b6"
+    },
+    {
+      "path": "portal/vehicles.py",
+      "sha256": "f7bb1d3be140fe36537260e16f63aeae178e63fb6fc65766d1c76202c5b318d3"
+    },
+    {
+      "path": "portal/views.py",
+      "sha256": "0878148d38f0bafd738471b312ae569f142add9ba6e69e044add29fa4137bb3d"
+    },
+    {
+      "path": "requirements-etudiants.txt",
+      "sha256": "03a53fc2d9e1ff59642c860c6ced142ed191ad088b82f190d2d4502641d16f33"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "75e29db5daf61412ee83c92c3f8ce98f32cfab09089bc93fd7c13bed535f385d"
+    },
+    {
+      "path": "static/css/panel.css",
+      "sha256": "269c88c742462c39a317fdb71fcc2e56969edc2b757a805f6b7d252ce6c5594c"
+    },
+    {
+      "path": "static/css/public-refresh.css",
+      "sha256": "613bfed4895bf1188ac48e826b9233647e87157e5c4cf263f9e018962fe1fb71"
+    },
+    {
+      "path": "static/css/teacher-portal.css",
+      "sha256": "13527c7d06b0bfa7756d75dd00068453e0389277c03dff14f8c231dce13ff685"
+    },
+    {
+      "path": "static/fonts/DejaVuSans-Bold.ttf",
+      "sha256": "5c1247acef7f2b8522a31742c76d6adcb5569bacc0be7ceaa4dc39dd252ce895"
+    },
+    {
+      "path": "static/fonts/DejaVuSans.ttf",
+      "sha256": "ae7b7855e115a5966d8b1b3f80f254ccc117ec86f9965e202ee2940453837280"
+    },
+    {
+      "path": "static/js/main.js",
+      "sha256": "fc78e0a89d853b9fb74b0739d066ba876e1dd90b2a8db28cacb844524d0bf05a"
+    },
+    {
+      "path": "static/js/teacher-portal.js",
+      "sha256": "017eca6bdb11ec174aee0cd6aae7a47e98cd2ce7aa201dc29da6b62d05fd3a92"
+    },
+    {
+      "path": "static/js/vehicle-request.js",
+      "sha256": "3dd2528373c03895c27cf4277c446314b46fc5d03062ad8c0ebb8b0869bbc222"
+    },
+    {
+      "path": "templates/admin/dashboard.html",
+      "sha256": "bd6976064cd60066c8419e227db06f7114e30f4cd3803da31a7ec86839c1f945"
+    },
+    {
+      "path": "templates/admin/enseignants/account_form.html",
+      "sha256": "86268621a7f1dd10978c24de369f98a3e720efc8070b1fbef76dea2e18a03cbf"
+    },
+    {
+      "path": "templates/admin/enseignants/accounts.html",
+      "sha256": "d380713bd5ed85ec47cba5706fb8615207d6b14e0c0bdcc3d7c557d6d7b74f19"
+    },
+    {
+      "path": "templates/admin/enseignants/document_form.html",
+      "sha256": "7a9eb8da700b05740599b91ff181c8e767b6ba6b04bd0d7e91071407387ec5e0"
+    },
+    {
+      "path": "templates/admin/enseignants/documents.html",
+      "sha256": "73919f506eb8026bde3dc9ddfac347a2037e059ce51fc93c3520d2cfab69042f"
+    },
+    {
+      "path": "templates/admin/enseignants/import.html",
+      "sha256": "68e2872b4fc04db3d4f79dad86af7f3dff0784ecc00291e1e22f9c1baca3d50c"
+    },
+    {
+      "path": "templates/admin/enseignants/message_form.html",
+      "sha256": "611ad70b26316463a1ad89cc0ba0c6c3cf27f2213dd888e0f098f973bba9cfde"
+    },
+    {
+      "path": "templates/admin/enseignants/messages.html",
+      "sha256": "e6e29c3c14867479bcf545f2f2e7af37c994905ca29e657ee43ac726fcbe681e"
+    },
+    {
+      "path": "templates/admin/enseignants/print_form.html",
+      "sha256": "f9b3b4bcad85fdb40fb8c1b64bdf61f96b64e23e84bb2784205631ab43f766a9"
+    },
+    {
+      "path": "templates/admin/enseignants/prints.html",
+      "sha256": "1582999e7b518c855c5371868ee7013998498beb5463efee1860cab2b02bec9d"
+    },
+    {
+      "path": "templates/admin/layout.html",
+      "sha256": "77fffac9ff56d7e726e34595fca2c762065d885ad738b80bc80f98b17d79927b"
+    },
+    {
+      "path": "templates/admin/vehicules.html",
+      "sha256": "3a3ab2f04ae3e1d3730a02fa406dc3bceb3ec90b775300eba4cb39f48f66380e"
+    },
+    {
+      "path": "templates/emplois/index.html",
+      "sha256": "649ebffbc134a23b163606915a667d503c64910487227a0eaf9ccb9f3727c612"
+    },
+    {
+      "path": "templates/enseignants/administrative.html",
+      "sha256": "5a6fd642151e07987aaedb522bc26906cd76385d37a9461f14c07c406e9dce3e"
+    },
+    {
+      "path": "templates/enseignants/administrative_detail.html",
+      "sha256": "c783ddb309f626032c660ce963286259f13c606d1e95c22ac9faeb7dcc14a414"
+    },
+    {
+      "path": "templates/enseignants/attendance.html",
+      "sha256": "09e89d3b0056fc7131879fa0f7dcee36036313bb044f7ad4d8b04ab204a509c6"
+    },
+    {
+      "path": "templates/enseignants/fields.html",
+      "sha256": "57262e394ca4974b648f54998bf2177980a17906db80705f45ce22cf130ac4ce"
+    },
+    {
+      "path": "templates/enseignants/form.html",
+      "sha256": "b6c63eba4a2efb29a2935940c9a375a469edf1bec6bedb38e8d70835f6cdeba0"
+    },
+    {
+      "path": "templates/enseignants/home.html",
+      "sha256": "347b5c25e736c05018f8c10789f00403930c8e4403e7241b4af166d1371d63d9"
+    },
+    {
+      "path": "templates/enseignants/layout.html",
+      "sha256": "a36ae3c84e02834b044600c43f7429e553f70a82bd66cf339ba8a639ff16118b"
+    },
+    {
+      "path": "templates/enseignants/login.html",
+      "sha256": "87acfa64b05288871cf119d331f5b0c35cb3d64572a16f1b8beb81f04c26a1f7"
+    },
+    {
+      "path": "templates/enseignants/print_delete.html",
+      "sha256": "612ec96bd37551c1b5c2b7d13013de7bddc4b5eabf08d8f216542e3f7e501516"
+    },
+    {
+      "path": "templates/enseignants/print_detail.html",
+      "sha256": "b6d26a539c9069ac5b8da80d22dd4b472028e8a3b4f968154ea6ed2e04c94e57"
+    },
+    {
+      "path": "templates/enseignants/print_locked.html",
+      "sha256": "be6a3040b004755a794adfc94dc4b3c52059f81c5dcc49d2a500e18926f3f9a5"
+    },
+    {
+      "path": "templates/enseignants/printing.html",
+      "sha256": "fc291b9cf31b894185016c99623aebc7d37012ddf5dc3bfb943cb9568307143e"
+    },
+    {
+      "path": "templates/enseignants/requests.html",
+      "sha256": "e9e0c1e130a10059e33a59ac5be154aa9cf7131f4bc3dd637a8f207e953141e2"
+    },
+    {
+      "path": "templates/home.html",
+      "sha256": "18a102f57ec8ad4eab73fa378923c692ff37853c48e04de606f012507037bf92"
+    },
+    {
+      "path": "templates/layouts/public.html",
+      "sha256": "cad1f6072b7b2322e4ad4c37c56fac63e95d283692589cacf13f54fd09a894ba"
+    },
+    {
+      "path": "templates/partials/footer.html",
+      "sha256": "35f8a5f83dd527060e6c53fe55c221b5d08ba2a4ac5af45cd8e3767573cdba1e"
+    },
+    {
+      "path": "templates/partials/header.html",
+      "sha256": "d9365c4c0b6d1ccd5148e92f6b85143869c6bd575a5c94db5851f7323b86961b"
+    },
+    {
+      "path": "templates/partials/site-head.html",
+      "sha256": "f179103a718a0df63e7a55be53155bce9bbe05b2340fc02dbd1faa14b4c5562b"
+    },
+    {
+      "path": "templates/partials/site-scripts.html",
+      "sha256": "323cdf6d2485bc16e5eccd3da696c76e3bdae2c6d18d1a302005aa3c22e0800f"
+    },
+    {
+      "path": "templates/vehicule/demande.html",
+      "sha256": "9a870882f0af3937ecb516e02a8bd63ef4e30f29055306f81336179d49cf712d"
+    },
+    {
+      "path": "templates/vehicule/ordre-mission-pdf.html",
+      "sha256": "ac116fb4b80da0600d8de4ea47d96791b617770515c88125864d988bc8bd9ef1"
+    },
+    {
+      "path": "templates/vehicule/pdf.html",
+      "sha256": "d1850e961fb195d063a7cc003933f4f00f76a47dd07a3d121860efc3b4067f7d"
+    },
+    {
+      "path": "templates/vehicule/status.html",
+      "sha256": "28c17bf2af52409dd0541101ebee01102dd5e7153e26b88b6f28a96dce63b219"
+    },
+    {
+      "path": "templates/vehicule/suivi.html",
+      "sha256": "dba06bc1bf91dca5b0ac7b627fe788fc15420f2df2abd6b3b02ed61ede541f62"
+    }
+  ]
+}

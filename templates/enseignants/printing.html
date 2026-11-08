@@ -1,0 +1,34 @@
+{% extends 'enseignants/layout.html' %}{% from 'enseignants/fields.html' import field,error_summary %}
+{% macro document_row(document_form) %}
+<section class="tp-document-row" data-document-row data-has-file="{{ 'true' if document_form.existing_document else 'false' }}" data-index="{{ document_form.prefix.split('-')[-1] }}">
+<div class="tp-section-head"><h3>Document <span data-document-number>{{ (document_form.prefix.split('-')[-1]|int)+1 }}</span></h3><button type="button" class="tp-link-button" data-remove-document>Retirer ce document</button></div>
+<div hidden>{{ document_form.DELETE }}{% if editing %}{{ document_form.document_id }}{% endif %}</div>
+<fieldset class="tp-document-type"><legend>Que souhaitez-vous imprimer ?</legend><div class="tp-purpose">{{ document_form.type_travail }}{{ document_form.type_travail.errors|safe }}</div></fieldset>
+<div class="tp-print-date">{{ field(document_form.date_souhaitee) }}</div>
+{% if document_form.existing_document %}{% set current=document_form.existing_document %}<p class="tp-current-file">PDF actuel : <strong>{{ current.nom_document }}</strong> · <a href="{{ route('teacher-print-document',{'reference':item.reference,'document_id':current.pk}) if current.demande_id else route('teacher-print-file',{'reference':item.reference}) }}">Télécharger</a></p>{% endif %}
+{{ field(document_form.fichier) }}
+<div class="tp-document-options">{{ field(document_form.exemplaires) }}{{ field(document_form.mode) }}{{ field(document_form.format_papier) }}</div>
+<fieldset class="tp-exam-supplies" data-exam-options {% if document_form.type_travail.value()!='examen' %}hidden{% endif %}><legend>Fournitures pour cet examen</legend><p class="tp-help">À préparer à la date de ce document, en plus des sujets imprimés.</p>
+<div class="tp-form-grid">
+<div class="tp-supply"><label class="tp-check">{{ document_form.avec_feuilles_reponse }} Ajouter des feuilles de réponse</label><div data-supply-count="feuilles_reponse">{{ field(document_form.feuilles_reponse) }}</div></div>
+<div class="tp-supply"><label class="tp-check">{{ document_form.avec_papier_brouillon }} Ajouter du papier brouillon</label><div data-supply-count="papier_brouillon">{{ field(document_form.papier_brouillon) }}</div></div>
+</div></fieldset>
+</section>
+{% endmacro %}
+{% block content %}
+<div class="tp-print-layout">
+<form method="post" enctype="multipart/form-data" class="tp-form tp-service-form" data-print-form>
+{{ csrf_input }}{% if editing %}{{ form.revision }}{% endif %}{{ error_summary(form) }}
+{% if documents.errors or documents.non_form_errors() %}<div class="tp-error" role="alert"><strong>Vérifiez les documents et leurs options.</strong>{{ documents.non_form_errors()|safe }}<p>{% if editing %}Les PDF existants sont conservés. Sélectionnez à nouveau uniquement les nouveaux PDF ou les remplacements.{% else %}Après une erreur, sélectionnez à nouveau vos fichiers PDF.{% endif %}</p></div>{% endif %}
+<section class="tp-panel"><div class="tp-section-head"><div><h2>Vos documents à imprimer</h2><p class="tp-help">Pour chaque document, choisissez Examen ou Autre document, sa date et ses exemplaires. Vous pouvez mélanger les deux types dans une même demande.</p><p class="tp-help">PDF uniquement · 20 Mo par fichier · 10 documents et 50 Mo au total.</p></div></div>
+{{ documents.management_form }}
+<div data-document-list>{% for document_form in documents %}{{ document_row(document_form) }}{% endfor %}</div>
+<template data-document-template>{{ document_row(documents.empty_form) }}</template>
+<button type="button" class="tp-button secondary" data-add-document>＋ Ajouter un autre document</button>
+<p class="tp-help">Un exemplaire correspond à une copie du document complet. Chaque document peut avoir sa propre date et son propre nombre d’exemplaires.</p>
+</section>
+<section class="tp-panel"><h2>Une précision pour le service d’impression ?</h2>{{ field(form.remarque) }}<div class="tp-form-actions"><button class="tp-button">{{ 'Enregistrer les modifications' if editing else 'Envoyer ma demande d’impression' }}</button><a href="{{ route('teacher-print-detail',{'reference':item.reference}) if editing else route('teacher-requests') }}">{{ 'Annuler' if editing else 'Voir mes demandes' }}</a></div><p class="tp-help">Vous pourrez consulter le statut et la réponse de l’administration dans votre suivi.</p></section>
+</form>
+<aside class="tp-print-reserved" aria-hidden="true"></aside>
+</div>
+{% endblock %}
